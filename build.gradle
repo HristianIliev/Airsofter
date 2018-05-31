@@ -34,10 +34,13 @@ dependencies {
 //    Thymeleaf
     compile 'org.thymeleaf:thymeleaf-spring5:3+'
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+//    Spring Security
+    compile("org.springframework.boot:spring-boot-starter-security")
 
 //    Unit Testing
-    testCompile 'junit:junit:4.12'
     testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile("org.springframework.security:spring-security-test")
+    testCompile 'junit:junit:4.12'
     testCompile('com.jayway.jsonpath:json-path')
     testCompile 'org.mockito:mockito-core:2.7.22'
 }
