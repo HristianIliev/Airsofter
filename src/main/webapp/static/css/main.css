@@ -18687,3 +18687,9 @@ body.coming-soon .ui-counter > div .label {
 #gray-color{
   color: #8e9bae;
 }
+.map{
+  height: 500px;
+  margin-top: 20px;
+  border-radius: 4px;
+  box-shadow: 0 7px 15px rgba(0, 9, 128, 0.05), 0 12px 28px rgba(0, 9, 128, 0.075);
+}

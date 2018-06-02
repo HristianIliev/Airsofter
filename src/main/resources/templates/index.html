@@ -7,6 +7,7 @@
     <title>Airsofter</title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:600|Source+Sans+Pro:600,700">
+    <link rel="stylesheet" href="/static/css/animate.css">
     <link rel="stylesheet" href="/static/css/main.css" />
 </head>
 
@@ -42,7 +43,7 @@
             </div>
 
             <!-- Navigation Button -->
-            <a href="" class="btn btn-sm ui-gradient-blue pull-right">Вход/Регистрация</a>
+            <a href="/login" class="btn btn-sm ui-gradient-blue pull-right">Вход/Регистрация</a>
 
             <!-- Navbar Toggle -->
             <a href="#" class="ui-mobile-nav-toggle pull-right"></a>
@@ -57,16 +58,16 @@
                 <div class="row pt-2 pb-6">
                     <div class="col-sm-12" data-vertical_center="true" data-vertical_offset="16">
                         <!-- Text -->
-                        <h1 class="heading animate" data-show="fade-in-up-big" data-delay="100">
-                            The
-                            <span class="text-color">easiest</span> &amp; most
-                            <span class="text-color">secure</span> online chat room
+                        <h1 class="heading animated fadeInUp" data-delay="100">
+                            Най-
+                            <span class="text-color">лесната</span> &amp; 
+                            <span class="text-color">иновативна</span> платформа за Airsoft любители.
                         </h1>
 
                         <!-- Buttons -->
-                        <div class="actions animate" data-show="fade-in-up-big" data-delay="600">
-                            <a href="#" data-scrollto="services" class="btn ui-gradient-blue shadow-xl">Намери сервиз</a>
-                            <a href="/app" class="btn ui-gradient-green shadow-xl">Към платформата</a>
+                        <div class="actions animated fadeInUp" data-delay="600">
+                            <a href="#" data-scrollto="find-arena" class="btn ui-gradient-blue shadow-xl">Намери арена</a>
+                            <a href="/login" class="btn ui-gradient-green shadow-xl">Към платформата</a>
                         </div>
                     </div>
                 </div>
@@ -75,14 +76,15 @@
 
         <!-- Intro Image -->
         <div class="section intro-image pt-0">
-            <img src="/static/img/applify-browser-mockup.png" data-uhd data-max_width="1000" class="shadow-xxl responsive-on-lg" alt="Airsofter">
+            <img src="/static/img/applify-browser-mockup.png" data-uhd data-max_width="1000" class="shadow-xxl responsive-on-lg animated fadeInUp"
+                alt="Airsofter">
         </div>
 
         <!-- How It Works Section -->
         <div id="how-it-works" class="section laptop-showcase">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-5 col-lg-4" data-vertical_center="true">
+                    <div class="col-md-5 col-lg-4 wow fadeInLeft" data-vertical_center="true">
                         <div>
                             <h2 class="heading text-dark-gray">
                                 Designed For All Apps
@@ -104,7 +106,7 @@
                             <a href="#" class="btn ui-gradient-blue">Download</a>
                         </div>
                     </div>
-                    <div class="col-md-7 col-lg-8">
+                    <div class="col-md-7 col-lg-8 wow fadeInRight">
                         <img class="responsive-on-sm laptop" src="/static/img/applify-mockup-11.png" data-uhd alt="Applify - App Landing HTML Template"
                             data-max_width="1000" />
                     </div>
@@ -125,7 +127,8 @@
                             <h2 class="heading text-indigo">
                                 Намери Airsoft арена
                             </h2>
-                        </div><!-- .section-heading -->
+                        </div>
+                        <!-- .section-heading -->
                         <form action="#" method="POST" class="searchService">
                             <div class="form-group">
                                 <div class="row justified-center">
@@ -139,19 +142,22 @@
                             </div>
                         </form>
                     </div>
-    
-                    <div class="col-md-12">
-                        <div id="google-map-services" style="height: 500px; margin-top: 20px; border-radius: 4px;     box-shadow: 0 7px 15px rgba(0, 9, 128, 0.05), 0 12px 28px rgba(0, 9, 128, 0.075);"></div>
+
+                    <!-- GoogleMaps -->
+                    <div class="col-md-12 wow fadeInUp">
+                        <div id="map" class="map"></div>
                     </div>
-                </div><!-- .row -->
-            </div><!-- .container -->
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .container -->
         </div>
 
         <!-- How It Works Section Part 2 -->
         <div class="section bg-light pb-6">
             <div class="container">
                 <div class="row text-center">
-                    <div class="col-md-6 pb-5">
+                    <div class="col-md-6 pb-5 wow fadeInLeft">
                         <img class="img-responsive" src="/static/img/applify-widget-mockup-2.png" data-uhd alt="Applify - App Landing HTML Template"
                         />
                         <h5 class="text-dark-gray">Lorem Ipsum Dolor Sit</h5>
@@ -159,7 +165,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
                     </div>
-                    <div class="col-md-6 pb-5">
+                    <div class="col-md-6 pb-5 wow fadeInRight">
                         <img class="img-responsive" src="/static/img/applify-widget-mockup-1.png" data-uhd alt="Applify - App Landing HTML Template"
                         />
                         <h5 class="text-dark-gray">Lorem Ipsum Dolor Sit</h5>
@@ -273,6 +279,13 @@
     <script type="text/javascript" src="/static/js/libs/bootstrap.js"></script>
     <script type="text/javascript" src="/static/js/libs/form-validator.min.js"></script>
     <script type="text/javascript" src="/static/js/landing.js"></script>
+    <script type="text/javascript" src="/static/js/libs/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjJimoTORP3LAM9lx8aasMG5_1dlNgrGI&callback=initMap" async
+        defer></script>
+    <script type="text/javascript" src="/static/js/libs/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
 </body>
 
 </html>
