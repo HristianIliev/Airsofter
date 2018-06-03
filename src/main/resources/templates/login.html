@@ -6,21 +6,77 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Влез в акаунта си - Airsofter.bg</title>
 
+    <link rel="stylesheet" href="/static/css/mdb.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/checkboxes.min.css">
     <link rel="stylesheet" href="/static/css/login.css">
 </head>
 
 <body>
     <div class="container-fluid full-height">
         <div class="row full-height">
-            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+            <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 login-form">
+                <div class="form-container form-container-desktop">
+                    <div class="stack-item stack-item-fluid">
+                        <div class="stack-item-fluid-content">
+                            <div class="login-logo">
+                                <a href="#">
+                                    <img class="login-logo-img" src="/static/img/sample-logo.png" alt="Airsofter">
+                                </a>
+                            </div>
+                            <div class="login-form-sign-in">
+                                <div class="login-head">
+                                    <h3 class="login-title">
+                                        Влез в акаунта си
+                                    </h3>
+                                </div>
+                                <form class="login-form-inputs" action="/api/login" method="POST">
+                                    <div class="md-form">
+                                        <i class="fa fa-envelope prefix login-input-icon"></i>
+                                        <input type="email" name="email" id="materialFormLoginEmailEx" class="form-control">
+                                        <label for="materialFormLoginEmailEx">E-mail</label>
+                                    </div>
+                                    <div class="md-form">
+                                        <i class="fa fa-lock prefix login-input-icon"></i>
+                                        <input type="password" name="password" id="materialFormLoginPasswordEx" class="form-control">
+                                        <label for="materialFormLoginPasswordEx">Парола</label>
+                                    </div>
+                                    <div class="row login-utils">
+                                        <div class="col-md-7 align-left">
+                                            <div class="ckbx-style-11 ckbx-small">
+                                                <input type="checkbox" id="ckbx-style-11-1" value="0" name="ckbx-style-11">
+                                                <label style="display: inline-block; padding-top: 5px;" for="ckbx-style-11-1"></label>
+                                                <span class="checkbox-label">Запомни ме</span>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-5 align-right">
+                                            <a href="#" id="forget-password" class="link">
+                                                Забравена парола
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-mdb-color">MDB</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="stack-item stack-item-center">
+                        <div class="register-prompt">
 
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 login-image">
                 <h3 class="login-image-header">
                     Стани част от Airsofter!
                 </h3>
+                <p class="login-image-subheader">
+                    Започни да използваш предимствата на платформата като се регистрираш. Регистрацията отнема минута!
+                </p>
             </div>
         </div>
     </div>
@@ -30,6 +86,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="/static/js/libs/bootstrap.js"></script>
+    <script type="text/javascript" src="/static/js/libs/mdb.min.js"></script>
 </body>
 
 </html>

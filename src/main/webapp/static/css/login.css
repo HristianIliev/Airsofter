@@ -1,10 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto");
-
-html,
-body {
-  font-family: "Roboto", sans-serif;
-}
-
 html,
 body {
   height: 100%;
@@ -12,7 +6,7 @@ body {
   padding: 0px;
   font-size: 14px;
   font-weight: 300;
-  font-family: "Roboto";
+  /* font-family: "Roboto"; */
   -ms-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -22,25 +16,160 @@ body {
   padding: 0 !important;
   margin: 0 !important;
 }
-
 .full-height {
   height: 100%;
 }
-
 .login-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
   background: linear-gradient(rgba(36, 37, 36, 0.774), rgba(53, 56, 55, 0.603)),
     url(/static/img/login-background.jpg) no-repeat center center;
   background-size: cover;
-  text-align: center;
-  justify-content: center;
+  padding: 5rem 10rem 10rem 10rem;
 }
-
 .login-image-header {
-  display: inline-block;
-  vertical-align: middle;
+  text-align: center;
   color: white;
   font-size: 3.5rem;
   font-weight: 500;
   margin-bottom: 2rem;
   font-family: inherit;
 }
+.login-image-subheader {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 200;
+}
+.login-form {
+  padding: 2rem 7rem;
+}
+
+.form-container {
+  width: 100%;
+  height: 100%;
+}
+.stack-item-fluid {
+  display: block;
+  height: auto;
+}
+.stack-item-center {
+  display: block;
+}
+.stack-item-fluid-content {
+  padding: 15% 1rem 1rem 1rem !important;
+  overflow: hidden;
+}
+.login-logo {
+  text-align: center;
+  margin: 0 auto 4rem auto;
+}
+.login-logo-img {
+  max-width: 100%;
+}
+.login-head {
+  margin-top: 1rem;
+}
+.login-title {
+  text-align: center;
+  font-size: 1.5rem;
+}
+.login-form-inputs {
+  margin-top: 4rem;
+}
+.login-input-icon {
+  color: #9e9e9e;
+}
+.login-utils {
+  margin-top: 2rem;
+}
+.align-left {
+  text-align: left;
+}
+.align-right {
+  text-align: right;
+}
+.link {
+  font-size: 1.2rem;
+  text-decoration: none;
+  color: #59698d;
+  display: inline-block;
+}
+.link:hover {
+  color: #38425c;
+  text-decoration: none !important;
+}
+.link:after {
+  display: block;
+  content: "";
+  position: absolute;
+  bottom: 0;
+  top: 1rem;
+  left: 0;
+  width: 0%;
+  -webkit-transition: width 0.3s ease;
+  -moz-transition: width 0.3s ease;
+  -ms-transition: width 0.3s ease;
+  -o-transition: width 0.3s ease;
+  transition: width 0.3s ease;
+}
+.link:hover:after {
+  width: 100%;
+}
+.link:hover:after {
+  border-bottom: 1px solid #5f57c3;
+  opacity: 0.3;
+  filter: alpha(opacity=30);
+}
+.checkbox-label {
+  padding-left: 5px;
+  vertical-align: top;
+  font-size: 1.2rem;
+}
+.ckbx-style-11 label:before {
+  margin-top: 5px;
+}
+@media (min-width: 993px) {
+  .form-container-desktop {
+    display: table;
+    table-layout: fixed;
+  }
+}
+@media (min-width: 993px) {
+  .stack-item {
+    display: table-row;
+    vertical-align: top;
+    height: 1px;
+  }
+}
+@media (min-width: 993px) {
+  .stack-item-fluid {
+    height: auto;
+  }
+}
+@media (min-width: 993px) {
+  .stack-item-center {
+    text-align: center;
+  }
+}
+
+/* Material Design inputs
+.md-form {
+  position: relative;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.md-form .prefix {
+  top: 0.25rem;
+  font-size: 1.75rem;
+}
+.fa {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+} */
