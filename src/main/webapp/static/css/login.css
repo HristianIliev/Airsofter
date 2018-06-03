@@ -131,6 +131,41 @@ body {
 .ckbx-style-11 label:before {
   margin-top: 5px;
 }
+.login-form-action {
+  margin: 3rem 0 3rem 0;
+  text-align: center;
+}
+.form-action {
+  display: inline-block;
+  text-align: center;
+  padding: 1.2rem 3rem;
+  font-size: 17px;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: box-shadow 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  user-select: none;
+  padding: 8px 14px 7px;
+}
+.form-action:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.26);
+}
+.register-prompt-label {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #898b96;
+}
+.register-prompt-link {
+  font-size: 1.1rem;
+  font-weight: 400;
+}
 @media (min-width: 993px) {
   .form-container-desktop {
     display: table;
