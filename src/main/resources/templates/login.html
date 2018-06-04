@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
         crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/checkboxes.min.css">
+    <link rel="stylesheet" href="/static/css/animate.css">
     <link rel="stylesheet" href="/static/css/login.css">
 </head>
 
@@ -20,7 +21,7 @@
         <div class="row full-height">
             <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 login-form">
                 <div class="form-container form-container-desktop">
-                    <div class="stack-item stack-item-fluid">
+                    <div class="stack-item stack-item-fluid animated zoomIn">
                         <div class="stack-item-fluid-content">
                             <div class="login-logo">
                                 <a href="#">
@@ -33,10 +34,10 @@
                                         Влез в акаунта си
                                     </h3>
                                 </div>
-                                <form class="login-form-inputs" action="/api/login" method="POST">
+                                <form class="login-form-inputs" th:action="@{/login}" method="post">
                                     <div class="md-form">
                                         <i class="fa fa-envelope prefix login-input-icon"></i>
-                                        <input type="email" name="email" id="materialFormLoginEmailEx" class="form-control">
+                                        <input type="email" name="username" id="materialFormLoginEmailEx" class="form-control">
                                         <label for="materialFormLoginEmailEx">E-mail</label>
                                     </div>
                                     <div class="md-form">

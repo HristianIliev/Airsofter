@@ -1,5 +1,6 @@
 package hristian.iliev.airsofter.utils;
 
+import hristian.iliev.airsofter.models.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -11,6 +12,8 @@ public class HibernateUtils {
   static {
     try {
       Configuration configuration = new Configuration().configure();
+
+      configuration.addAnnotatedClass(User.class);
 
       StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
               .applySettings(

@@ -35,8 +35,7 @@ dependencies {
     compile 'org.thymeleaf:thymeleaf-spring5:3+'
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 //    Spring Security
-//    Uncomment when ready to implement
-//    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-security")
 
 //    Unit Testing
     testCompile('org.springframework.boot:spring-boot-starter-test')
