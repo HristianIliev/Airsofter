@@ -22,7 +22,7 @@ public class UsersService implements IUsersService {
   }
 
   @Override
-  public User getUserByUsername(String username) {
+  public User getUserByEmail(String username) {
     return usersRepository.getAll()
             .stream()
             .filter(u -> u.getEmail().equals(username))
@@ -33,12 +33,11 @@ public class UsersService implements IUsersService {
   @Override
   public User register(User user) {
     if (this.isEmailFree(user.getEmail())) {
-      System.out.println("Email is free");
       user.setPassword(passwordEncoder.encode(user.getPassword()));
+      user.setNeedsInstallation(true);
       return this.usersRepository.create(user);
     }
 
-    System.out.println("Email is not free");
     return null;
   }
 
@@ -49,7 +48,7 @@ public class UsersService implements IUsersService {
 
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    User user = this.getUserByUsername(username);
+    User user = this.getUserByEmail(username);
     return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
   }
 }

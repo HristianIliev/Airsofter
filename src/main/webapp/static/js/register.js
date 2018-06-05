@@ -11,7 +11,7 @@ $(".login-form-inputs").submit(function(event) {
   var repassword = $("#materialFormLoginPasswordConfirm").val();
   var dataAccountType = $(".type-account-box.active").attr("data-account-type");
   var arenaOwner = false;
-  if (dataAccountType === 1) {
+  if (dataAccountType === 1 || dataAccountType === "1") {
     arenaOwner = true;
   }
 
@@ -36,10 +36,8 @@ $(".login-form-inputs").submit(function(event) {
     success: function(result) {
       stopLoading();
       if (result === null || result === "null" || result === "") {
-        alert("first if");
         displayEmailTakenError();
       } else {
-        alert("second if");
         window.location.href = "/login";
       }
     }

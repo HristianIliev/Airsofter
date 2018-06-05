@@ -19,6 +19,7 @@ public class User implements IModel {
   private String name;
   private String lastName;
   private boolean arenaOwner;
+  private boolean needsInstallation;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,11 +71,20 @@ public class User implements IModel {
   }
 
   @Column(name = "arena_owner")
-  public boolean isarenaOwner() {
+  public boolean isArenaOwner() {
     return arenaOwner;
   }
 
-  public void setarenaOwner(boolean arenaOwner) {
+  public void setArenaOwner(boolean arenaOwner) {
     this.arenaOwner = arenaOwner;
+  }
+
+  @Column(name = "needs_installation")
+  public boolean isNeedsInstallation() {
+    return needsInstallation;
+  }
+
+  public void setNeedsInstallation(boolean needsInstallation) {
+    this.needsInstallation = needsInstallation;
   }
 }

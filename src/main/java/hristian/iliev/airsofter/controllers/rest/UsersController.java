@@ -22,7 +22,6 @@ public class UsersController {
   @RequestMapping(value = "/register", method = RequestMethod.POST)
   @ResponseBody
   public User register(@RequestBody User user) {
-    System.out.println("in register in UsersController");
     return this.usersService.register(user);
   }
 }
