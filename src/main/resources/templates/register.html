@@ -13,6 +13,7 @@
         crossorigin="anonymous">
     <link rel="stylesheet" href="/static/css/checkboxes.min.css">
     <link rel="stylesheet" href="/static/css/animate.css">
+    <link rel="stylesheet" href="/static/css/iziToast.min.css">
     <link rel="stylesheet" href="/static/css/login-register-forgot-password.css">
 </head>
 
@@ -37,32 +38,49 @@
                                 <form class="login-form-inputs">
                                     <div class="md-form">
                                         <i class="fas fa-user-circle prefix login-input-icon"></i>
-                                        <input type="text" id="materialFormLoginName" class="form-control">
+                                        <input type="text" id="materialFormLoginName" class="form-control" required>
                                         <label for="materialFormLoginName">Име</label>
                                     </div>
                                     <div class="md-form">
                                         <i class="fas fa-user prefix login-input-icon"></i>
-                                        <input type="text" id="materialFormLoginSurname" class="form-control">
+                                        <input type="text" id="materialFormLoginSurname" class="form-control" required>
                                         <label for="materialFormLoginSurname">Фамилия</label>
                                     </div>
                                     <div class="md-form">
                                         <i class="fa fa-envelope prefix login-input-icon"></i>
-                                        <input type="email" id="materialFormLoginEmail" class="form-control">
+                                        <input type="email" id="materialFormLoginEmail" class="form-control" required>
                                         <label for="materialFormLoginEmail">E-mail</label>
                                     </div>
                                     <div class="md-form">
                                         <i class="fa fa-lock prefix login-input-icon"></i>
-                                        <input type="password" id="materialFormLoginPassword" class="form-control">
+                                        <input type="password" id="materialFormLoginPassword" class="form-control" required>
                                         <label for="materialFormLoginPassword">Парола</label>
                                     </div>
                                     <div class="md-form">
-                                        <i class="fa fa-lock prefix login-input-icon"></i>
-                                        <input type="password" id="materialFormLoginPasswordConfirm" class="form-control">
+                                        <i class="fas fa-reply prefix login-input-icon"></i>
+                                        <input type="password" id="materialFormLoginPasswordConfirm" class="form-control" required>
                                         <label for="materialFormLoginPasswordConfirm">Повтори паролата</label>
                                     </div>
-            
+                                    <div class="form-group-register">
+                                        <label class="label-form-group">Избери тип на акаунта</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="type-account-box" data-account-type=0>
+                                                    <i class="fas fa-search type-account-icon"></i>
+                                                    <span> Играч </span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="type-account-box" data-account-type=1>
+                                                    <i class="far fa-map type-account-icon"></i>
+                                                    <span> Притежател на арена </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="login-form-action">
-                                        <button class="btn btn-mdb-color form-action">Продължи</button>
+                                        <button id="proceed" type="submit" class="btn btn-mdb-color form-action">Продължи</button>
+                                        <button id="back" type="button" class="btn btn-outline-info waves-effect form-action">Назад</button>
                                     </div>
                                 </form>
                             </div>
@@ -87,6 +105,8 @@
         crossorigin="anonymous"></script>
     <script type="text/javascript" src="/static/js/libs/bootstrap.js"></script>
     <script type="text/javascript" src="/static/js/libs/mdb.min.js"></script>
+    <script type="text/javascript" src="/static/js/libs/iziToast.min.js"></script>
+    <script type="text/javascript" src="/static/js/register.js"></script>
 </body>
 
 </html>

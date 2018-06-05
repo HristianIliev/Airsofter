@@ -21,11 +21,6 @@ public class UsersService implements IUsersService {
     this.passwordEncoder = passwordEncoder;
   }
 
-  public User create(User user) {
-    user.setPassword(passwordEncoder.encode(user.getPassword()));
-    return this.usersRepository.create(user);
-  }
-
   @Override
   public User getUserByUsername(String username) {
     return usersRepository.getAll()
@@ -33,6 +28,23 @@ public class UsersService implements IUsersService {
             .filter(u -> u.getEmail().equals(username))
             .findFirst()
             .orElse(null);
+  }
+
+  @Override
+  public User register(User user) {
+    if (this.isEmailFree(user.getEmail())) {
+      System.out.println("Email is free");
+      user.setPassword(passwordEncoder.encode(user.getPassword()));
+      return this.usersRepository.create(user);
+    }
+
+    System.out.println("Email is not free");
+    return null;
+  }
+
+  private boolean isEmailFree(String email) {
+    return this.usersRepository.getAll().stream()
+            .noneMatch(u -> u.getEmail().equals(email));
   }
 
   @Override

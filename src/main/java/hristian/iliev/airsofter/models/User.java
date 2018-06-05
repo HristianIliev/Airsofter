@@ -12,15 +12,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 public class User implements IModel {
+
+  private int id;
+  private String email;
+  private String password;
+  private String name;
+  private String lastName;
+  private boolean arenaOwner;
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
-  private int id;
-  @Column(name = "email")
-  private String email;
-  @Column(name = "password")
-  private String password;
-
   @Override
   public int getId() {
     return id;
@@ -31,6 +33,7 @@ public class User implements IModel {
     this.id = id;
   }
 
+  @Column(name = "password")
   public String getPassword() {
     return password;
   }
@@ -39,11 +42,39 @@ public class User implements IModel {
     this.password = password;
   }
 
+  @Column(name = "email")
   public String getEmail() {
     return email;
   }
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  @Column(name = "name")
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  @Column(name = "last_name")
+  public String getLastName() {
+    return lastName;
+  }
+
+  public void setLastName(String lastName) {
+    this.lastName = lastName;
+  }
+
+  @Column(name = "arena_owner")
+  public boolean isarenaOwner() {
+    return arenaOwner;
+  }
+
+  public void setarenaOwner(boolean arenaOwner) {
+    this.arenaOwner = arenaOwner;
   }
 }
