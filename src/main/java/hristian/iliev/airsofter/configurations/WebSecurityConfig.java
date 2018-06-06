@@ -34,7 +34,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     "/api/**",
                     "/home",
                     "/register",
-                    "/forgot-password")
+                    "/forgot-password",
+                    /* remove from here after production*/
+                    "/dashboard",
+                    "/install",
+                    "/install-arena")
             .permitAll()
             .anyRequest()
             .authenticated()

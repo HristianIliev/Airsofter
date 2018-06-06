@@ -1,0 +1,112 @@
+.MDateTimePicker .dayHolder {
+  width: 49%;
+  display: inline-block;
+  vertical-align: top;
+}
+.MDateTimePicker .dayHolder:nth-child(2) {
+  margin-right: 2%;
+}
+
+.MDateTimePicker .dayInfo {
+  background-color: #2f353b;
+  color: white;
+  text-align: center;
+}
+
+.dayHolder .date_name {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  font-weight: 600;
+  display: block;
+}
+
+.freeHours {
+  border: 1px solid #2f353b;
+}
+.freeHours .hour {
+  width: 20%;
+  text-align: center;
+  display: inline-block;
+  padding: 5px;
+}
+.freeHours .hour:hover {
+  background-color: #cccccc;
+  cursor: pointer;
+}
+.freeHours .hour.selected {
+  background-color: #32c5d2 !important;
+  color: white;
+}
+.DTPControls {
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+.DTPControls i {
+  font-size: 30px;
+  color: #327ad5;
+}
+.DTPControls i:hover {
+  cursor: pointer;
+  color: #2f353b;
+}
+
+.no_hours {
+  text-align: center;
+  display: block;
+  padding: 20px 0px;
+  background: #e5e5e5;
+}
+
+.t-red {
+  background: rgba(243, 106, 90, 0.5);
+}
+
+.MDateTimePicker .legend {
+  margin-top: 15px;
+}
+
+.legend_box {
+  margin-top: -5px;
+  margin-right: 5px;
+  background: rgba(243, 106, 90, 0.5);
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.serviceImageHolder {
+  color: white;
+  border-radius: 6px;
+  padding: 8px;
+  display: block;
+  margin-bottom: 15px;
+  -webkit-box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.57);
+  box-shadow: 0px 0px 12px -1px rgba(0, 0, 0, 0.57);
+  background-size: cover !important;
+}
+
+.serviceImageHolder:hover {
+  cursor: pointer;
+}
+
+.serviceImageHolder.selected {
+  -webkit-box-shadow: 0px 0px 12px -1px rgba(20, 77, 116, 1);
+  -moz-box-shadow: 0px 0px 12px -1px rgba(20, 77, 116, 1);
+  box-shadow: 0px 0px 12px -1px rgba(20, 77, 116, 1);
+}
+
+.serviceName {
+  color: white;
+  font-size: 16px;
+}
+
+.serviceLink {
+  display: block;
+  margin-top: 100px;
+}
+
+.distance {
+  display: block;
+}

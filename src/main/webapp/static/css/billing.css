@@ -1,0 +1,271 @@
+.payment-method {
+  padding: 10px;
+  border-bottom: 2px solid #e5e5e5;
+}
+
+.img-holder img {
+  margin-right: 5px;
+}
+
+.inactive_group {
+  opacity: 0.2;
+}
+
+.payment_title {
+  font-weight: bold;
+  display: block;
+}
+
+.period-option {
+  padding: 10px;
+  border-bottom: 2px solid #e5e5e5;
+}
+
+.period-option label,
+.summarize_order label,
+.plan_information label {
+  font-weight: bold;
+  margin-top: 7px;
+}
+
+.period-option .col-md-8,
+.summarize_order .col-md-8,
+.plan_information .col-md-8 {
+  padding-left: 0px;
+}
+
+.period-option .col-md-4,
+.summarize_order .col-md-4,
+.plan_information .col-md-4 {
+  padding: 0px !important;
+}
+
+.priceTag {
+  text-align: right;
+  color: #26c281;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.summarize_order {
+  padding: 10px;
+}
+
+.plan_information {
+  padding: 10px;
+  border-bottom: 2px solid #e5e5e5;
+}
+
+.order-options {
+  margin-top: 25px;
+}
+
+.order-options button {
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+button.finish {
+  width: 100%;
+}
+
+.plan_information .col-md-4 {
+  text-align: right;
+  margin-top: 7px;
+}
+
+.bank_propery {
+  display: block;
+}
+
+.bank_propery label {
+  font-weight: bold;
+}
+
+.bank_payment {
+  max-width: 700px;
+  margin: 0px auto;
+  margin-top: 30px !important;
+}
+
+.bank_propery {
+  padding-top: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.using_this_plan .arrow {
+  margin-top: 15px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.using_this_plan .arrow i {
+  font-size: 24px;
+}
+
+.using_this_plan .text_box {
+  padding: 10px;
+  border: 1px solid #e5e9ee;
+}
+
+.IVRIntro {
+  background: #4e54c8; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #4e54c8,
+    #8f94fb
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #4e54c8,
+    #8f94fb
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  color: white;
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.BillingIntro {
+  background: #c33764; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to right,
+    #1d2671,
+    #c33764
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to right,
+    #1d2671,
+    #c33764
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  color: white;
+  border-radius: 4px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.IVRIntro i,
+.BillingIntro i {
+  font-size: 85px;
+  line-height: normal !important;
+}
+
+.IVRIntro .row,
+.BillingIntro .row {
+  display: table;
+}
+
+.IVRIntro p,
+.BillingIntro p {
+  text-align: justify;
+}
+
+.IVRIntro .tab-title,
+.BillingIntro .tab-title {
+  font-weight: 600;
+  font-size: 16px;
+  display: block;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.IVRIntro .col-md-8,
+.BillingIntro .col-md-8 {
+  display: table-cell;
+  float: none;
+}
+
+.IVRIntro .col-md-4,
+.BillingIntro .col-md-4 {
+  text-align: center;
+  display: table-cell;
+  float: none;
+  vertical-align: middle;
+}
+
+.spin-loader {
+  text-align: center;
+}
+
+.v-spinner {
+  display: inline-block !important;
+}
+
+.pulse_button {
+  -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+  animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+.pulse_button:hover {
+  -webkit-animation: none;
+  -moz-animation: none;
+  -ms-animation: none;
+  animation: none;
+}
+.spin-loader.full-box {
+  width: 60px;
+  height: 60px;
+  overflow: auto;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.boxOpacityLoading {
+  opacity: 0.1;
+}
+@-webkit-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);
+  }
+}
+@-moz-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);
+  }
+}
+@-ms-keyframes pulse {
+  to {
+    box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);
+  }
+}
+@keyframes pulse {
+  to {
+    box-shadow: 0 0 0 15px rgba(232, 76, 61, 0);
+  }
+}
+
+.shake_item {
+  animation: shake 1.5s infinite cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  transform: translate3d(0, 0, 0);
+}
+
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
