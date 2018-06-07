@@ -281,7 +281,7 @@
                                                 <br>
                                             </div>
                                             <!-- STEP 1 -->
-                                            <div class="col-md-4 mt-step-col first active">
+                                            <div id="step-1" class="col-md-4 mt-step-col first active">
                                                 <div class="mt-step-number bg-white">
                                                     <i class="icon-pencil"></i>
                                                 </div>
@@ -294,7 +294,7 @@
                                             </div>
                                             <!-- END STEP 1 -->
                                             <!-- STEP 2 -->
-                                            <div class="col-md-4 mt-step-col">
+                                            <div id="step-2" class="col-md-4 mt-step-col">
                                                 <div class="mt-step-number bg-white">
                                                     <i class="icon-compass"></i>
                                                 </div>
@@ -321,7 +321,8 @@
                                             <!-- END STEP 3 -->
                                         </div>
                                         <!-- END STEPS -->
-                                        <div class="row">
+                                        <!-- STEP 1 FORM -->
+                                        <div id="first-form" class="row">
                                             <div class="col-sm-12 col-md-8 col-md-offset-2" style="margin-top: 40px">
                                                 <div class="portlet light bordered">
                                                     <div class="portlet-title">
@@ -374,7 +375,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-actions ">
-                                                                <button type="button" class="btn green-sharp" style="float: right">
+                                                                <button id="submit-1" type="button" class="btn green-sharp" style="float: right">
                                                                     <i class="far fa-check-circle"></i> Submit</button>
                                                             </div>
                                                         </form>
@@ -382,6 +383,42 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- END STEP 1 FORM -->
+                                        <!-- STEP 2 FORM -->
+                                        <div id="second-form" class="row" style="display: none;">
+                                            <div class="col-sm-12 col-md-12" style="margin-top: 40px;">
+                                                <div class="portlet light bordered">
+                                                    <div class="portlet-title">
+                                                        <div class="caption font-green">
+                                                            <i class="icon-pin font-green">
+                                                            </i>
+                                                            <span class="caption-subject bold uppercase">
+                                                                Въведи повече информация относно местополжението на арената
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body form">
+                                                        <form role="form">
+                                                            <div class="form-body">
+                                                                <div class="form-group form-md-line-input form-md-floating-label">
+                                                                    <div class="input-icon">
+                                                                        <input name="name" type="text" class="form-control">
+                                                                        <label for="name">Въведи адрес</label>
+                                                                        <span class="help-block">След като маркерът за местополоение се покаже можеш просто да го местиш за да покажеш адреса</span>
+                                                                        <i class="icon-location-pin"></i>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-actions" style="float: right">
+                                                                <button id="submit-1" type="button" class="btn green-sharp">
+                                                                    <i class="far fa-check-circle"></i> Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END STEP 2 FORM -->
                                     </div>
                                 </div>
                             </div>
