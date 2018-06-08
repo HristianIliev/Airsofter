@@ -1,1 +1,1 @@
-Web Application for Airsoft lovers and also Airsoft arenas that want to grow their business (still in development)
+Web Application for Airsoft lovers and also Airsoft arenas that want to grow their business. Main purpose is to ease the process of finding and booking an airsoft arena. Can be used also as a airsoft arena managment system. In order to run the application first add hibernate.cfg.xml with the configuration for your database to the resources folder in the source code. (still in development)
