@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
@@ -30,6 +30,7 @@
     <link href="/static/css/toastr.css" rel="stylesheet" type="text/css" />
     <link href="/static/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/static/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/mdDateTimePicker.min.css" rel="stylesheet">
     <style>
         input[type="checkbox"].ios8-switch {
             display: none;
@@ -221,6 +222,13 @@
         [v-cloak] {
             display: none;
         }
+
+        .map {
+            height: 500px;
+            margin-top: 20px;
+            border-radius: 4px;
+            box-shadow: 0 7px 15px rgba(0, 9, 128, 0.05), 0 12px 28px rgba(0, 9, 128, 0.075);
+        }
     </style>
 </head>
 
@@ -307,7 +315,7 @@
                                             </div>
                                             <!-- END STEP 2 -->
                                             <!-- STEP 3 -->
-                                            <div class="col-md-4 mt-step-col last">
+                                            <div id="step-3" class="col-md-4 mt-step-col last">
                                                 <div class="mt-step-number bg-white">
                                                     <i class="icon-settings"></i>
                                                 </div>
@@ -339,36 +347,43 @@
                                                             <div class="form-body">
                                                                 <div class="form-group form-md-line-input form-md-floating-label">
                                                                     <div class="input-icon">
-                                                                        <input name="name" type="text" class="form-control">
+                                                                        <input id="arenaName" name="name" type="text" class="form-control">
                                                                         <label for="name">Име на арената</label>
                                                                         <span class="help-block">Кратко и ясно име на Airsoft арената ви</span>
                                                                         <i class="icon-grid"></i>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group form-md-line-input form-md-floating-label">
-                                                                    <textarea name="description" class="form-control" rows="6"></textarea>
+                                                                    <textarea id="arenaDescription" name="description" class="form-control autosizeme" rows="6"></textarea>
                                                                     <label for="description">Описание на арената</label>
-                                                                    <span class="help-block">Кратко и ясно описание на арената ти</span>
+                                                                    <span class="help-block">Кратко и ясно описание на арената ти. Минимум 150 символа</span>
                                                                 </div>
                                                                 <div class="form-group form-md-checkboxes">
-                                                                    <label style="font-weight: 600; font-size: 15px; margin-bottom: 20px;">Спецификации на арената</label>
+                                                                    <div class="caption font-green" style="text-align: center; margin-bottom: 20px;">
+                                                                        <i class="icon-clock font-green"></i>
+                                                                        <span class="caption-subject bold uppercase">
+                                                                            Избери кои от тези категории на арена отговарят на твоята
+                                                                        </span>
+                                                                    </div>
                                                                     <div class="row md-checkbox-list">
                                                                         <div class="col-md-6">
-                                                                            <div class="md-checkbox">
-                                                                                <input type="checkbox" id="checkbox1" class="md-check">
-                                                                                <label for="checkbox1">
+                                                                            <div th:each="arenaCategory: ${arenaCategories1}" class="md-checkbox">
+                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategory.getId()}" class="md-check">
+                                                                                <label th:inline="text" th:for="'checkbox' + ${arenaCategory.getId()}">
                                                                                     <span class="inc"></span>
                                                                                     <span class="check"></span>
-                                                                                    <span class="box"></span> Option 1 </label>
+                                                                                    <span class="box"></span> [[${arenaCategory.getName()}]]
+                                                                                </label>
                                                                             </div>
                                                                         </div>
                                                                         <div class="col-md-6">
-                                                                            <div class="md-checkbox">
-                                                                                <input type="checkbox" id="checkbox2" class="md-check">
-                                                                                <label for="checkbox2">
+                                                                            <div th:each="arenaCategory: ${arenaCategories2}" class="md-checkbox">
+                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategory.getId()}" class="md-check">
+                                                                                <label th:inline="text" th:for="'checkbox' + ${arenaCategory.getId()}">
                                                                                     <span class="inc"></span>
                                                                                     <span class="check"></span>
-                                                                                    <span class="box"></span> Option 2 </label>
+                                                                                    <span class="box"></span> [[${arenaCategory.getName()}]]
+                                                                                </label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -376,7 +391,7 @@
                                                             </div>
                                                             <div class="form-actions ">
                                                                 <button id="submit-1" type="button" class="btn green-sharp" style="float: right">
-                                                                    <i class="far fa-check-circle"></i> Submit</button>
+                                                                    <i class="far fa-check-circle"></i> Продължи</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -404,14 +419,19 @@
                                                                     <div class="input-icon">
                                                                         <input name="name" type="text" class="form-control">
                                                                         <label for="name">Въведи адрес</label>
-                                                                        <span class="help-block">След като маркерът за местополоение се покаже можеш просто да го местиш за да покажеш адреса</span>
-                                                                        <i class="icon-location-pin"></i>
+                                                                        <span class="help-block">След като маркерът за местополоение се покаже можеш
+                                                                            просто да го местиш за да покажеш адреса</span>
+                                                                        <i class="far fa-compass"></i>
                                                                     </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="form-actions" style="float: right">
-                                                                <button id="submit-1" type="button" class="btn green-sharp">
-                                                                    <i class="far fa-check-circle"></i> Submit</button>
+
+                                                                <!-- GOOGLE MAPS -->
+                                                                <div id="map" class="map" style="margin-bottom: 15px;"></div>
+
+                                                                <button id="back-1" type="button" class="btn grey-cascade" style="float: left; margin-bottom: 10px;">
+                                                                    <i class="fas fa-undo"></i> Назад</button>
+                                                                <button id="submit-2" type="button" class="btn green-sharp" style="float: right; margin-bottom: 10px;">
+                                                                    <i class="far fa-check-circle"></i> Продължи</button>
                                                             </div>
                                                         </form>
                                                     </div>
@@ -419,6 +439,235 @@
                                             </div>
                                         </div>
                                         <!-- END STEP 2 FORM -->
+                                        <!-- STEP 3 FORM -->
+                                        <div id="third-form" class="row" style="display: none;">
+                                            <div class="col-sm-12 col-md-8 col-md-offset-2" style="margin-top: 40px">
+                                                <div class="portlet light bordered">
+                                                    <div class="portlet-title">
+                                                        <div class="caption font-green">
+                                                            <i class="icon-pin font-green">
+                                                            </i>
+                                                            <span class="caption-subject bold uppercase">
+                                                                Последни настройки
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body form">
+                                                        <form role="form">
+                                                            <div class="form-body">
+                                                                <div class="form-group form-md-line-input form-md-floating-label">
+                                                                    <div class="input-icon">
+                                                                        <input name="telephone" type="text" class="form-control">
+                                                                        <label for="telephone">Телефонен номер</label>
+                                                                        <i class="fas fa-phone"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="caption font-green" style="text-align: center; margin-bottom: 10px;">
+                                                                    <i class="icon-clock font-green"></i>
+                                                                    <span class="caption-subject bold uppercase">
+                                                                        Въведи работното време на арената
+                                                                    </span>
+                                                                </div>
+                                                                <table class="table table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th scope="col"></th>
+                                                                            <th scope="col">Отваря</th>
+                                                                            <th scope="col">Затваря</th>
+                                                                            <th scope="col">Почивен ден</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <th style="vertical-align: middle;" scope="row">Понеделник</th>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-0" type="text" class="form-control" value="09:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-1" type="text" class="form-control" value="17:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td style="vertical-align: middle;">
+                                                                                <div class="md-checkbox">
+                                                                                    <input type="checkbox" id="checkbox-0" class="md-check">
+                                                                                    <label for="checkbox-0">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th style="vertical-align: middle;" scope="row">Вторник</th>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-2" type="text" class="form-control" value="09:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-3" type="text" class="form-control" value="17:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td style="vertical-align: middle;">
+                                                                                <div class="md-checkbox">
+                                                                                    <input type="checkbox" id="checkbox-1" class="md-check">
+                                                                                    <label for="checkbox-1">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th style="vertical-align: middle;" scope="row">Сряда</th>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-4" type="text" class="form-control" value="09:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-5" type="text" class="form-control" value="17:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td style="vertical-align: middle;">
+                                                                                <div class="md-checkbox">
+                                                                                    <input type="checkbox" id="checkbox-2" class="md-check">
+                                                                                    <label for="checkbox-2">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th style="vertical-align: middle;" scope="row">Четвъртък</th>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-6" type="text" class="form-control" value="09:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-7" type="text" class="form-control" value="17:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td style="vertical-align: middle;">
+                                                                                <div class="md-checkbox">
+                                                                                    <input type="checkbox" id="checkbox-3" class="md-check">
+                                                                                    <label for="checkbox-3">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th style="vertical-align: middle;" scope="row">Петък</th>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-8" type="text" class="form-control" value="09:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-9" type="text" class="form-control" value="17:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td style="vertical-align: middle;">
+                                                                                <div class="md-checkbox">
+                                                                                    <input type="checkbox" id="checkbox-4" class="md-check">
+                                                                                    <label for="checkbox-4">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th style="vertical-align: middle;" scope="row">Събота</th>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-10" type="text" class="form-control" value="09:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-11" type="text" class="form-control" value="17:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td style="vertical-align: middle;">
+                                                                                <div class="md-checkbox">
+                                                                                    <input type="checkbox" id="checkbox-5" class="md-check">
+                                                                                    <label for="checkbox-5">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <th style="vertical-align: middle;" scope="row">Неделя</th>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-12" type="text" class="form-control" value="09:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="input-icon">
+                                                                                    <i class="far fa-clock"></i>
+                                                                                    <input id="trigger-time-13" type="text" class="form-control" value="17:00">
+                                                                                </div>
+                                                                            </td>
+                                                                            <td style="vertical-align: middle;">
+                                                                                <div class="md-checkbox">
+                                                                                    <input type="checkbox" id="checkbox-6" class="md-check">
+                                                                                    <label for="checkbox-6">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span>
+                                                                                    </label>
+                                                                                </div>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="form-actions">
+                                                                <button id="back-2" type="button" class="btn grey-cascade" style="float: left;">
+                                                                    <i class="fas fa-undo"></i> Назад</button>
+                                                                <button id="submit-3" type="button" class="btn green-sharp" style="float: right">
+                                                                    <i class="far fa-check-circle"></i> Приключване</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END STEP 3 FORM -->
                                     </div>
                                 </div>
                             </div>
@@ -448,7 +697,15 @@
     <!-- WYSIWYG -->
     <script src="/static/js/wysihtml5-0.3.0.js"></script>
     <script src="/static/js/bootstrap-wysihtml5.js"></script>
+    <!-- TIME PICKER -->
+    <script src="/static/js/libs/moment.min.js"></script>
+    <script src="/static/js/libs/draggabilly.pkgd.min.js"></script>
+    <script src="/static/js/libs/mdDateTimePicker.min.js"></script>
+
     <script type="text/javascript" src="/static/js/install.js"></script>
+    <script type="text/javascript" src="/static/js/libs/map.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjJimoTORP3LAM9lx8aasMG5_1dlNgrGI&callback=initMap" async
+        defer></script>
 </body>
 
 </html>

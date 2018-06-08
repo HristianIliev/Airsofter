@@ -1,6 +1,7 @@
 .gradle
 /build/
 !gradle/wrapper/gradle-wrapper.jar
+src/main/resources/hibernate.cfg
 
 ### STS ###
 .apt_generated

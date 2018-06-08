@@ -1,5 +1,6 @@
 package hristian.iliev.airsofter.utils;
 
+import hristian.iliev.airsofter.models.ArenaCategory;
 import hristian.iliev.airsofter.models.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -14,6 +15,7 @@ public class HibernateUtils {
       Configuration configuration = new Configuration().configure();
 
       configuration.addAnnotatedClass(User.class);
+      configuration.addAnnotatedClass(ArenaCategory.class);
 
       StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
               .applySettings(
