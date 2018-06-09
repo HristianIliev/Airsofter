@@ -368,8 +368,8 @@
                                                                     <div class="row md-checkbox-list">
                                                                         <div class="col-md-6">
                                                                             <div th:each="arenaCategory: ${arenaCategories1}" class="md-checkbox">
-                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategory.getId()}" class="md-check">
-                                                                                <label th:inline="text" th:for="'checkbox' + ${arenaCategory.getId()}">
+                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategoryStat.index}" class="md-check">
+                                                                                <label th:id="'label' + ${arenaCategoryStat.index}" th:inline="text" th:for="'checkbox' + ${arenaCategoryStat.index}">
                                                                                     <span class="inc"></span>
                                                                                     <span class="check"></span>
                                                                                     <span class="box"></span> [[${arenaCategory.getName()}]]
@@ -378,8 +378,8 @@
                                                                         </div>
                                                                         <div class="col-md-6">
                                                                             <div th:each="arenaCategory: ${arenaCategories2}" class="md-checkbox">
-                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategory.getId()}" class="md-check">
-                                                                                <label th:inline="text" th:for="'checkbox' + ${arenaCategory.getId()}">
+                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategoryStat.index} + '_1'" class="md-check">
+                                                                                <label th:id="'label' + ${arenaCategoryStat.index} + ''" th:inline="text" th:for="'checkbox' + ${arenaCategoryStat.index} + '_1'">
                                                                                     <span class="inc"></span>
                                                                                     <span class="check"></span>
                                                                                     <span class="box"></span> [[${arenaCategory.getName()}]]
@@ -413,12 +413,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="portlet-body form">
-                                                        <form role="form">
+                                                        <form role="form" action="#" method="POST" class="searchService">
                                                             <div class="form-body">
                                                                 <div class="form-group form-md-line-input form-md-floating-label">
                                                                     <div class="input-icon">
-                                                                        <input name="name" type="text" class="form-control">
-                                                                        <label for="name">Въведи адрес</label>
+                                                                        <input id="arena-address" name="name" type="text" class="form-control searchedCity">
                                                                         <span class="help-block">След като маркерът за местополоение се покаже можеш
                                                                             просто да го местиш за да покажеш адреса</span>
                                                                         <i class="far fa-compass"></i>
@@ -457,7 +456,7 @@
                                                             <div class="form-body">
                                                                 <div class="form-group form-md-line-input form-md-floating-label">
                                                                     <div class="input-icon">
-                                                                        <input name="telephone" type="text" class="form-control">
+                                                                        <input id="telephone" name="telephone" type="text" class="form-control">
                                                                         <label for="telephone">Телефонен номер</label>
                                                                         <i class="fas fa-phone"></i>
                                                                     </div>
@@ -703,9 +702,9 @@
     <script src="/static/js/libs/mdDateTimePicker.min.js"></script>
 
     <script type="text/javascript" src="/static/js/install.js"></script>
-    <script type="text/javascript" src="/static/js/libs/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjJimoTORP3LAM9lx8aasMG5_1dlNgrGI&callback=initMap" async
-        defer></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjJimoTORP3LAM9lx8aasMG5_1dlNgrGI&libraries=places&callback=initMap"
+        async defer></script>
 </body>
 
 </html>

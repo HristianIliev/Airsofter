@@ -1,6 +1,8 @@
 package hristian.iliev.airsofter.utils;
 
+import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.ArenaCategory;
+import hristian.iliev.airsofter.models.Timetable;
 import hristian.iliev.airsofter.models.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
@@ -16,6 +18,8 @@ public class HibernateUtils {
 
       configuration.addAnnotatedClass(User.class);
       configuration.addAnnotatedClass(ArenaCategory.class);
+      configuration.addAnnotatedClass(Arena.class);
+      configuration.addAnnotatedClass(Timetable.class);
 
       StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
               .applySettings(

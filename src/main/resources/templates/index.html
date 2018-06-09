@@ -60,7 +60,7 @@
                         <!-- Text -->
                         <h1 class="heading animated fadeInUp" data-delay="100">
                             Най-
-                            <span class="text-color">лесната</span> &amp; 
+                            <span class="text-color">лесната</span> &amp;
                             <span class="text-color">иновативна</span> платформа за Airsoft любители.
                         </h1>
 
@@ -133,7 +133,7 @@
                             <div class="form-group">
                                 <div class="row justified-center">
                                     <div class="col-md-4 col-md-offset-3">
-                                        <input class="input form-control searchedCity" name="city" placeholder="Въведи град" style="height: 40px !important;">
+                                        <input id="find-arena-input" type="text" class="input form-control searchedCity" name="city" placeholder="Въведи град" style="height: 40px !important;">
                                     </div>
                                     <div class="col-md-2">
                                         <button type="submit" class="btn btn-block ui-gradient-green shadow-md searchServices" style="margin-top: 0px !important;">Намери сервиз</button>
@@ -279,9 +279,9 @@
     <script type="text/javascript" src="/static/js/libs/bootstrap.js"></script>
     <script type="text/javascript" src="/static/js/libs/form-validator.min.js"></script>
     <script type="text/javascript" src="/static/js/landing.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjJimoTORP3LAM9lx8aasMG5_1dlNgrGI&libraries=places&callback=initMap"
+        async defer></script>
     <script type="text/javascript" src="/static/js/libs/map.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjJimoTORP3LAM9lx8aasMG5_1dlNgrGI&callback=initMap" async
-        defer></script>
     <script type="text/javascript" src="/static/js/libs/wow.min.js"></script>
     <script>
         new WOW().init();

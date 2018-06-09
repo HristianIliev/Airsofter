@@ -35,6 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     "/home",
                     "/register",
                     "/forgot-password",
+                    "/api/createArena",
                     /* remove from here after production*/
                     "/dashboard",
                     "/install",
@@ -54,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/api/register");
+    web.ignoring().antMatchers("/api/register", "/api/createArena");
   }
 
   @Autowired

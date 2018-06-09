@@ -1,6 +1,7 @@
 package hristian.iliev.airsofter.configurations;
 
 import hristian.iliev.airsofter.contracts.IRepository;
+import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.ArenaCategory;
 import hristian.iliev.airsofter.models.User;
 import hristian.iliev.airsofter.repositories.HibernateRepository;
@@ -24,6 +25,15 @@ public class AppConfig {
   IRepository<ArenaCategory> provideArenaCategoriesRepository() {
     HibernateRepository<ArenaCategory> repository = new HibernateRepository<>();
     repository.setEntityClass(ArenaCategory.class);
+
+    return repository;
+  }
+
+  @Bean
+  @Autowired
+  IRepository<Arena> provideArenasRepository() {
+    HibernateRepository<Arena> repository = new HibernateRepository<>();
+    repository.setEntityClass(Arena.class);
 
     return repository;
   }
