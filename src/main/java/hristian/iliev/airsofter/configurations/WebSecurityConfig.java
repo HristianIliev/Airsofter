@@ -26,6 +26,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    http.csrf().disable();
+
     http
             .authorizeRequests()
             .antMatchers("/",
@@ -34,12 +36,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     "/api/**",
                     "/home",
                     "/register",
-                    "/forgot-password",
-                    "/api/createArena",
-                    /* remove from here after production*/
+                    "/forgot-password" /*,
+                     remove from here after production
                     "/dashboard",
                     "/install",
-                    "/install-arena")
+                    "/install-arena"*/)
+            .permitAll()
+            .antMatchers(HttpMethod.POST, "/api/createArena")
+            .permitAll()
+            .antMatchers(HttpMethod.POST, "/api/register")
             .permitAll()
             .anyRequest()
             .authenticated()
@@ -53,10 +58,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll();
   }
 
-  @Override
-  public void configure(WebSecurity web) throws Exception {
-    web.ignoring().antMatchers("/api/register", "/api/createArena");
-  }
+//  @Override
+//  public void configure(WebSecurity web) throws Exception {
+//    web.ignoring().antMatchers("/api/register", "/api/createArena");
+//  }
 
   @Autowired
   public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

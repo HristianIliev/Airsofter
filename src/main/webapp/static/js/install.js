@@ -109,6 +109,15 @@ $("#submit-2").click(function() {
 });
 
 $("#submit-3").click(function() {
+  if ($("#telephone").val().length === 0) {
+    $("#telephone")
+      .parent()
+      .parent()
+      .addClass("has-error");
+
+    return false;
+  }
+
   var name = $("#arenaName").val();
   var description = $("#arenaDescription").val();
   var latitude = lastMarker.position.lat();
@@ -181,7 +190,7 @@ $("#submit-3").click(function() {
     }
   }
 
-  for (var i = 9; i < 18; i += 1) {
+  for (var i = 0; i < 9; i += 1) {
     var checkboxId = "checkbox" + i + "_1";
     var labelId = "label" + i + "_1";
     var entryName = $("#" + labelId).text();
@@ -192,18 +201,31 @@ $("#submit-3").click(function() {
     }
   }
 
+  startLoading();
+
   $.ajax({
     url: "/api/createArena",
-    method: "POST",
+    method: "post",
     data: JSON.stringify(dataJSON),
     contentType: "application/json",
     success: function(result) {
-      if(result.id !== 0 && result !== 'null' && result !== null){
-        alert("success");
+      stopLoading();
+      if (result.id !== 0 && result !== "null" && result !== null) {
+        window.location.href = "/dashboard";
       }
     }
   });
 });
+
+function startLoading() {
+  $("#submit-3").html(
+    '<i class="far fa-check-circle"></i> Приключване <i class="fas fa-circle-notch fa-spin"></i>'
+  );
+}
+
+function stopLoading() {
+  $("#submit-3").html('<i class="far fa-check-circle"></i> Приключване');
+}
 
 $("#back-1").click(function() {
   $("#second-form").attr("style", "display: none;");

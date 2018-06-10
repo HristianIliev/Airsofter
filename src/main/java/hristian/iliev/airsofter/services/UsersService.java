@@ -41,6 +41,13 @@ public class UsersService implements IUsersService {
     return null;
   }
 
+  @Override
+  public void installationCompleted(User user) {
+    user.setNeedsInstallation(false);
+
+    this.usersRepository.update(user);
+  }
+
   private boolean isEmailFree(String email) {
     return this.usersRepository.getAll().stream()
             .noneMatch(u -> u.getEmail().equals(email));

@@ -99,7 +99,7 @@ public class Arena implements IModel {
     this.telephone = telephone;
   }
 
-  @OneToOne(mappedBy = "arena", fetch = FetchType.EAGER)
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "arena")
   public Timetable getTimetable() {
     return timetable;
   }

@@ -379,7 +379,7 @@
                                                                         <div class="col-md-6">
                                                                             <div th:each="arenaCategory: ${arenaCategories2}" class="md-checkbox">
                                                                                 <input type="checkbox" th:id="'checkbox' + ${arenaCategoryStat.index} + '_1'" class="md-check">
-                                                                                <label th:id="'label' + ${arenaCategoryStat.index} + ''" th:inline="text" th:for="'checkbox' + ${arenaCategoryStat.index} + '_1'">
+                                                                                <label th:id="'label' + ${arenaCategoryStat.index} + '_1'" th:inline="text" th:for="'checkbox' + ${arenaCategoryStat.index} + '_1'">
                                                                                     <span class="inc"></span>
                                                                                     <span class="check"></span>
                                                                                     <span class="box"></span> [[${arenaCategory.getName()}]]

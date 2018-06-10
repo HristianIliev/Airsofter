@@ -7,4 +7,6 @@ public interface IUsersService extends UserDetailsService {
   User getUserByEmail(String username);
 
   User register(User user);
+
+  void installationCompleted(User user);
 }

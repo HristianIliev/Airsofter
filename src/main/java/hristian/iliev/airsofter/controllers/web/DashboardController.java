@@ -3,6 +3,7 @@ package hristian.iliev.airsofter.controllers.web;
 import hristian.iliev.airsofter.contracts.IUsersService;
 import hristian.iliev.airsofter.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
