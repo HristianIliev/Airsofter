@@ -36,6 +36,8 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 //    Spring Security
     compile("org.springframework.boot:spring-boot-starter-security")
+//    SMS Verification
+    compile 'com.nexmo:client:3.5.0'
 
 //    Unit Testing
     testCompile('org.springframework.boot:spring-boot-starter-test')
