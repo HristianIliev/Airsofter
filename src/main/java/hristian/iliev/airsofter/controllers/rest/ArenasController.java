@@ -38,15 +38,10 @@ public class ArenasController {
   @RequestMapping(value = "/createArena", method = RequestMethod.POST)
   @ResponseBody
   public Arena createArena(@RequestBody Arena arena, Principal principal) {
-    System.out.println("reached");
-    String userEmail = principal.getName(); // Here is the exception thrown
-    System.out.println("reached 2");
+    String userEmail = principal.getName();
     User user = this.usersService.getUserByEmail(userEmail);
-    System.out.println("reached 3");
     Arena created = this.arenasService.createArena(arena);
     if (created.getId() != 0) {
-      System.out.println("reacher 4");
-      System.out.println(user.getEmail());
       this.usersService.installationCompleted(user);
     }
 

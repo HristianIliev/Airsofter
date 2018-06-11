@@ -27,6 +27,8 @@ public class DashboardController {
       } else if (!user.isArenaOwner()) {
         return "redirect:/install";
       }
+    } else if(!user.isNeedsInstallation() && !user.isArenaOwner()){
+      return "redirect:/app";
     }
 
     return "dashboard";
