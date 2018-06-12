@@ -1,6 +1,9 @@
 package hristian.iliev.airsofter.models;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import hristian.iliev.airsofter.contracts.IModel;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -8,8 +11,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -23,6 +28,9 @@ public class User implements IModel {
   private boolean arenaOwner;
   private boolean needsInstallation;
   private Arena arena;
+  private List<Request> madeRequests;
+  private List<Request> requestsForTheArena;
+  private List<Conversation> meConversations;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -98,5 +106,36 @@ public class User implements IModel {
 
   public void setArena(Arena arena) {
     this.arena = arena;
+  }
+
+  @OneToMany(mappedBy = "user")
+  @LazyCollection(LazyCollectionOption.FALSE)
+  public List<Request> getMadeRequests() {
+    return madeRequests;
+  }
+
+  public void setMadeRequests(List<Request> madeRequests) {
+    this.madeRequests = madeRequests;
+  }
+
+  @OneToMany(mappedBy = "owner")
+  @JsonManagedReference
+  @LazyCollection(LazyCollectionOption.FALSE)
+  public List<Request> getRequestsForTheArena() {
+    return requestsForTheArena;
+  }
+
+  public void setRequestsForTheArena(List<Request> requestsForTheArena) {
+    this.requestsForTheArena = requestsForTheArena;
+  }
+
+  @OneToMany(mappedBy = "me")
+  @LazyCollection(LazyCollectionOption.FALSE)
+  public List<Conversation> getMeConversations() {
+    return meConversations;
+  }
+
+  public void setMeConversations(List<Conversation> meConversations) {
+    this.meConversations = meConversations;
   }
 }

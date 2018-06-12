@@ -36,9 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     "/api/**",
                     "/home",
                     "/register",
-                    "/forgot-password" ,
-                    /* remove from here after production */
-                    "/dashboard")
+                    "/forgot-password")
             .permitAll()
             .antMatchers(HttpMethod.POST, "/api/createArena")
             .permitAll()

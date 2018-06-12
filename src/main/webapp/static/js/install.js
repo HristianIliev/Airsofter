@@ -227,11 +227,11 @@ function showCodeVerificationModal(dataJSON) {
       }
       console.log(data.code);
 
-      // $.ajax({
-      //   url: "/api/checkVerificationCode?code=" + data.code,
-      //   method: "GET",
-      //   success: function(result) {
-      //     if (result) {
+      $.ajax({
+        url: "/api/checkVerificationCode?code=" + data.code,
+        method: "GET",
+        success: function(result) {
+          if (result) {
             startLoading();
 
             $.ajax({
@@ -246,11 +246,11 @@ function showCodeVerificationModal(dataJSON) {
                 }
               }
             });
-      //     } else {
-      //       alert("Вашият код беше грешен :(");
-      //     }
-      //   }
-      // });
+          } else {
+            alert("Вашият код беше грешен :(");
+          }
+        }
+      });
     }
   });
 }

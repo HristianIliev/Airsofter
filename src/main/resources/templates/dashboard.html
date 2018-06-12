@@ -229,6 +229,47 @@
             box-shadow: 0 7px 15px rgba(0, 9, 128, 0.05), 0 12px 28px rgba(0, 9, 128, 0.075);
         }
     </style>
+
+    <!-- GOOGLE CHARTS -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'], 'language': 'bg' });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Define the chart to be drawn.
+            // var data = new google.visualization.DataTable();
+            // data.addColumn('string', 'Element');
+            // data.addColumn('number', 'Percentage');
+            // data.addRows([
+            //     ['Nitrogen', 0.78],
+            //     ['Oxygen', 0.21],
+            //     ['Other', 0.01]
+            // ]);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Ден', 'Заявки'],
+                ['12.06.', 2],
+                ['11.06.', 1],
+                ['10.06.', 3],
+                ['09.06.', 4],
+                ['08.06.', 1],
+                ['07.06.', 0],
+                ['06.06.', 5]
+            ]);
+
+            var options = {
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                'width': 515,
+                'height': 400
+            };
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
+            chart.draw(data, options);
+        }
+    </script>
 </head>
 
 <body class="page-container-bg-solid page-md">
@@ -342,24 +383,210 @@
                                     <li id="service_item">
                                         <a href="/edit">
                                             <i class="fas fa-wrench"></i>
-                                             Настройки
+                                            Настройки
                                         </a>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="clearfix">
-                    </div>
-                    <!-- PAGE TITLE -->
-                    <div class="page-wrapper-row full-height">
-                        <div class="page-wrapper-middle">
-                            <div class="page-container">
-                                <div class="page-content-wrapper">
-                                    <div class="page-head">
-                                        <div class="container">
-                                            <div class="page-title">
-                                                <h1 th:text="'Управление на Airsoft арена - ' + ${arenaName}"></h1>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+        </div>
+        <!-- PAGE TITLE -->
+        <div class="page-wrapper-row full-height">
+            <div class="page-wrapper-middle">
+                <div class="page-container">
+                    <div class="page-content-wrapper">
+                        <div class="page-head">
+                            <div class="container">
+                                <div class="page-title">
+                                    <h1 th:text="'Управление на Airsoft арена - ' + ${arenaName}"></h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-content" style="min-height: 834px;">
+                            <div class="container">
+                                <div class="BillingIntro">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <span class="tab-title">Добре дошли в таблото за управлението на Airsoft арена.</span>
+                                            <p>Ние в Airsofter се опитваме да улесним максимално управлението и менъжирането
+                                                на Airsoft арена за игра. Можете да се възползвате от удобства като система
+                                                за известяване и отговор на заявки към арена ви чрез телефонно обаждане,
+                                                имейл кампании към Ваши предходни и евентуално бъдещи клиенти. Твоята арена
+                                                може да бъде промотирана и да застава на челни позиции в резултатите при
+                                                търсене от потребителите! Започни да се възползваш от всички тези функции
+                                                на Airsofter
+                                            </p>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <img src="/static/img/billing_icon.png" alt="Airsofter" style="max-height: 140px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- NUMBER OF CLIENTS FOR TODAY -->
+                                    <div class="col-md-3">
+                                        <div id="client-waiting-today" class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20">
+                                            <h4 class="widget-thumb-heading">
+                                                Клиенти за обсл. днес
+                                            </h4>
+                                            <div class="widget-thumb-wrap">
+                                                <i class="widget-thumb-icon bg-purple fas fa-hands-helping">
+                                                </i>
+                                                <div class="widget-thumb-body">
+                                                    <span class="widget-thumb-subtitle">
+                                                        Клиенти
+                                                    </span>
+                                                    <span data-counter="counterup" data-value="0" class="widget-thumb-body-stat">
+                                                        <!-- CHANGE WITH THYMELEAF WHEN THE LOGIC IS IMPLEMENTED -->
+                                                        0
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div id="next_client" class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20">
+                                            <h4 class="widget-thumb-heading">
+                                                Следващ клиент
+                                            </h4>
+                                            <div class="widget-thumb-wrap">
+                                                <i class="widget-thumb-icon bg-blue far fa-clock"></i>
+                                                <div class="widget-thumb-body">
+                                                    <span class="widget-thumb-subtitle">
+                                                        <!-- CHANGE WITH THYMELEAF WHEN THE LOGIC IS IMPLEMENTED -->
+                                                        Няма намерени
+                                                    </span>
+                                                    <span class="widget-thumb-body-stat">
+                                                        <!-- CHANGE WITH THYMELEAF WHEN THE LOGIC IS IMPLEMENTED -->
+                                                        --
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div id="awaiting-acceptance" class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20">
+                                            <h4 class="widget-thumb-heading">
+                                                Очакващи одобрение
+                                            </h4>
+                                            <div class="widget-thumb-wrap">
+                                                <i class="widget-thumb-icon bg-green icon-bulb">
+
+                                                </i>
+                                                <div class="widget-thumb-body">
+                                                    <span class="widget-thumb-subtitle">
+                                                        Клиенти
+                                                    </span>
+                                                    <span data-counter="counterup" data-value="0" class="widget-thumb-body-stat">
+                                                        0
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div id="clients-done" class="widget-thumb widget-bg-color-white tet-uppercase margin-bottom-20">
+                                            <h4 class="widget-thumb-heading">
+                                                Обслужени клиенти
+                                            </h4>
+                                            <div class="widget-thumb-wrap">
+                                                <i class="widget-thumb-icon bg-red icon-users"></i>
+                                                <div class="widget-thumb-body">
+                                                    <span class="widget-thumb-subtitle">Клиенти</span>
+                                                    <span data-counter="counterup" data-value="0" class="widget-thumb-body-stat">0</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div id="awaiting_acceptance_box" class="portlet light">
+                                            <div class="portlet-title tabbable-line">
+                                                <div class="caption">
+                                                    <i class="icon-social-twitter font-dark hide"></i>
+                                                    <span class="caption-subject font-dark bold uppercase">
+                                                        <i class="fa fa-list-ol"></i>
+                                                        Очакващи одобрение
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="mt-actions">
+                                                    <div class="text-center">
+                                                        <h3>
+                                                            <i class="fa fa-list-ol"></i>
+                                                            Все още нямате заявки
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <div id="requests_7_days" class="portlet light ">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="icon-share font-dark hide"></i>
+                                                    <span class="caption-subject font-dark bold uppercase">
+                                                        <i class="fas fa-chart-line"></i> Вашите заявки за последните 7 дни</span>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="">
+                                                    <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                                                        <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                            <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                                                        </div>
+                                                        <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                                            <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="line-chart" style="width: 515px; height: 400px;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-xs-12 col-sm-12">
+                                        <div id="up_clients" class="portlet light ">
+                                            <div class="portlet-title">
+                                                <div class="caption caption-md">
+                                                    <i class="icon-bar-chart font-dark hide"></i>
+                                                    <span class="caption-subject font-dark bold uppercase">Следващи клиенти</span>
+                                                    <span class="caption-helper">
+                                                        <span class="label label-success">0</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="general-item-list">
+                                                    <h3 class="text-center">
+                                                        Няма намерени</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="portlet light ">
+                                            <div class="portlet-title tabbable-line">
+                                                <div class="caption">
+                                                    <i class="icon-bubbles font-dark hide"></i>
+                                                    <span class="caption-subject font-dark bold uppercase">
+                                                        <i class="fa fa-comments"></i> Съобщения</span>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="mt-comments">
+                                                    <div class="text-center">
+                                                        <h3>
+                                                            <i class="fa fa-comments-o"></i> Нямате непрочетени съобщения.</h3>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

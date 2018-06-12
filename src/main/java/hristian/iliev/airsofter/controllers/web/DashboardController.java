@@ -36,4 +36,29 @@ public class DashboardController {
 
     return "dashboard";
   }
+
+  @GetMapping("/requests")
+  public String requests(){
+    return "requests";
+  }
+
+  @GetMapping("/messages")
+  public String messages(){
+    return "messages";
+  }
+
+  @GetMapping("/preview")
+  public String preview(){
+    return "preview";
+  }
+
+  @GetMapping("/edit")
+  public String edit(){
+    return "edit";
+  }
+
+  @GetMapping("/profile")
+  public String profile(){
+    return "profile";
+  }
 }
