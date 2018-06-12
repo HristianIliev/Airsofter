@@ -1,8 +1,11 @@
 package hristian.iliev.airsofter.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hristian.iliev.airsofter.contracts.IModel;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 import java.util.List;
 
@@ -29,10 +33,13 @@ public class Arena implements IModel {
   private List<ArenaCategory> arenaCategories;
   private String telephone;
   private Timetable timetable;
+  private User owner;
 
+  @GenericGenerator(name = "generator_arena", strategy = "foreign",
+          parameters = @Parameter(name = "property", value = "owner"))
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "id")
+  @GeneratedValue(generator = "generator_arena")
+  @Column(name = "owner_id")
   @Override
   public int getId() {
     return id;
@@ -106,5 +113,16 @@ public class Arena implements IModel {
 
   public void setTimetable(Timetable timetable) {
     this.timetable = timetable;
+  }
+
+  @OneToOne()
+  @PrimaryKeyJoinColumn
+  @JsonIgnore
+  public User getOwner() {
+    return owner;
+  }
+
+  public void setOwner(User owner) {
+    this.owner = owner;
   }
 }

@@ -231,7 +231,146 @@
     </style>
 </head>
 
-<body>
+<body class="page-container-bg-solid page-md">
+    <div class="page-wrapper" id="app">
+        <div class="page-wrapper-row">
+            <div class="page-wrapper-top">
+                <div class="page-header">
+                    <!-- HEADER TOP PART -->
+                    <div class="page-header-top">
+                        <div class="container">
+                            <div class="page-logo">
+                                <a href="#">
+                                    <img src="/static/img/sample-logo-app.png" alt="Airsofter" class="logo-default" style="max-width: 200px; margin-top: 17px !important;">
+                                </a>
+                            </div>
+                            <a href="javascript:;" class="menu-toggler"></a>
+                            <div class="top-menu">
+                                <ul class="nav navbar-nav pull-right">
+                                    <li id="header_notification_bar" class="dropdown dropdown-extended dropdown_notification">
+                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" class="dropdown-toggle">
+                                            <i class="far fa-bell"></i>
+                                            <span class="badge badge-default">
+                                                0
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="external">
+                                                <h3>
+                                                    <span class="bold">
+                                                        0
+                                                    </span>
+                                                    нови известия
+                                                </h3>
+                                                <a href="/notifications">Виж всички</a>
+                                            </li>
+                                            <li>
+                                                <div class="slimScrollDiv" style="position: relative; overflow:hidden; width: auto; height: 250px;">
+                                                    <ul data-handle-color="#637283" class="dropdown-menu-list scroller" style="height: 250px; overflow: hidden; width: auto;"
+                                                        data-initialized="1">
+                                                        <li>
+                                                            <a> Нямате известия</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 250px;">
+                                                    </div>
+                                                    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;">
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-separator">
+                                        <span class="separator"></span>
+                                    </li>
+                                    <li class="dropdown dropdown-user">
+                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" class="dropdown-toggle">
+                                            <img src="/static/img/avatars/avatar.png" alt="Airsofter" class="img-circle">
+                                            <span class="username username-hide-mobile">
+
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="/profile">
+                                                    <i class="far fa-user"></i>
+                                                    Моят профил
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/logout">
+                                                    <i class="fas fa-sign-out-alt"></i>
+                                                    Изход
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MAIN NAVBAR HEADER -->
+                    <div class="page-header-menu">
+                        <div class="container">
+                            <div class="hor-menu">
+                                <ul id="menu" class="nav navbar-nav">
+                                    <li class="active open">
+                                        <a href="/dashboard">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            Начало
+                                        </a>
+                                    </li>
+                                    <li id="requests-item">
+                                        <a href="/requests">
+                                            <i class="fas fa-th-list"></i>
+                                            Заявки
+                                        </a>
+                                    </li>
+                                    <li id="messages_item">
+                                        <a href="/messages">
+                                            <i class="far fa-envelope-open"></i>
+                                            Съобщения
+                                        </a>
+                                    </li>
+                                    <li id="page_preview">
+                                        <a href="/preview">
+                                            <i class="far fa-image"></i>
+                                            Страница на арената
+                                        </a>
+                                    </li>
+                                    <li id="service_item">
+                                        <a href="/edit">
+                                            <i class="fas fa-wrench"></i>
+                                             Настройки
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                    </div>
+                    <!-- PAGE TITLE -->
+                    <div class="page-wrapper-row full-height">
+                        <div class="page-wrapper-middle">
+                            <div class="page-container">
+                                <div class="page-content-wrapper">
+                                    <div class="page-head">
+                                        <div class="container">
+                                            <div class="page-title">
+                                                <h1 th:text="'Управление на Airsoft арена - ' + ${arenaName}"></h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Scripts -->
     <script type="text/javascript" src="/static/js/libs/jquery-3.3.1.js"></script>

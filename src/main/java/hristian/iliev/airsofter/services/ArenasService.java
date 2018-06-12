@@ -4,6 +4,7 @@ import hristian.iliev.airsofter.contracts.IArenasService;
 import hristian.iliev.airsofter.contracts.IRepository;
 import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.ArenaCategory;
+import hristian.iliev.airsofter.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +15,15 @@ import java.util.List;
 public class ArenasService implements IArenasService {
   private final IRepository<Arena> arenasRepository;
   private final IRepository<ArenaCategory> arenaCategoriesRepository;
+  private final IRepository<User> usersRepository;
 
   @Autowired
   public ArenasService(IRepository<Arena> arenasRepository,
-                       IRepository<ArenaCategory> arenaCategoriesRepository) {
+                       IRepository<ArenaCategory> arenaCategoriesRepository,
+                       IRepository<User> usersRepository) {
     this.arenasRepository = arenasRepository;
     this.arenaCategoriesRepository = arenaCategoriesRepository;
+    this.usersRepository = usersRepository;
   }
 
   @Override
@@ -28,7 +32,7 @@ public class ArenasService implements IArenasService {
   }
 
   @Override
-  public Arena createArena(Arena arena) {
+  public Arena createArena(Arena arena, User user) {
     List<ArenaCategory> arenaCategoriesToInsert = new ArrayList<>();
     for (int i = 0; i < arena.getArenaCategories().size(); i++) {
       ArenaCategory toInsert = this.getArenaCategoryByName(arena.getArenaCategories().get(i).getName().trim());
@@ -39,7 +43,10 @@ public class ArenasService implements IArenasService {
 
     arena.getTimetable().setArena(arena);
 
-    return this.arenasRepository.create(arena);
+    user.setArena(arena);
+    user.getArena().setOwner(user);
+
+    return this.usersRepository.update(user).getArena();
   }
 
   @Override

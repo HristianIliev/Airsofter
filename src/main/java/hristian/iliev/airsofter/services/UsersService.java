@@ -2,6 +2,7 @@ package hristian.iliev.airsofter.services;
 
 import hristian.iliev.airsofter.contracts.IRepository;
 import hristian.iliev.airsofter.contracts.IUsersService;
+import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

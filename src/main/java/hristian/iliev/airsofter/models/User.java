@@ -2,11 +2,13 @@ package hristian.iliev.airsofter.models;
 
 import hristian.iliev.airsofter.contracts.IModel;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,6 +22,7 @@ public class User implements IModel {
   private String lastName;
   private boolean arenaOwner;
   private boolean needsInstallation;
+  private Arena arena;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -86,5 +89,14 @@ public class User implements IModel {
 
   public void setNeedsInstallation(boolean needsInstallation) {
     this.needsInstallation = needsInstallation;
+  }
+
+  @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "owner")
+  public Arena getArena() {
+    return arena;
+  }
+
+  public void setArena(Arena arena) {
+    this.arena = arena;
   }
 }

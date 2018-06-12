@@ -40,7 +40,7 @@ public class ArenasController {
   public Arena createArena(@RequestBody Arena arena, Principal principal) {
     String userEmail = principal.getName();
     User user = this.usersService.getUserByEmail(userEmail);
-    Arena created = this.arenasService.createArena(arena);
+    Arena created = this.arenasService.createArena(arena, user);
     if (created.getId() != 0) {
       this.usersService.installationCompleted(user);
     }
