@@ -2,6 +2,7 @@ package hristian.iliev.airsofter.controllers.rest;
 
 import hristian.iliev.airsofter.contracts.IUsersService;
 import hristian.iliev.airsofter.models.User;
+import hristian.iliev.airsofter.models.response.Conversation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,8 +32,9 @@ public class UsersController {
 
   @RequestMapping(value = "/getCurrentUser", method = RequestMethod.GET)
   @ResponseBody
-  public User getCurrentUser(Principal principal){
+  public Conversation getCurrentUser(Principal principal){
     String userEmail = principal.getName();
-    return this.usersService.getUserByEmail(userEmail);
+    User current = this.usersService.getUserByEmail(userEmail);
+    return new Conversation(current, this.usersService.getById(current.getLastConversationWith()));
   }
 }

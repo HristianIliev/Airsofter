@@ -416,22 +416,20 @@
                 // TODO: CHANGE THESE HARDCODED VALUES WITH THE DATA FROM "result"
                 Talk.ready.then(function () {
                     var me = new Talk.User({
-                        id: "123456",
-                        name: "Alice",
-                        email: "alice@example.com",
-                        photoUrl: "https://demo.talkjs.com/img/alice.jpg",
-                        welcomeMessage: "Hey there! How are you? :-)"
+                        id: result.current.id,
+                        name: result.current.name,
+                        email: result.current.email,
+                        photoUrl: "/static/img/avatars/avatar.png"
                     });
                     window.talkSession = new Talk.Session({
                         appId: "ta8ZF4Ii",
                         me: me
                     });
                     var other = new Talk.User({
-                        id: "654321",
-                        name: "Bob",
-                        email: "bob@example.com",
-                        photoUrl: "https://demo.talkjs.com/img/9.jpg",
-                        welcomeMessage: "Hey, how can I help?"
+                        id: result.other.id,
+                        name: result.other.name,
+                        email: result.other.email,
+                        photoUrl: "/static/img/avatars/avatar.png"
                     });
 
                     var conversation = talkSession.getOrCreateConversation(Talk.oneOnOneId(me, other))

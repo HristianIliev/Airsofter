@@ -49,6 +49,11 @@ public class UsersService implements IUsersService {
     this.usersRepository.update(user);
   }
 
+  @Override
+  public User getById(int id) {
+    return this.usersRepository.getById(id);
+  }
+
   private boolean isEmailFree(String email) {
     return this.usersRepository.getAll().stream()
             .noneMatch(u -> u.getEmail().equals(email));

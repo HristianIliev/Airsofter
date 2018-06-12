@@ -30,7 +30,7 @@ public class User implements IModel {
   private Arena arena;
   private List<Request> madeRequests;
   private List<Request> requestsForTheArena;
-  private List<Conversation> meConversations;
+  private Integer lastConversationWith;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -129,13 +129,12 @@ public class User implements IModel {
     this.requestsForTheArena = requestsForTheArena;
   }
 
-  @OneToMany(mappedBy = "me")
-  @LazyCollection(LazyCollectionOption.FALSE)
-  public List<Conversation> getMeConversations() {
-    return meConversations;
+  @Column(name = "last_conversation_with")
+  public Integer getLastConversationWith() {
+    return lastConversationWith;
   }
 
-  public void setMeConversations(List<Conversation> meConversations) {
-    this.meConversations = meConversations;
+  public void setLastConversationWith(Integer lastConversationWith) {
+    this.lastConversationWith = lastConversationWith;
   }
 }

@@ -9,4 +9,7 @@ public interface IUsersService extends UserDetailsService {
   User register(User user);
 
   void installationCompleted(User user);
+
+  User getById(int id);
+
 }
