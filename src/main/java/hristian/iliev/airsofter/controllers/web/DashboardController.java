@@ -37,11 +37,6 @@ public class DashboardController {
     return "dashboard";
   }
 
-  @GetMapping("/requests")
-  public String requests(){
-    return "requests";
-  }
-
   @GetMapping("/messages")
   public String messages(){
     return "messages";
@@ -60,5 +55,10 @@ public class DashboardController {
   @GetMapping("/profile")
   public String profile(){
     return "profile";
+  }
+
+  @GetMapping("/calendar")
+  public String calendar(){
+    return "calendar";
   }
 }

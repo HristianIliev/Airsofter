@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Съобщения - Airsofter</title>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"
+    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <link href="/static/css/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap-3.3.7.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/about.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/contact.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/pricing.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/billing.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/MDTP.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/inbox.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/error.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN APP GLOBAL ASSETS-->
+    <link href="/static/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/static/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/layout-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/default-theme.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="/static/css/toastr.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/static/css/iziToast.min.css">
+    <style>
+        input[type="checkbox"].ios8-switch {
+            display: none;
+        }
+
+        input[type="checkbox"].ios8-switch+label {
+            position: relative;
+            padding: 5px 0 0 50px;
+            font-weight: bold;
+            color: #555;
+            line-height: 2.0em;
+        }
+
+        input[type="checkbox"].ios8-switch+label:before {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0;
+            top: 2px;
+            width: 40px;
+            /* x*5 */
+            height: 24px;
+            /* x*3 */
+            border-radius: 16px;
+            /* x*2 */
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        input[type="checkbox"].ios8-switch+label:after {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0px;
+            top: 2px;
+            width: 24px;
+            /* x*3 */
+            height: 24px;
+            /* x*3 */
+            border-radius: 16px;
+            /* x*2 */
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        input[type="checkbox"].ios8-switch+label:hover:after {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"].ios8-switch:checked+label:after {
+            margin-left: 16px;
+        }
+
+        input[type="checkbox"].ios8-switch:checked+label:before {
+            background: #55D069;
+        }
+
+        /* SMALL */
+
+        input[type="checkbox"].ios8-switch-sm {
+            margin: 5px 0 0 10px;
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label {
+            position: relative;
+            padding: 0 0 0 32px;
+            line-height: 1.3em;
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label:before {
+            width: 25px;
+            /* x*5 */
+            height: 15px;
+            /* x*3 */
+            border-radius: 10px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label:after {
+            width: 15px;
+            /* x*3 */
+            height: 15px;
+            /* x*3 */
+            border-radius: 10px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label:hover:after {
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"].ios8-switch-sm:checked+label:after {
+            margin-left: 10px;
+            /* x*2 */
+        }
+
+        /* LARGE */
+
+        input[type="checkbox"].ios8-switch-lg {
+            margin: 10px 0 0 20px;
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label {
+            position: relative;
+            padding: 7px 0 0 60px;
+            line-height: 2.3em;
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label:before {
+            width: 50px;
+            /* x*5 */
+            height: 30px;
+            /* x*3 */
+            border-radius: 20px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label:after {
+            width: 30px;
+            /* x*3 */
+            height: 30px;
+            /* x*3 */
+            border-radius: 20px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label:hover:after {
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"].ios8-switch-lg:checked+label:after {
+            margin-left: 20px;
+            /* x*2 */
+        }
+    </style>
+    <style>
+        .sidebar-hidden {
+            visibility: hidden !important;
+        }
+
+        .full-width-page-content {
+            margin-left: 0px !important;
+        }
+
+        .page-sidebar .page-sidebar-menu a {
+            font-size: 15px !important;
+        }
+
+        .page-content {
+            background-color: #f2f3f8;
+        }
+
+        .removeTopPadding {
+            padding-top: 0px !important;
+        }
+
+        .diff_time {
+            font-size: 10px;
+        }
+
+        .serviceGallery img {
+            max-width: 100%;
+        }
+
+        .dropdown-menu-list a:hover {
+            text-decoration: none;
+        }
+
+        .calender-div {
+            background-color: white;
+        }
+
+        .alreadyRequested:hover {
+            background-color: white !important;
+            cursor: default;
+        }
+
+        .findServiceButton {
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        .map {
+            height: 500px;
+            margin-top: 20px;
+            border-radius: 4px;
+            box-shadow: 0 7px 15px rgba(0, 9, 128, 0.05), 0 12px 28px rgba(0, 9, 128, 0.075);
+        }
+    </style>
+
+    <!-- CHAT -->
+    <!-- this snippet loads the chat -->
+    <script>
+        (function (t, a, l, k, j, s) {
+            s = a.createElement('script'); s.async = 1; s.src = "https://cdn.talkjs.com/talk.js"; a.head.appendChild(s)
+                ; k = t.Promise; t.Talk = {
+                    ready: {
+                        then: function (f) {
+                            if (k) return new k(function (r, e) { l.push([f, r, e]) }); l
+                                .push([f])
+                        }, catch: function () { return k && new k() }, c: l
+                    }
+                };
+        })(window, document, []);
+    </script>
+
+</head>
+
+<body class="page-container-bg-solid page-md">
+    <div class="page-wrapper" id="app">
+        <div class="page-wrapper-row">
+            <div class="page-wrapper-top">
+                <div class="page-header">
+                    <!-- HEADER TOP PART -->
+                    <div class="page-header-top">
+                        <div class="container">
+                            <div class="page-logo">
+                                <a href="#">
+                                    <img src="/static/img/sample-logo-app.png" alt="Airsofter" class="logo-default" style="max-width: 200px; margin-top: 17px !important;">
+                                </a>
+                            </div>
+                            <a href="javascript:;" class="menu-toggler"></a>
+                            <div class="top-menu">
+                                <ul class="nav navbar-nav pull-right">
+                                    <li id="header_notification_bar" class="dropdown dropdown-extended dropdown_notification">
+                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" class="dropdown-toggle">
+                                            <i class="far fa-bell"></i>
+                                            <span class="badge badge-default">
+                                                0
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="external">
+                                                <h3>
+                                                    <span class="bold">
+                                                        0
+                                                    </span>
+                                                    нови известия
+                                                </h3>
+                                                <a href="/notifications">Виж всички</a>
+                                            </li>
+                                            <li>
+                                                <div class="slimScrollDiv" style="position: relative; overflow:hidden; width: auto; height: 250px;">
+                                                    <ul data-handle-color="#637283" class="dropdown-menu-list scroller" style="height: 250px; overflow: hidden; width: auto;"
+                                                        data-initialized="1">
+                                                        <li>
+                                                            <a> Нямате известия</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 250px;">
+                                                    </div>
+                                                    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;">
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-separator">
+                                        <span class="separator"></span>
+                                    </li>
+                                    <li class="dropdown dropdown-user">
+                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" class="dropdown-toggle">
+                                            <img src="/static/img/avatars/avatar.png" alt="Airsofter" class="img-circle">
+                                            <span class="username username-hide-mobile">
+
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="/profile">
+                                                    <i class="far fa-user"></i>
+                                                    Моят профил
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/logout">
+                                                    <i class="fas fa-sign-out-alt"></i>
+                                                    Изход
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MAIN NAVBAR HEADER -->
+                    <div class="page-header-menu">
+                        <div class="container">
+                            <div class="hor-menu">
+                                <ul id="menu" class="nav navbar-nav">
+                                    <li>
+                                        <a href="/dashboard">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            Начало
+                                        </a>
+                                    </li>
+                                    <li id="requests-item" class="active open">
+                                        <a href="/requests">
+                                            <i class="fas fa-th-list"></i>
+                                            Заявки
+                                        </a>
+                                    </li>
+                                    <li id="messages_item">
+                                        <a href="/messages">
+                                            <i class="far fa-envelope-open"></i>
+                                            Съобщения
+                                        </a>
+                                    </li>
+                                    <li id="page_preview">
+                                        <a href="/preview">
+                                            <i class="far fa-image"></i>
+                                            Страница на арената
+                                        </a>
+                                    </li>
+                                    <li id="service_item">
+                                        <a href="/edit">
+                                            <i class="fas fa-wrench"></i>
+                                            Настройки
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+        </div>
+        <!-- PAGE TITLE -->
+        <div class="page-wrapper-row full-height">
+            <div class="page-wrapper-middle">
+                <div class="page-container">
+                    <div class="page-content-wrapper">
+                        <div class="page-head">
+                            <div class="container">
+                                <div class="page-title">
+                                    <h1>Заявки</h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-content" style="min-height: 834px;">
+                            <div class="container">
+                                <a href="/calendar" class="btn btn-info">
+                                    <i class="far fa-calendar-alt"></i> Календар
+                                </a>
+                                <div class="portlet light bordered" style="margin-top: 15px;">
+                                    <div class="portlet-body">
+                                        <div th:each="request: ${requests}" class="mt-actions">
+                                            <div class="mt-action">
+                                                <div class="mt-action-body">
+                                                    <div class="mt-action-row">
+                                                        <div class="mt-action-info ">
+                                                            <div class="mt-action-icon" style="padding-bottom: 15px;">
+                                                                <i class="fas fa-bullseye"></i>
+                                                            </div>
+                                                            <div class="mt-action-details" style="vertical-align: middle;">
+                                                                <a th:href="'#requestModal' + ${request.getId()}" data-toggle="modal" class="mt-action-author" th:text="${request.getUser().getName()} + ' ' + ${request.getUser().getLastName()} + ' - ' + ${request.getNumberOfParticipants()} + ' човека'"></a>
+                                                                <div th:id="'requestModal' + ${request.getId()}" class="modal fade">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×
+                                                                                </button>
+                                                                                <h4 class="modal-title" th:inline="text">
+                                                                                    <i class="fas fa-bullseye"></i>
+                                                                                    [[${request.getUser().getName()}]] [[${request.getUser().getLastName()}]] - [[${request.getNumberOfParticipants()}]] човека
+                                                                                </h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <strong>Допълнителна информация:</strong>
+                                                                                <span th:text="${request.getInformation()}"></span>
+                                                                                <br>
+                                                                                <strong>Дата на изпълнение:</strong>
+                                                                                <span th:text="${request.getDaytime()}"></span>
+                                                                                <br>
+                                                                                <strong>Брой участници:</strong>
+                                                                                <span th:text="${request.getNumberOfParticipants()}"></span>
+                                                                                <br>
+                                                                                <strong>Направена от:</strong>
+                                                                                <span th:text="${request.getUser().getName()} + ' ' + ${request.getUser().getLastName()}"></span>
+                                                                                <br>
+                                                                                <strong>Статус:</strong>
+                                                                                <span th:if="${request.getStatus() == 'DONE'}">
+                                                                                    Извършена
+                                                                                </span>
+                                                                                <span th:if="${request.getStatus() == 'ACCEPTED'}">
+                                                                                    Очаква се изпълнение
+                                                                                </span>
+                                                                                <span th:if="${request.getStatus() == 'REJECTED'}">
+                                                                                    Отхвърлена
+                                                                                </span>
+                                                                                <span th:if="${request.getStatus() == 'PENDING'}">
+                                                                                    Очаква се одобрение
+                                                                                </span>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" data-dismiss="modal" class="btn btn-default">Затвори
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="mt-action-datetime">
+                                                            <span class="mt-action-date" style="padding-right: 20px;" th:inline="text">
+                                                                <i class="fa fa-clock-o"></i> [[${request.getDaytime()}]]</span>
+                                                            <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'DONE'}">
+                                                                <i class="far fa-thumbs-up"></i> Извършена
+                                                            </span>
+                                                            <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'ACCEPTED'}">
+                                                                <i class="fa fa-play-circle"></i> Очаква се изпълнение
+                                                            </span>
+                                                            <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'REJECTED'}">
+                                                                <i class="far fa-thumbs-down"></i> Отхвърлена
+                                                            </span>
+                                                            <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'PENDING'}">
+                                                                <i class="fas fa-question"></i> Очаква се одобрение
+                                                            </span>
+                                                        </div>
+                                                        <div class="mt-action-buttons " style="width: 200px;" th:if="${request.getStatus() == 'PENDING'}">
+                                                            <a th:href="'#approveModal' + ${request.getId()}" data-toggle="modal" class="btn btn-circle btn-outline green btn-sm">
+                                                                Прегледай заявката
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div th:id="'approveModal' + ${request.getId()}" class="modal fade in" th:if="${request.getStatus() == 'PENDING'}">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×
+                                                            </button>
+                                                            <h4 class="modal-title">
+                                                                <i class="fa fa-eye"></i> Прегледай заявката</h4>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <table class="table table-hover" style="margin: 0px; padding: 0px;">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <i class="fa fa-clock-o"></i> Дата на приемане</td>
+                                                                        <td th:text="${request.getSendOn()}"></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <i class="far fa-user"></i> Изпратил</td>
+                                                                        <td th:text="${request.getUser().getName()} + ' ' + ${request.getUser().getLastName()}">
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <i class="fa fa-info"></i> Допълнителна информация</td>
+                                                                        <td th:text="${request.getInformation()}"></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <!---->
+                                                        </div>
+                                                        <div th:id="${request.getId()}" class="modal-footer">
+                                                            <button type="button" data-dismiss="modal" class="btn btn-danger btn-reject">
+                                                                <i class="far fa-times-circle"></i> Откажи Заявката
+                                                            </button>
+                                                            <button type="button" data-dismiss="modal" class="btn btn-success btn-accept">
+                                                                <i class="fa fa-check"></i> Приеми заявката
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="/static/js/libs/jquery-3.3.1.js"></script>
+    <!-- CONTAINS JS THEME ASSETS -->
+    <script src="/static/js/app-assets.js"></script>
+    <!-- TOASTR-->
+    <script src="/static/js/toastr.js"></script>
+    <!-- WYSIWYG -->
+    <script src="/static/js/wysihtml5-0.3.0.js"></script>
+    <script src="/static/js/bootstrap-wysihtml5.js"></script>
+    <script src="/static/js/libs/moment-with-locales.js"></script>
+    <script type="text/javascript" src="/static/js/libs/iziToast.min.js"></script>
+    <script src="/static/js/requests.js"></script>
+</body>
+
+</html>

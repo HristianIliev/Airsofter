@@ -18,7 +18,11 @@ public class Request implements IModel {
   private int id;
   private User user;
   private User owner;
-  private String day;
+  private String daytime;
+  private String information;
+  private int numberOfParticipants;
+  private String status;
+  private String sendOn;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,12 +57,48 @@ public class Request implements IModel {
     this.owner = arenaOwner;
   }
 
-  @Column(name = "day")
-  public String getDay() {
-    return day;
+  @Column(name = "daytime")
+  public String getDaytime() {
+    return daytime;
   }
 
-  public void setDay(String day) {
-    this.day = day;
+  public void setDaytime(String daytime) {
+    this.daytime = daytime;
+  }
+
+  @Column(name = "information")
+  public String getInformation() {
+    return information;
+  }
+
+  public void setInformation(String information) {
+    this.information = information;
+  }
+
+  @Column(name = "number_of_participants")
+  public int getNumberOfParticipants() {
+    return numberOfParticipants;
+  }
+
+  public void setNumberOfParticipants(int numberOfParticipants) {
+    this.numberOfParticipants = numberOfParticipants;
+  }
+
+  @Column(name = "status")
+  public String getStatus() {
+    return status;
+  }
+
+  public void setStatus(String status) {
+    this.status = status;
+  }
+
+  @Column(name = "send_on")
+  public String getSendOn() {
+    return sendOn;
+  }
+
+  public void setSendOn(String sendOn) {
+    this.sendOn = sendOn;
   }
 }

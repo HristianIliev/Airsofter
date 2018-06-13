@@ -3,6 +3,7 @@ package hristian.iliev.airsofter.configurations;
 import hristian.iliev.airsofter.contracts.IRepository;
 import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.ArenaCategory;
+import hristian.iliev.airsofter.models.Request;
 import hristian.iliev.airsofter.models.User;
 import hristian.iliev.airsofter.repositories.HibernateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,15 @@ public class AppConfig {
   IRepository<Arena> provideArenasRepository() {
     HibernateRepository<Arena> repository = new HibernateRepository<>();
     repository.setEntityClass(Arena.class);
+
+    return repository;
+  }
+
+  @Bean
+  @Autowired
+  IRepository<Request> provideRequestsRepository() {
+    HibernateRepository<Request> repository = new HibernateRepository<>();
+    repository.setEntityClass(Request.class);
 
     return repository;
   }

@@ -332,7 +332,7 @@
                         <div class="container">
                             <div class="hor-menu">
                                 <ul id="menu" class="nav navbar-nav">
-                                    <li class="active open">
+                                    <li>
                                         <a href="/dashboard">
                                             <i class="fas fa-sign-out-alt"></i>
                                             Начало
@@ -344,7 +344,7 @@
                                             Заявки
                                         </a>
                                     </li>
-                                    <li id="messages_item">
+                                    <li id="messages_item" class="active open">
                                         <a href="/messages">
                                             <i class="far fa-envelope-open"></i>
                                             Съобщения
@@ -406,6 +406,7 @@
     <!-- WYSIWYG -->
     <script src="/static/js/wysihtml5-0.3.0.js"></script>
     <script src="/static/js/bootstrap-wysihtml5.js"></script>
+    <script src="/static/js/libs/moment-with-locales.js"></script>
     <!-- CHAT INITILIASATION CODE -->
     <script>
         $.ajax({
