@@ -42,11 +42,6 @@ public class DashboardController {
     return "messages";
   }
 
-  @GetMapping("/preview")
-  public String preview(){
-    return "preview";
-  }
-
   @GetMapping("/edit")
   public String edit(){
     return "edit";

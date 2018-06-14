@@ -35,6 +35,15 @@ public class ArenasController {
     return this.arenasService.getArena(Integer.parseInt(id));
   }
 
+  @RequestMapping(value = "/arena", method = RequestMethod.GET)
+  @ResponseBody
+  public Arena arena(Principal principal) {
+    String userEmail = principal.getName();
+    User user = this.usersService.getUserByEmail(userEmail);
+
+    return user.getArena();
+  }
+
   @RequestMapping(value = "/createArena", method = RequestMethod.POST)
   @ResponseBody
   public Arena createArena(@RequestBody Arena arena, Principal principal) {

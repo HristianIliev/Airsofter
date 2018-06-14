@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="bg">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Начало - Airsofter</title>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"
+    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <link href="/static/css/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap-3.3.7.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/about.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/contact.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/pricing.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/billing.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/MDTP.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/inbox.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/error.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN APP GLOBAL ASSETS-->
+    <link href="/static/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/static/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/layout-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/default-theme.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="/static/css/toastr.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
+    <style>
+        input[type="checkbox"].ios8-switch {
+            display: none;
+        }
+
+        input[type="checkbox"].ios8-switch+label {
+            position: relative;
+            padding: 5px 0 0 50px;
+            font-weight: bold;
+            color: #555;
+            line-height: 2.0em;
+        }
+
+        input[type="checkbox"].ios8-switch+label:before {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0;
+            top: 2px;
+            width: 40px;
+            /* x*5 */
+            height: 24px;
+            /* x*3 */
+            border-radius: 16px;
+            /* x*2 */
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        input[type="checkbox"].ios8-switch+label:after {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0px;
+            top: 2px;
+            width: 24px;
+            /* x*3 */
+            height: 24px;
+            /* x*3 */
+            border-radius: 16px;
+            /* x*2 */
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        input[type="checkbox"].ios8-switch+label:hover:after {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"].ios8-switch:checked+label:after {
+            margin-left: 16px;
+        }
+
+        input[type="checkbox"].ios8-switch:checked+label:before {
+            background: #55D069;
+        }
+
+        /* SMALL */
+
+        input[type="checkbox"].ios8-switch-sm {
+            margin: 5px 0 0 10px;
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label {
+            position: relative;
+            padding: 0 0 0 32px;
+            line-height: 1.3em;
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label:before {
+            width: 25px;
+            /* x*5 */
+            height: 15px;
+            /* x*3 */
+            border-radius: 10px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label:after {
+            width: 15px;
+            /* x*3 */
+            height: 15px;
+            /* x*3 */
+            border-radius: 10px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label:hover:after {
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"].ios8-switch-sm:checked+label:after {
+            margin-left: 10px;
+            /* x*2 */
+        }
+
+        /* LARGE */
+
+        input[type="checkbox"].ios8-switch-lg {
+            margin: 10px 0 0 20px;
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label {
+            position: relative;
+            padding: 7px 0 0 60px;
+            line-height: 2.3em;
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label:before {
+            width: 50px;
+            /* x*5 */
+            height: 30px;
+            /* x*3 */
+            border-radius: 20px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label:after {
+            width: 30px;
+            /* x*3 */
+            height: 30px;
+            /* x*3 */
+            border-radius: 20px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label:hover:after {
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"].ios8-switch-lg:checked+label:after {
+            margin-left: 20px;
+            /* x*2 */
+        }
+    </style>
+    <style>
+        .sidebar-hidden {
+            visibility: hidden !important;
+        }
+
+        .full-width-page-content {
+            margin-left: 0px !important;
+        }
+
+        .page-sidebar .page-sidebar-menu a {
+            font-size: 15px !important;
+        }
+
+        .page-content {
+            background-color: #f2f3f8;
+        }
+
+        .removeTopPadding {
+            padding-top: 0px !important;
+        }
+
+        .diff_time {
+            font-size: 10px;
+        }
+
+        .serviceGallery img {
+            max-width: 100%;
+        }
+
+        .dropdown-menu-list a:hover {
+            text-decoration: none;
+        }
+
+        .calender-div {
+            background-color: white;
+        }
+
+        .alreadyRequested:hover {
+            background-color: white !important;
+            cursor: default;
+        }
+
+        .findServiceButton {
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        .map {
+            height: 500px;
+            margin-top: 20px;
+            border-radius: 4px;
+            box-shadow: 0 7px 15px rgba(0, 9, 128, 0.05), 0 12px 28px rgba(0, 9, 128, 0.075);
+        }
+    </style>
+
+    <!-- GOOGLE CHARTS -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', { 'packages': ['corechart'], 'language': 'bg' });
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Define the chart to be drawn.
+            // var data = new google.visualization.DataTable();
+            // data.addColumn('string', 'Element');
+            // data.addColumn('number', 'Percentage');
+            // data.addRows([
+            //     ['Nitrogen', 0.78],
+            //     ['Oxygen', 0.21],
+            //     ['Other', 0.01]
+            // ]);
+
+            var data = google.visualization.arrayToDataTable([
+                ['Ден', 'Заявки'],
+                ['12.06.', 2],
+                ['11.06.', 1],
+                ['10.06.', 3],
+                ['09.06.', 4],
+                ['08.06.', 1],
+                ['07.06.', 0],
+                ['06.06.', 5]
+            ]);
+
+            var options = {
+                curveType: 'function',
+                legend: { position: 'bottom' },
+                'width': 515,
+                'height': 400
+            };
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+
+<body class="page-container-bg-solid page-md">
+    <div class="page-wrapper" id="app">
+        <div class="page-wrapper-row">
+            <div class="page-wrapper-top">
+                <div class="page-header">
+                    <!-- HEADER TOP PART -->
+                    <div class="page-header-top">
+                        <div class="container">
+                            <div class="page-logo">
+                                <a href="#">
+                                    <img src="/static/img/sample-logo-app.png" alt="Airsofter" class="logo-default" style="max-width: 200px; margin-top: 17px !important;">
+                                </a>
+                            </div>
+                            <a href="javascript:;" class="menu-toggler"></a>
+                            <div class="top-menu">
+                                <ul class="nav navbar-nav pull-right">
+                                    <li id="header_notification_bar" class="dropdown dropdown-extended dropdown_notification">
+                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" class="dropdown-toggle">
+                                            <i class="far fa-bell"></i>
+                                            <span class="badge badge-default">
+                                                0
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="external">
+                                                <h3>
+                                                    <span class="bold">
+                                                        0
+                                                    </span>
+                                                    нови известия
+                                                </h3>
+                                                <a href="/notifications">Виж всички</a>
+                                            </li>
+                                            <li>
+                                                <div class="slimScrollDiv" style="position: relative; overflow:hidden; width: auto; height: 250px;">
+                                                    <ul data-handle-color="#637283" class="dropdown-menu-list scroller" style="height: 250px; overflow: hidden; width: auto;"
+                                                        data-initialized="1">
+                                                        <li>
+                                                            <a> Нямате известия</a>
+                                                        </li>
+                                                    </ul>
+                                                    <div class="slimScrollBar" style="background: rgb(99, 114, 131); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 250px;">
+                                                    </div>
+                                                    <div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(234, 234, 234); opacity: 0.2; z-index: 90; right: 1px;">
+
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropdown dropdown-separator">
+                                        <span class="separator"></span>
+                                    </li>
+                                    <li class="dropdown dropdown-user">
+                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" class="dropdown-toggle">
+                                            <img src="/static/img/avatars/avatar.png" alt="Airsofter" class="img-circle">
+                                            <span class="username username-hide-mobile">
+
+                                            </span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li>
+                                                <a href="/profile">
+                                                    <i class="far fa-user"></i>
+                                                    Моят профил
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/logout">
+                                                    <i class="fas fa-sign-out-alt"></i>
+                                                    Изход
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- MAIN NAVBAR HEADER -->
+                    <div class="page-header-menu">
+                        <div class="container">
+                            <div class="hor-menu">
+                                <ul id="menu" class="nav navbar-nav">
+                                    <li>
+                                        <a href="/dashboard">
+                                            <i class="fas fa-sign-out-alt"></i>
+                                            Начало
+                                        </a>
+                                    </li>
+                                    <li id="requests-item">
+                                        <a href="/requests">
+                                            <i class="fas fa-th-list"></i>
+                                            Заявки
+                                        </a>
+                                    </li>
+                                    <li id="messages_item">
+                                        <a href="/messages">
+                                            <i class="far fa-envelope-open"></i>
+                                            Съобщения
+                                        </a>
+                                    </li>
+                                    <li id="page_preview" class="active open">
+                                        <a href="/preview">
+                                            <i class="far fa-image"></i>
+                                            Страница на арената
+                                        </a>
+                                    </li>
+                                    <li id="service_item">
+                                        <a href="/edit">
+                                            <i class="fas fa-wrench"></i>
+                                            Настройки
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+        </div>
+        <!-- PAGE TITLE -->
+        <div class="page-wrapper-row full-height">
+            <div class="page-wrapper-middle">
+                <div class="page-container">
+                    <div class="page-content-wrapper">
+                        <div class="page-head">
+                            <div class="container">
+                                <div class="page-title">
+                                    <h1 th:text="${arenaName}"></h1>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page-content" style="min-height: 834px;">
+                            <div class="container">
+                                <div>
+                                    <div class="alert alert-info">
+                                        <button type="button" data-dismiss="alert" aria-hidden="true" class="close">×</button>
+                                        <strong>
+                                            <i class="fa fa-info-circle"></i> Така изглежда страница на вашият сервиз. Това е визията, която клиентите
+                                            Ви ще виждат.</strong>
+                                    </div>
+                                    <div class="row margin-bottom-40 about-header" style="margin: 0px 0px 30px !important; background: linear-gradient(rgb(0, 0, 0), rgba(0, 0, 0, 0.4)), url(&quot;https://mechanic.bg/images/bg/default_service.jpg&quot;) center center no-repeat;">
+                                        <div class="col-md-12">
+                                            <h1 th:text="${arenaName}"></h1>
+                                            <h2 class="arena-address"></h2>
+                                            <!---->
+                                            <!---->
+                                            <a href="#/page/edit" class="btn btn-warning">
+                                                <i class="fa fa-edit"></i> Редактирай
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <!---->
+                                            <div class="portlet light borderd">
+                                                <div class="portlet-title">
+                                                    <div class="caption font-red-intense">
+                                                        <i class="fa fa-info font-red-intense"></i>
+                                                        <span class="caption-subject bold uppercase">Информация за сервиза</span>
+                                                        <span class="caption-helper"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="portlet-body">
+                                                    <p th:text="${arenaDescription}">
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <!---->
+                                        </div>
+                                    </div>
+                                    <!---->
+                                    <div class="row margin-bottom-20 stories-cont" style="display: none;"></div>
+                                    <div class="c-content-contact-1 c-opt-1">
+                                        <div data-auto-height=".c-height" class="row">
+                                            <div class="col-lg-8 col-md-6 c-desktop"></div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="c-body">
+                                                    <div class="c-section">
+                                                        <h3 th:text="${arenaName}"></h3>
+                                                    </div>
+                                                    <div class="c-section">
+                                                        <div class="c-content-label uppercase bg-blue">Адрес</div>
+                                                        <p class="arena-address"></p>
+                                                    </div>
+                                                    <div class="c-section">
+                                                        <div class="c-content-label uppercase bg-blue">Контакти</div>
+                                                        <p>
+                                                            <strong>Телефон:</strong>
+                                                            <span th:inline="text">+[[${arenaTelephone}]]</span>
+                                                        </p>
+                                                    </div>
+                                                    <!---->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="map" class="c-content-contact-1-gmap" style="width: 100%; height: 615px; margin-bottom: 40px; overflow: hidden;">
+                                        </div>
+                                    </div>
+                                    <div id="sendRequest" tabindex="-1" aria-hidden="true" class="modal fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close"></button>
+                                                    <h4 class="modal-title">Изпрати заявка до сервиз</h4>
+                                                </div>
+                                                <!---->
+                                                <div class="modal-body">
+                                                    <div class="alert alert-info" style="margin-bottom: 0px;">
+                                                        Нямате регистрирани автомобили.
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn dark btn-outline">Затвори
+                                                    </button>
+                                                    <!---->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="messageModal" class="modal fade">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
+                                                    <h4 class="modal-title">Изпрати лично съобщение до fdsfsdfsd</h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <textarea rows="3" placeholder="Въведете съобщението си тук..." class="form-control"></textarea>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Затвори </button>
+                                                    <button type="button" class="btn btn-primary">
+                                                        <i class="fa fa-paper-plane"></i> Изпрати
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="page-footer">
+                <div class="container">
+                    <div class="page-footer-inner"> 2018 © Airsofter
+
+                    </div>
+                    <div class="scroll-to-top" style="display: block;">
+                        <i class="icon-arrow-up"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="/static/js/libs/jquery-3.3.1.js"></script>
+    <!-- CONTAINS JS THEME ASSETS -->
+    <script src="/static/js/app-assets.js"></script>
+    <!-- TOASTR-->
+    <script src="/static/js/toastr.js"></script>
+    <!-- WYSIWYG -->
+    <script src="/static/js/wysihtml5-0.3.0.js"></script>
+    <script src="/static/js/bootstrap-wysihtml5.js"></script>
+
+    <script src="/static/js/preview.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjJimoTORP3LAM9lx8aasMG5_1dlNgrGI&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+
+</html>

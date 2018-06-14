@@ -31,6 +31,7 @@ public class User implements IModel {
   private List<Request> madeRequests;
   private List<Request> requestsForTheArena;
   private Integer lastConversationWith;
+  private List<ArenaPhoto> arenaPhotos;
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -136,5 +137,16 @@ public class User implements IModel {
 
   public void setLastConversationWith(Integer lastConversationWith) {
     this.lastConversationWith = lastConversationWith;
+  }
+
+  @OneToMany(mappedBy = "owner")
+  @JsonManagedReference
+  @LazyCollection(LazyCollectionOption.FALSE)
+  public List<ArenaPhoto> getArenaPhotos() {
+    return arenaPhotos;
+  }
+
+  public void setArenaPhotos(List<ArenaPhoto> arenaPhotos) {
+    this.arenaPhotos = arenaPhotos;
   }
 }
