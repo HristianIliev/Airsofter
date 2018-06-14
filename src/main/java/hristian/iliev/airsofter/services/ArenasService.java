@@ -56,4 +56,9 @@ public class ArenasService implements IArenasService {
             .findFirst()
             .orElse(null);
   }
+
+  @Override
+  public List<Arena> getAll() {
+    return this.arenasRepository.getAll();
+  }
 }

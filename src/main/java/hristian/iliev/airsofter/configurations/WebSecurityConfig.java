@@ -40,6 +40,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll()
             .antMatchers(HttpMethod.POST, "/api/register")
             .permitAll()
+            .antMatchers(HttpMethod.POST, "/api/arenas")
+            .permitAll()
             .anyRequest()
             .authenticated()
             .and()

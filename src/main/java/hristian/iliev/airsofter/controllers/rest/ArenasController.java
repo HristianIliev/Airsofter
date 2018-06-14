@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -42,6 +43,12 @@ public class ArenasController {
     User user = this.usersService.getUserByEmail(userEmail);
 
     return user.getArena();
+  }
+
+  @RequestMapping(value = "/arenas", method = RequestMethod.GET)
+  @ResponseBody
+  public List<Arena> arenas(){
+    return this.arenasService.getAll();
   }
 
   @RequestMapping(value = "/createArena", method = RequestMethod.POST)

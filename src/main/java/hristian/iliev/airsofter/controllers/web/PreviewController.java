@@ -22,9 +22,17 @@ public class PreviewController {
   public String preview(Model model, Principal principal) {
     User user = this.usersService.getUserByEmail(principal.getName());
 
+    boolean hasOtherPictures = false;
+    for(int i = 0; i < user.getArenaPhotos().size(); i++){
+      if(!user.getArenaPhotos().get(i).isCover()){
+        hasOtherPictures = true;
+      }
+    }
+
     model.addAttribute("arenaName", user.getArena().getName());
     model.addAttribute("arenaDescription", user.getArena().getDescription());
     model.addAttribute("arenaTelephone", user.getArena().getTelephone());
+    model.addAttribute("hasOtherPictures", hasOtherPictures);
 
     return "preview";
   }

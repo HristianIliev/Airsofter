@@ -433,7 +433,7 @@
                                             <div class="portlet light borderd">
                                                 <div class="portlet-title">
                                                     <div class="caption font-red-intense">
-                                                        <i class="fa fa-info font-red-intense"></i>
+                                                        <i class="fas fa-info font-red-intense"></i>
                                                         <span class="caption-subject bold uppercase">Информация за сервиза</span>
                                                         <span class="caption-helper"></span>
                                                     </div>
@@ -445,7 +445,23 @@
                                             </div>
                                         </div>
                                         <div class="col-md-6">
-                                            <!---->
+                                            <div class="portlet light borderd" th:if="${hasOtherPictures}">
+                                                <div class="portlet-title">
+                                                    <div class="caption font-red-intense">
+                                                        <i class="fa fa-picture-o font-red-intense"></i>
+                                                        <span class="caption-subject bold uppercase">Галерия</span>
+                                                        <span class="caption-helper"></span>
+                                                    </div>
+                                                </div>
+                                                <div class="portlet-body serviceGallery">
+                                                    <div class="row">
+                                                        SAMPLE IMAGE
+                                                        <div class="col-md-3">
+                                                            <img src="/images/services/1528998414.jpg">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <!---->
@@ -474,46 +490,6 @@
                                             </div>
                                         </div>
                                         <div id="map" class="c-content-contact-1-gmap" style="width: 100%; height: 615px; margin-bottom: 40px; overflow: hidden;">
-                                        </div>
-                                    </div>
-                                    <div id="sendRequest" tabindex="-1" aria-hidden="true" class="modal fade">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close"></button>
-                                                    <h4 class="modal-title">Изпрати заявка до сервиз</h4>
-                                                </div>
-                                                <!---->
-                                                <div class="modal-body">
-                                                    <div class="alert alert-info" style="margin-bottom: 0px;">
-                                                        Нямате регистрирани автомобили.
-                                                    </div>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" data-dismiss="modal" class="btn dark btn-outline">Затвори
-                                                    </button>
-                                                    <!---->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div id="messageModal" class="modal fade">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×</button>
-                                                    <h4 class="modal-title">Изпрати лично съобщение до fdsfsdfsd</h4>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <textarea rows="3" placeholder="Въведете съобщението си тук..." class="form-control"></textarea>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" data-dismiss="modal" class="btn btn-default">Затвори </button>
-                                                    <button type="button" class="btn btn-primary">
-                                                        <i class="fa fa-paper-plane"></i> Изпрати
-                                                    </button>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
