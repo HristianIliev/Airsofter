@@ -4,6 +4,7 @@ import hristian.iliev.airsofter.contracts.IArenasService;
 import hristian.iliev.airsofter.contracts.IUsersService;
 import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.User;
+import hristian.iliev.airsofter.models.request.ArenaMainSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -47,7 +48,7 @@ public class ArenasController {
 
   @RequestMapping(value = "/arenas", method = RequestMethod.GET)
   @ResponseBody
-  public List<Arena> arenas(){
+  public List<Arena> arenas() {
     return this.arenasService.getAll();
   }
 
@@ -62,5 +63,14 @@ public class ArenasController {
     }
 
     return created;
+  }
+
+  @RequestMapping(value = "/changeArenaMainSettings", method = RequestMethod.POST)
+  @ResponseBody
+  public Arena changeArenaMainSettings(@RequestBody ArenaMainSettings arenaMainSettings, Principal principal) {
+    String userEmail = principal.getName();
+    User user = this.usersService.getUserByEmail(userEmail);
+
+    return this.arenasService.changeArenaMainSettings(user, arenaMainSettings);
   }
 }

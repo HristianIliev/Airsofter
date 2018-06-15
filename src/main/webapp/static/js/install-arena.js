@@ -201,7 +201,7 @@ $("#submit-3").click(function() {
     }
   }
 
-  // sendVerificationSMS(telephone);
+  sendVerificationSMS(telephone);
 
   showCodeVerificationModal(dataJSON);
 });

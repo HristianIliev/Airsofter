@@ -101,14 +101,16 @@ function setUpWorkTimeEvents() {
     });
 
     let time = document.getElementById("trigger-time-" + i);
-    dialog.trigger = time;
-    time.addEventListener("click", function() {
-      dialog.toggle();
-    });
-    time.addEventListener("onOk", function() {
-      let start = dialog.time.toString().indexOf(":") - 2;
-      this.value = dialog.time.toString().substring(start, start + 5);
-    });
+    if (time !== null) {
+      dialog.trigger = time;
+      time.addEventListener("click", function() {
+        dialog.toggle();
+      });
+      time.addEventListener("onOk", function() {
+        let start = dialog.time.toString().indexOf(":") - 2;
+        this.value = dialog.time.toString().substring(start, start + 5);
+      });
+    }
   }
 
   // Setting up off days
@@ -177,4 +179,103 @@ function hideOffDayLabel(checkbox) {
     .parent()
     .prev()
     .remove();
+}
+
+$("#main-settings-form").submit(function(event) {
+  event.preventDefault();
+  var name = $("#arenaName").val();
+  var description = $("#arenaDescription").val();
+  var telephone = $("#arenaTelephone").val();
+
+  var dataJSON = {
+    name: name,
+    description: description,
+    arenaCategories: [],
+    telephone: telephone
+  };
+
+  for (var i = 0; i < 9; i += 1) {
+    var checkboxId = "checkbox" + i;
+    var labelId = "label" + i;
+    var entryName = $("#" + labelId).text();
+    if ($("#" + checkboxId).is(":checked")) {
+      dataJSON["arenaCategories"].push({
+        name: entryName
+      });
+    }
+  }
+
+  for (var i = 0; i < 9; i += 1) {
+    var checkboxId = "checkbox" + i + "_1";
+    var labelId = "label" + i + "_1";
+    var entryName = $("#" + labelId).text();
+    if ($("#" + checkboxId).is(":checked")) {
+      dataJSON["arenaCategories"].push({
+        name: entryName
+      });
+    }
+  }
+
+  sendVerificationSMS(telephone);
+
+  showCodeVerificationModal(dataJSON);
+});
+
+function sendVerificationSMS(telephone) {
+  $.ajax({
+    url: "/api/sendVerificationSMS?telephone=" + telephone,
+    method: "GET",
+    success: function(result) {}
+  });
+}
+
+function showCodeVerificationModal(dataJSON) {
+  vex.dialog.open({
+    message:
+      "За да завършите успешно промените си трябва първо да потвърдите че вие извършвате промените. Ние ви изпратихме SMS, въведете кода за достъп:",
+    input: [
+      '<div class="input-group"><span class="input-group-addon"><input type="text" name="code" class="form-control" placeholder="Код"></span"</div>'
+    ].join(""),
+    callback: function(data) {
+      if (!data) {
+        return console.log("Cancelled");
+      }
+      console.log(data.code);
+
+      $.ajax({
+        url: "/api/checkVerificationCode?code=" + data.code,
+        method: "GET",
+        success: function(result) {
+          if (result) {
+            startLoading();
+
+            $.ajax({
+              url: "/api/changeArenaMainSettings",
+              method: "post",
+              data: JSON.stringify(dataJSON),
+              contentType: "application/json",
+              success: function(result) {
+                stopLoading();
+                if (result.id !== 0 && result !== "null" && result !== null) {
+                  // SHOW IZIMODAL SUCCESS
+                }
+              }
+            });
+          } else {
+            alert("Вашият код беше грешен :(");
+          }
+        }
+      });
+    }
+  });
+}
+
+function startLoading() {
+  $("#form-1-submit").html(
+    '<i class="far fa-check-circle"></i> Промени <i class="fas fa-circle-notch fa-spin"></i>'
+  );
+}
+
+function stopLoading() {
+  $("#form-1-submit").html('<i class="far fa-check-circle"></i> Промени');
 }

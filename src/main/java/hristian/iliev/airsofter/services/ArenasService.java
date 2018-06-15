@@ -5,6 +5,7 @@ import hristian.iliev.airsofter.contracts.IRepository;
 import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.ArenaCategory;
 import hristian.iliev.airsofter.models.User;
+import hristian.iliev.airsofter.models.request.ArenaMainSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,5 +61,25 @@ public class ArenasService implements IArenasService {
   @Override
   public List<Arena> getAll() {
     return this.arenasRepository.getAll();
+  }
+
+  @Override
+  public Arena changeArenaMainSettings(User owner, ArenaMainSettings arenaMainSettings) {
+    Arena toChange = owner.getArena();
+    toChange.setName(arenaMainSettings.getName());
+    toChange.setDescription(arenaMainSettings.getDescription());
+    toChange.setTelephone(arenaMainSettings.getTelephone());
+
+    List<ArenaCategory> arenaCategoriesToInsert = new ArrayList<>();
+    for (int i = 0; i < arenaMainSettings.getArenaCategories().size(); i++) {
+      ArenaCategory toInsert = this.getArenaCategoryByName(arenaMainSettings.getArenaCategories().get(i).getName().trim());
+      arenaCategoriesToInsert.add(toInsert);
+    }
+
+    toChange.setArenaCategories(arenaCategoriesToInsert);
+
+    owner.setArena(toChange);
+
+    return this.usersRepository.update(owner).getArena();
   }
 }
