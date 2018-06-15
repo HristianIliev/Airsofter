@@ -1,0 +1,16 @@
+.md-pills .nav-item {
+  border: 1px solid #ddd;
+  background-color: white;
+  margin-bottom: 10px;
+  border-radius: 5%;
+}
+.md-pills .nav-item .nav-link {
+  text-decoration: none;
+  color: #555;
+  font-size: 17px;
+}
+.md-pills .nav-item .active {
+    background-color: #337ab7;
+    border-color: #337ab7;
+    color: white;
+}
