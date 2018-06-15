@@ -31,6 +31,7 @@
     <link href="/static/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/static/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
     <link href="/static/css/mdb.min.css" rel="stylesheet">
+    <link href="/static/css/mdDateTimePicker.min.css" rel="stylesheet">
     <link href="/static/css/custom.css" rel="stylesheet">
     <style>
         input[type="checkbox"].ios8-switch {
@@ -411,7 +412,62 @@
                                                             </div>
                                                         </div>
                                                         <div class="portlet-body form">
-
+                                                            <form action="" class="form-horizontal form-bordered">
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 control-label">Име на арена</label>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" th:value="${arena.getName()}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 control-label">Описание на арена:</label>
+                                                                    <div class="col-md-8">
+                                                                        <textarea rows="8" class="form-control" th:inline="text">[[${arena.getDescription()}]]</textarea>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 control-label">Телефон за контакти:</label>
+                                                                    <div class="col-md-8">
+                                                                        <input type="text" class="form-control" th:value="'+' + ${arena.getTelephone()}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label class="col-md-4 control-label">Категории на арената</label>
+                                                                    <div class="col-md-8">
+                                                                        <div class="col-sm-6">
+                                                                            <div th:each="arenaCategory: ${arenaCategories1}" class="md-checkbox">
+                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategoryStat.index}" th:checked="${#lists.contains(arena.getArenaCategories(), arenaCategory)}"
+                                                                                    class="md-check">
+                                                                                <label th:id="'label' + ${arenaCategoryStat.index}" th:inline="text" th:for="'checkbox' + ${arenaCategoryStat.index}">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> [[${arenaCategory.getName()}]]
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <div th:each="arenaCategory: ${arenaCategories2}" class="md-checkbox">
+                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategoryStat.index} + '_1'" th:checked="${#lists.contains(arena.getArenaCategories(), arenaCategory)}"
+                                                                                    class="md-check">
+                                                                                <label th:id="'label' + ${arenaCategoryStat.index} + '_1'" th:inline="text" th:for="'checkbox' + ${arenaCategoryStat.index} + '_1'">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> [[${arenaCategory.getName()}]]
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-actions">
+                                                                    <div class="row">
+                                                                        <div class="col-md-offset-3 col-md-9 text-right">
+                                                                            <button type="button" class="btn green">
+                                                                                <i class="fa fa-check"></i> Промени
+                                                                            </button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -419,23 +475,453 @@
 
                                                 <!--Panel 2-->
                                                 <div class="tab-pane fade" id="gallery" role="tabpanel">
-
-                                                    <h5 class="my-2 h5">Panel 2</h5>
-
+                                                    <div class="portlet light borderd">
+                                                        <div class="portlet-title">
+                                                            <div class="caption font-red-intense">
+                                                                <i class="fa fa-picture-o font-red-intense"></i>
+                                                                <span class="caption-subject bold uppercase">Галерия</span>
+                                                                <span class="caption-helper"></span>
+                                                            </div>
+                                                            <div class="actions">
+                                                                <a data-toggle="modal" href="#addImage" class="btn red-mint">
+                                                                    Добави снимка
+                                                                </a>
+                                                                <div id="addImage" tabindex="-1" aria-hidden="true" class="modal fade">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-header">
+                                                                                <button type="button" data-dismiss="modal" aria-hidden="true" class="close"></button>
+                                                                                <h4 class="modal-title">Добави снимка</h4>
+                                                                            </div>
+                                                                            <div class="modal-body">
+                                                                                <form enctype="multipart/form-data" action="#">
+                                                                                    <input type="file" accept="image/*" class="btn" style="width: 100%;">
+                                                                                </form>
+                                                                            </div>
+                                                                            <div class="modal-footer">
+                                                                                <button type="button" data-dismiss="modal" class="btn dark btn-outline">
+                                                                                    Затвори
+                                                                                </button>
+                                                                                <button type="button" class="btn green">
+                                                                                    Изпрати
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="portlet-body serviceGallery">
+                                                            <div class="row">
+                                                                <div class="col-md-4">
+                                                                    <img src="https://mechanic.bg/images/services/1528998414.jpg">
+                                                                    <div class="row page-full-width" style="margin-top: 7px;">
+                                                                        <div class="col-md-6">
+                                                                            <div class="md-radio">
+                                                                                <input id="radio66" name="radio2" type="radio" class="md-radiobtn" value="66">
+                                                                                <label for="radio66">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> Основна </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 text-right">
+                                                                            <a>Изтрий</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <img src="https://mechanic.bg/images/services/1528998498.jpg">
+                                                                    <div class="row page-full-width" style="margin-top: 7px;">
+                                                                        <div class="col-md-6">
+                                                                            <div class="md-radio">
+                                                                                <input id="radio67" name="radio2" type="radio" class="md-radiobtn" value="67">
+                                                                                <label for="radio67">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> Основна </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 text-right">
+                                                                            <a>Изтрий</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <img src="https://mechanic.bg/images/services/1528998504.jpg">
+                                                                    <div class="row page-full-width" style="margin-top: 7px;">
+                                                                        <div class="col-md-6">
+                                                                            <div class="md-radio">
+                                                                                <input id="radio68" name="radio2" type="radio" class="md-radiobtn" value="68">
+                                                                                <label for="radio68">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> Основна </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 text-right">
+                                                                            <a>Изтрий</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <img src="https://mechanic.bg/images/services/1528998509.jpg">
+                                                                    <div class="row page-full-width" style="margin-top: 7px;">
+                                                                        <div class="col-md-6">
+                                                                            <div class="md-radio">
+                                                                                <input id="radio69" name="radio2" type="radio" class="md-radiobtn" value="69">
+                                                                                <label for="radio69">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> Основна </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 text-right">
+                                                                            <a>Изтрий</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <img src="https://mechanic.bg/images/services/1528998514.jpg">
+                                                                    <div class="row page-full-width" style="margin-top: 7px;">
+                                                                        <div class="col-md-6">
+                                                                            <div class="md-radio">
+                                                                                <input id="radio70" name="radio2" type="radio" class="md-radiobtn" value="70">
+                                                                                <label for="radio70">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> Основна </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 text-right">
+                                                                            <a>Изтрий</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <img src="https://mechanic.bg/images/services/1528998519.jpg">
+                                                                    <div class="row page-full-width" style="margin-top: 7px;">
+                                                                        <div class="col-md-6">
+                                                                            <div class="md-radio">
+                                                                                <input id="radio71" name="radio2" type="radio" class="md-radiobtn" value="71">
+                                                                                <label for="radio71">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> Основна </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 text-right">
+                                                                            <a>Изтрий</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <img src="https://mechanic.bg/images/services/1528998381.jpg">
+                                                                    <div class="row page-full-width" style="margin-top: 7px;">
+                                                                        <div class="col-md-6">
+                                                                            <div class="md-radio">
+                                                                                <input id="radio72" name="radio2" type="radio" class="md-radiobtn" value="72">
+                                                                                <label for="radio72">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> Основна </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6 text-right">
+                                                                            <a>Изтрий</a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <!---->
+                                                            </div>
+                                                            <div class="row">
+                                                                <div class="col-md-offset-3 col-md-9 text-right">
+                                                                    <button type="button" class="btn green">
+                                                                        <i class="fa fa-check"></i> Обнови галерията
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <!--/.Panel 2-->
                                                 <!--Panel 3-->
                                                 <div class="tab-pane fade" id="location" role="tabpanel">
-
-                                                    <h5 class="my-2 h5">Panel 3</h5>
-
+                                                    <div class="portlet light borderd">
+                                                        <div class="portlet-title">
+                                                            <div class="caption font-red-intense">
+                                                                <span class="caption-subject bold uppercase">Локация на арената</span>
+                                                                <span class="caption-helper"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="portlet-body form">
+                                                            <form role="form" action="#" method="POST" class="searchService">
+                                                                <div id="map" style="width: 100%; height: 300px; margin-bottom: 20px; position: relative; overflow: hidden;">
+                                                                </div>
+                                                                <input id="arena-address" name="name" type="text" class="form-control searchedCity">
+                                                                <div class="row">
+                                                                    <div class="col-md-offset-3 col-md-9 text-right">
+                                                                        <button type="button" class="btn green">
+                                                                            <i class="fa fa-check"></i> Обнови локацията
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <!--/.Panel 3-->
                                                 <!--Panel 4-->
                                                 <div class="tab-pane fade" id="worktime" role="tabpanel">
+                                                    <div class="portlet light borderd">
+                                                        <div class="portlet-title">
+                                                            <div class="caption font-red-intense">
+                                                                <i class="fa fa-table font-red-intense"></i>
+                                                                <span class="caption-subject bold uppercase"> Редакция на работно време</span>
+                                                                <span class="caption-helper"></span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="portlet-body form">
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col"></th>
+                                                                        <th scope="col">Отваря</th>
+                                                                        <th scope="col">Затваря</th>
+                                                                        <th scope="col">Почивен ден</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle;">Понеделник</td>
+                                                                        <!-- IF IT IS OFF -->
+                                                                        <td colspan="2" class="text-center font-green" th:if="${arena.getTimetable().isMondayOff()}">Почивен ден
+                                                                        </td>
+                                                                        <!-- ELSE -->
+                                                                        <td th:if="${!arena.getTimetable().isMondayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-0" type="text" class="form-control" th:value="${arena.getTimetable().getMondayStart()}">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td th:if="${!arena.getTimetable().isMondayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-1" type="text" class="form-control" th:value="${arena.getTimetable().getMondayEnd()}">
+                                                                            </div>
+                                                                        </td>
 
-                                                    <h5 class="my-2 h5">Panel 4</h5>
+                                                                        <!-- CHECKBOX -->
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input th:checked="${arena.getTimetable().isMondayOff()}" type="checkbox" id="checkbox-0" class="md-check">
+                                                                                <label for="checkbox-0">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle;">Вторник</td>
+                                                                        <!-- IF IT IS OFF -->
+                                                                        <td colspan="2" class="text-center font-green" th:if="${arena.getTimetable().isTuesdayOff()}">Почивен ден
+                                                                        </td>
+                                                                        <!-- ELSE -->
+                                                                        <td th:if="${!arena.getTimetable().isTuesdayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-2" type="text" class="form-control" th:value="${arena.getTimetable().getTuesdayStart()}">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td th:if="${!arena.getTimetable().isTuesdayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-3" type="text" class="form-control" th:value="${arena.getTimetable().getTuesdayEnd()}">
+                                                                            </div>
+                                                                        </td>
 
+                                                                        <!-- CHECKBOX -->
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input th:checked="${arena.getTimetable().isTuesdayOff()}" type="checkbox" id="checkbox-1" class="md-check">
+                                                                                <label for="checkbox-1">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle;">Сряда</td>
+                                                                        <!-- IF IT IS OFF -->
+                                                                        <td colspan="2" class="text-center font-green" th:if="${arena.getTimetable().isWednesdayOff()}">Почивен ден
+                                                                        </td>
+                                                                        <!-- ELSE -->
+                                                                        <td th:if="${!arena.getTimetable().isWednesdayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-4" type="text" class="form-control" th:value="${arena.getTimetable().getWednesdayStart()}">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td th:if="${!arena.getTimetable().isWednesdayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-5" type="text" class="form-control" th:value="${arena.getTimetable().getWednesdayEnd()}">
+                                                                            </div>
+                                                                        </td>
+
+                                                                        <!-- CHECKBOX -->
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input th:checked="${arena.getTimetable().isWednesdayOff()}" type="checkbox" id="checkbox-2" class="md-check">
+                                                                                <label for="checkbox-2">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle;">Четвъртък</td>
+                                                                        <!-- IF IT IS OFF -->
+                                                                        <td colspan="2" class="text-center font-green" th:if="${arena.getTimetable().isThursdayOff()}">Почивен ден
+                                                                        </td>
+                                                                        <!-- ELSE -->
+                                                                        <td th:if="${!arena.getTimetable().isThursdayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-6" type="text" class="form-control" th:value="${arena.getTimetable().getThursdayStart()}">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td th:if="${!arena.getTimetable().isThursdayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-7" type="text" class="form-control" th:value="${arena.getTimetable().getThursdayEnd()}">
+                                                                            </div>
+                                                                        </td>
+
+                                                                        <!-- CHECKBOX -->
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input th:checked="${arena.getTimetable().isThursdayOff()}" type="checkbox" id="checkbox-3" class="md-check">
+                                                                                <label for="checkbox-3">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle;">Петък</td>
+                                                                        <!-- IF IT IS OFF -->
+                                                                        <td colspan="2" class="text-center font-green" th:if="${arena.getTimetable().isFridayOff()}">Почивен ден
+                                                                        </td>
+                                                                        <!-- ELSE -->
+                                                                        <td th:if="${!arena.getTimetable().isFridayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-8" type="text" class="form-control" th:value="${arena.getTimetable().getFridayStart()}">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td th:if="${!arena.getTimetable().isFridayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-9" type="text" class="form-control" th:value="${arena.getTimetable().getFridayEnd()}">
+                                                                            </div>
+                                                                        </td>
+
+                                                                        <!-- CHECKBOX -->
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input th:checked="${arena.getTimetable().isFridayOff()}" type="checkbox" id="checkbox-4" class="md-check">
+                                                                                <label for="checkbox-4">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle;">Събота</td>
+                                                                        <!-- IF IT IS OFF -->
+                                                                        <td colspan="2" class="text-center font-green" th:if="${arena.getTimetable().isSaturdayOff()}">Почивен ден
+                                                                        </td>
+                                                                        <!-- ELSE -->
+                                                                        <td th:if="${!arena.getTimetable().isSaturdayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-10" type="text" class="form-control" th:value="${arena.getTimetable().getSaturdayStart()}">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td th:if="${!arena.getTimetable().isSaturdayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-11" type="text" class="form-control" th:value="${arena.getTimetable().getSaturdayEnd()}">
+                                                                            </div>
+                                                                        </td>
+
+                                                                        <!-- CHECKBOX -->
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input th:checked="${arena.getTimetable().isSaturdayOff()}" type="checkbox" id="checkbox-5" class="md-check">
+                                                                                <label for="checkbox-5">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="vertical-align: middle;">Неделя</td>
+                                                                        <!-- IF IT IS OFF -->
+                                                                        <td colspan="2" class="text-center font-green" th:if="${arena.getTimetable().isSundayOff()}">Почивен ден
+                                                                        </td>
+                                                                        <!-- ELSE -->
+                                                                        <td th:if="${!arena.getTimetable().isSundayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-12" type="text" class="form-control" th:value="${arena.getTimetable().getSundayStart()}">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td th:if="${!arena.getTimetable().isSundayOff()}">
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-13" type="text" class="form-control" th:value="${arena.getTimetable().getSundayEnd()}">
+                                                                            </div>
+                                                                        </td>
+
+                                                                        <!-- CHECKBOX -->
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input th:checked="${arena.getTimetable().isSundayOff()}" type="checkbox" id="checkbox-6" class="md-check">
+                                                                                <label for="checkbox-6">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <div class="form-actions">
+                                                                <div class="row">
+                                                                    <div class="col-md-offset-3 col-md-9 text-right">
+                                                                        <button type="button" class="btn green">
+                                                                            <i class="fa fa-check"></i> Обнови
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                                 <!--/.Panel 4-->
                                             </div>
@@ -469,6 +955,11 @@
     <!-- WYSIWYG -->
     <script src="/static/js/wysihtml5-0.3.0.js"></script>
     <script src="/static/js/bootstrap-wysihtml5.js"></script>
+    <!-- TIME PICKER -->
+    <script src="/static/js/libs/moment.min.js"></script>
+    <script src="/static/js/libs/draggabilly.pkgd.min.js"></script>
+    <script src="/static/js/libs/mdDateTimePicker.min.js"></script>
+
     <script src="/static/js/libs/mdb.min.js"></script>
 
     <script src="/static/js/edit.js"></script>
@@ -477,4 +968,4 @@
         async defer></script>
 </body>
 
-</html>F
+</html>
