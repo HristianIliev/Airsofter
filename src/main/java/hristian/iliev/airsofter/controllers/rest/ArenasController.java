@@ -3,8 +3,10 @@ package hristian.iliev.airsofter.controllers.rest;
 import hristian.iliev.airsofter.contracts.IArenasService;
 import hristian.iliev.airsofter.contracts.IUsersService;
 import hristian.iliev.airsofter.models.Arena;
+import hristian.iliev.airsofter.models.Timetable;
 import hristian.iliev.airsofter.models.User;
 import hristian.iliev.airsofter.models.request.ArenaMainSettings;
+import hristian.iliev.airsofter.models.request.LatLng;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -72,5 +74,23 @@ public class ArenasController {
     User user = this.usersService.getUserByEmail(userEmail);
 
     return this.arenasService.changeArenaMainSettings(user, arenaMainSettings);
+  }
+
+  @RequestMapping(value = "/changeLatLng", method = RequestMethod.POST)
+  @ResponseBody
+  public Arena changeLatLng(@RequestBody LatLng latLng, Principal principal) {
+    String userEmail = principal.getName();
+    User user = this.usersService.getUserByEmail(userEmail);
+
+    return this.arenasService.changeLatLng(user, latLng);
+  }
+
+  @RequestMapping(value = "/changeTimetable", method = RequestMethod.POST)
+  @ResponseBody
+  public Arena changeTimetable(@RequestBody Timetable timetable, Principal principal){
+    String userEmail = principal.getName();
+    User user = this.usersService.getUserByEmail(userEmail);
+
+    return this.arenasService.changeTimetable(user, timetable);
   }
 }

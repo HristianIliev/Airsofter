@@ -4,6 +4,7 @@ import hristian.iliev.airsofter.contracts.IRepository;
 import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.ArenaCategory;
 import hristian.iliev.airsofter.models.Request;
+import hristian.iliev.airsofter.models.Timetable;
 import hristian.iliev.airsofter.models.User;
 import hristian.iliev.airsofter.repositories.HibernateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,6 +45,15 @@ public class AppConfig {
   IRepository<Request> provideRequestsRepository() {
     HibernateRepository<Request> repository = new HibernateRepository<>();
     repository.setEntityClass(Request.class);
+
+    return repository;
+  }
+
+  @Bean
+  @Autowired
+  IRepository<Timetable> provideTimetablesRepository() {
+    HibernateRepository<Timetable> repository = new HibernateRepository<>();
+    repository.setEntityClass(Timetable.class);
 
     return repository;
   }

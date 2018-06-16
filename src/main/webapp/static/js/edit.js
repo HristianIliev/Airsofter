@@ -181,6 +181,7 @@ function hideOffDayLabel(checkbox) {
     .remove();
 }
 
+//FIRST FORM
 $("#main-settings-form").submit(function(event) {
   event.preventDefault();
   var name = $("#arenaName").val();
@@ -279,3 +280,120 @@ function startLoading() {
 function stopLoading() {
   $("#form-1-submit").html('<i class="far fa-check-circle"></i> Промени');
 }
+//END FIRST FORM
+
+// LOCATION FORM
+$("#submit-location").click(function() {
+  if (lastMarker === null) {
+    // IZITOAST MODAL TO ALERT
+    return false;
+  }
+
+  var latitude = lastMarker.position.lat();
+  var longitude = lastMarker.position.lng();
+
+  startLoadingOnLocation();
+
+  $.ajax({
+    url: "/api/changeLatLng",
+    method: "POST",
+    data: JSON.stringify({
+      latitude: latitude,
+      longitude: longitude
+    }),
+    contentType: "application/json",
+    success: function(result) {
+      stopLoadingOnLocation();
+      if (result.id !== 0 && result !== "null" && result !== null) {
+        // IZITOAST ALERT FOR SUCCESS
+      }
+    }
+  });
+});
+
+function startLoadingOnLocation() {
+  $("#submit-location").html(
+    '<i class="fa fa-check"></i> Обнови локацията <i class="fas fa-circle-notch fa-spin"></i>'
+  );
+}
+
+function stopLoadingOnLocation() {
+  $("#submit-location").html('<i class="fa fa-check"></i> Обнови локацията');
+}
+// END LOCATION FORM
+
+// WORKTIME FORM
+$("#submit-worktime").click(function() {
+  var mondayOff = $("#checkbox-0").prop("checked");
+  var tuesdayOff = $("#checkbox-1").prop("checked");
+  var wednesdayOff = $("#checkbox-2").prop("checked");
+  var thursdayOff = $("#checkbox-3").prop("checked");
+  var fridayOff = $("#checkbox-4").prop("checked");
+  var saturdayOff = $("#checkbox-5").prop("checked");
+  var sundayOff = $("#checkbox-6").prop("checked");
+
+  var mondayStart = $("#trigger-time-0").val();
+  var mondayEnd = $("#trigger-time-1").val();
+  var tuesdayStart = $("#trigger-time-2").val();
+  var tuesdayEnd = $("#trigger-time-3").val();
+  var wednesdayStart = $("#trigger-time-4").val();
+  var wednesdayEnd = $("#trigger-time-5").val();
+  var thursdayStart = $("#trigger-time-6").val();
+  var thursdayEnd = $("#trigger-time-7").val();
+  var fridayStart = $("#trigger-time-8").val();
+  var fridayEnd = $("#trigger-time-9").val();
+  var saturdayStart = $("#trigger-time-10").val();
+  var saturdayEnd = $("#trigger-time-11").val();
+  var sundayStart = $("#trigger-time-12").val();
+  var sundayEnd = $("#trigger-time-13").val();
+
+  var dataJSON = {
+    mondayOff: mondayOff,
+    tuesdayOff: tuesdayOff,
+    wednesdayOff: wednesdayOff,
+    thursdayOff: thursdayOff,
+    fridayOff: fridayOff,
+    saturdayOff: saturdayOff,
+    sundayOff: sundayOff,
+    mondayStart: mondayStart,
+    mondayEnd: mondayEnd,
+    tuesdayStart: tuesdayStart,
+    tuesdayEnd: tuesdayEnd,
+    wednesdayStart: wednesdayStart,
+    wednesdayEnd: wednesdayEnd,
+    thursdayStart: thursdayStart,
+    thursdayEnd: thursdayEnd,
+    fridayStart: fridayStart,
+    fridayEnd: fridayEnd,
+    saturdayStart: saturdayStart,
+    saturdayEnd: saturdayEnd,
+    sundayStart: sundayStart,
+    sundayEnd: sundayEnd
+  };
+
+  startLoadingOnWorktime();
+
+  $.ajax({
+    url: "/api/changeTimetable",
+    method: "post",
+    data: JSON.stringify(dataJSON),
+    contentType: "application/json",
+    success: function(result) {
+      stopLoadingOnWorktime();
+      if (result.id !== 0 && result !== "null" && result !== null) {
+        // IZITOAST ALERT SUCCESS
+      }
+    }
+  });
+});
+
+function startLoadingOnWorktime() {
+  $("#submit-worktime").html(
+    '<i class="fa fa-check"></i> Обнови <i class="fas fa-circle-notch fa-spin"></i>'
+  );
+}
+
+function stopLoadingOnWorktime() {
+  $("#submit-worktime").html('<i class="fa fa-check"></i> Обнови');
+}
+// END WORKTIME FORM

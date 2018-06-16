@@ -4,8 +4,10 @@ import hristian.iliev.airsofter.contracts.IArenasService;
 import hristian.iliev.airsofter.contracts.IRepository;
 import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.ArenaCategory;
+import hristian.iliev.airsofter.models.Timetable;
 import hristian.iliev.airsofter.models.User;
 import hristian.iliev.airsofter.models.request.ArenaMainSettings;
+import hristian.iliev.airsofter.models.request.LatLng;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,14 +19,17 @@ public class ArenasService implements IArenasService {
   private final IRepository<Arena> arenasRepository;
   private final IRepository<ArenaCategory> arenaCategoriesRepository;
   private final IRepository<User> usersRepository;
+  private final IRepository<Timetable> timetablesRepository;
 
   @Autowired
   public ArenasService(IRepository<Arena> arenasRepository,
                        IRepository<ArenaCategory> arenaCategoriesRepository,
-                       IRepository<User> usersRepository) {
+                       IRepository<User> usersRepository,
+                       IRepository<Timetable> timetablesRepository) {
     this.arenasRepository = arenasRepository;
     this.arenaCategoriesRepository = arenaCategoriesRepository;
     this.usersRepository = usersRepository;
+    this.timetablesRepository = timetablesRepository;
   }
 
   @Override
@@ -77,6 +82,32 @@ public class ArenasService implements IArenasService {
     }
 
     toChange.setArenaCategories(arenaCategoriesToInsert);
+
+    owner.setArena(toChange);
+
+    return this.usersRepository.update(owner).getArena();
+  }
+
+  @Override
+  public Arena changeLatLng(User owner, LatLng latLng) {
+    Arena toChange = owner.getArena();
+    toChange.setLatitude(latLng.getLatitude());
+    toChange.setLongitude(latLng.getLongitude());
+
+    owner.setArena(toChange);
+
+    return this.usersRepository.update(owner).getArena();
+  }
+
+  @Override
+  public Arena changeTimetable(User owner, Timetable timetable) {
+    Arena toChange = owner.getArena();
+
+    this.timetablesRepository.delete(toChange.getTimetable());
+
+    timetable.setArena(toChange);
+
+    toChange.setTimetable(timetable);
 
     owner.setArena(toChange);
 
