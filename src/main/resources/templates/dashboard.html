@@ -230,45 +230,46 @@
         }
     </style>
 
+    <script type="text/javascript" src="/static/js/libs/jquery-3.3.1.js"></script>
     <!-- GOOGLE CHARTS -->
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
-        google.charts.load('current', { 'packages': ['corechart'], 'language': 'bg' });
-        google.charts.setOnLoadCallback(drawChart);
 
-        function drawChart() {
-            // Define the chart to be drawn.
-            // var data = new google.visualization.DataTable();
-            // data.addColumn('string', 'Element');
-            // data.addColumn('number', 'Percentage');
-            // data.addRows([
-            //     ['Nitrogen', 0.78],
-            //     ['Oxygen', 0.21],
-            //     ['Other', 0.01]
-            // ]);
 
-            var data = google.visualization.arrayToDataTable([
-                ['Ден', 'Заявки'],
-                ['12.06.', 2],
-                ['11.06.', 1],
-                ['10.06.', 3],
-                ['09.06.', 4],
-                ['08.06.', 1],
-                ['07.06.', 0],
-                ['06.06.', 5]
-            ]);
+        $.ajax({
+            url: "/api/getChartData",
+            method: "GET",
+            success: function (result) {
+                google.charts.load('current', { 'packages': ['corechart'], 'language': 'bg' });
+                google.charts.setOnLoadCallback(drawChart);
 
-            var options = {
-                curveType: 'function',
-                legend: { position: 'bottom' },
-                'width': 515,
-                'height': 400
-            };
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Ден', 'Заявки'],
+                        [result.chartData[0].date, result.chartData[0].requests],
+                        [result.chartData[1].date, result.chartData[1].requests],
+                        [result.chartData[2].date, result.chartData[2].requests],
+                        [result.chartData[3].date, result.chartData[3].requests],
+                        [result.chartData[4].date, result.chartData[4].requests],
+                        [result.chartData[5].date, result.chartData[5].requests],
+                        [result.chartData[6].date, result.chartData[6].requests]
+                    ]);
 
-            // Instantiate and draw the chart.
-            var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
-            chart.draw(data, options);
-        }
+                    var options = {
+                        curveType: 'function',
+                        legend: { position: 'bottom' },
+                        'width': 515,
+                        'height': 400
+                    };
+
+                    // Instantiate and draw the chart.
+                    var chart = new google.visualization.LineChart(document.getElementById('line-chart'));
+                    chart.draw(data, options);
+                }
+            }
+        });
+
+
     </script>
 </head>
 
@@ -439,11 +440,9 @@
                                                 </i>
                                                 <div class="widget-thumb-body">
                                                     <span class="widget-thumb-subtitle">
-                                                        Клиенти
+                                                        Клиенти за днес
                                                     </span>
-                                                    <span data-counter="counterup" data-value="0" class="widget-thumb-body-stat">
-                                                        <!-- CHANGE WITH THYMELEAF WHEN THE LOGIC IS IMPLEMENTED -->
-                                                        0
+                                                    <span data-counter="counterup" data-value="0" class="widget-thumb-body-stat" th:text="${clientsForToday}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -457,11 +456,11 @@
                                             <div class="widget-thumb-wrap">
                                                 <i class="widget-thumb-icon bg-blue far fa-clock"></i>
                                                 <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">
+                                                    <span class="widget-thumb-subtitle" th:text="${timeUntilNextClient}">
                                                         <!-- CHANGE WITH THYMELEAF WHEN THE LOGIC IS IMPLEMENTED -->
                                                         Няма намерени
                                                     </span>
-                                                    <span class="widget-thumb-body-stat">
+                                                    <span class="widget-thumb-body-stat" th:text="${timeNextClient}">
                                                         <!-- CHANGE WITH THYMELEAF WHEN THE LOGIC IS IMPLEMENTED -->
                                                         --
                                                     </span>
@@ -482,8 +481,7 @@
                                                     <span class="widget-thumb-subtitle">
                                                         Клиенти
                                                     </span>
-                                                    <span data-counter="counterup" data-value="0" class="widget-thumb-body-stat">
-                                                        0
+                                                    <span data-counter="counterup" data-value="0" class="widget-thumb-body-stat" th:text="${pendingRequests}">
                                                     </span>
                                                 </div>
                                             </div>
@@ -497,8 +495,8 @@
                                             <div class="widget-thumb-wrap">
                                                 <i class="widget-thumb-icon bg-red icon-users"></i>
                                                 <div class="widget-thumb-body">
-                                                    <span class="widget-thumb-subtitle">Клиенти</span>
-                                                    <span data-counter="counterup" data-value="0" class="widget-thumb-body-stat">0</span>
+                                                    <span class="widget-thumb-subtitle">КЛИЕНТИ</span>
+                                                    <span data-counter="counterup" data-value="0" class="widget-thumb-body-stat" th:text="${doneClients}"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -517,7 +515,132 @@
                                                 </div>
                                             </div>
                                             <div class="portlet-body">
-                                                <div class="mt-actions">
+                                                <div th:each="request: ${requests}" class="mt-actions">
+                                                    <div class="mt-action">
+                                                        <div class="mt-action-body">
+                                                            <div class="mt-action-row">
+                                                                <div class="mt-action-info ">
+                                                                    <div class="mt-action-icon" style="padding-bottom: 15px;">
+                                                                        <i class="fas fa-bullseye"></i>
+                                                                    </div>
+                                                                    <div class="mt-action-details" style="vertical-align: middle;">
+                                                                        <a th:href="'#requestModal' + ${request.getId()}" data-toggle="modal" class="mt-action-author" th:text="${request.getUser().getName()} + ' ' + ${request.getUser().getLastName()} + ' - ' + ${request.getNumberOfParticipants()} + ' човека'"></a>
+                                                                        <div th:id="'requestModal' + ${request.getId()}" class="modal fade">
+                                                                            <div class="modal-dialog">
+                                                                                <div class="modal-content">
+                                                                                    <div class="modal-header">
+                                                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×
+                                                                                        </button>
+                                                                                        <h4 class="modal-title" th:inline="text">
+                                                                                            <i class="fas fa-bullseye"></i>
+                                                                                            [[${request.getUser().getName()}]] [[${request.getUser().getLastName()}]] - [[${request.getNumberOfParticipants()}]] човека
+                                                                                        </h4>
+                                                                                    </div>
+                                                                                    <div class="modal-body">
+                                                                                        <strong>Допълнителна информация:</strong>
+                                                                                        <span th:text="${request.getInformation()}"></span>
+                                                                                        <br>
+                                                                                        <strong>Дата на изпълнение:</strong>
+                                                                                        <span th:text="${request.getDaytime()}"></span>
+                                                                                        <br>
+                                                                                        <strong>Брой участници:</strong>
+                                                                                        <span th:text="${request.getNumberOfParticipants()}"></span>
+                                                                                        <br>
+                                                                                        <strong>Направена от:</strong>
+                                                                                        <span th:text="${request.getUser().getName()} + ' ' + ${request.getUser().getLastName()}"></span>
+                                                                                        <br>
+                                                                                        <strong>Статус:</strong>
+                                                                                        <span th:if="${request.getStatus() == 'DONE'}">
+                                                                                            Извършена
+                                                                                        </span>
+                                                                                        <span th:if="${request.getStatus() == 'ACCEPTED'}">
+                                                                                            Очаква се изпълнение
+                                                                                        </span>
+                                                                                        <span th:if="${request.getStatus() == 'REJECTED'}">
+                                                                                            Отхвърлена
+                                                                                        </span>
+                                                                                        <span th:if="${request.getStatus() == 'PENDING'}">
+                                                                                            Очаква се одобрение
+                                                                                        </span>
+                                                                                    </div>
+                                                                                    <div class="modal-footer">
+                                                                                        <button type="button" data-dismiss="modal" class="btn btn-default">Затвори
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="mt-action-datetime">
+                                                                    <span class="mt-action-date" style="padding-right: 20px;" th:inline="text">
+                                                                        <i class="fa fa-clock-o"></i> [[${request.getDaytime()}]]</span>
+                                                                    <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'DONE'}">
+                                                                        <i class="far fa-thumbs-up"></i> Извършена
+                                                                    </span>
+                                                                    <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'ACCEPTED'}">
+                                                                        <i class="fa fa-play-circle"></i> Очаква се изпълнение
+                                                                    </span>
+                                                                    <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'REJECTED'}">
+                                                                        <i class="far fa-thumbs-down"></i> Отхвърлена
+                                                                    </span>
+                                                                    <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'PENDING'}">
+                                                                        <i class="fas fa-question"></i> Очаква се одобрение
+                                                                    </span>
+                                                                </div>
+                                                                <div class="mt-action-buttons " style="width: 200px;" th:if="${request.getStatus() == 'PENDING'}">
+                                                                    <a th:href="'#approveModal' + ${request.getId()}" data-toggle="modal" class="btn btn-circle btn-outline green btn-sm">
+                                                                        Прегледай заявката
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div th:id="'approveModal' + ${request.getId()}" class="modal fade in" th:if="${request.getStatus() == 'PENDING'}">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×
+                                                                    </button>
+                                                                    <h4 class="modal-title">
+                                                                        <i class="fa fa-eye"></i> Прегледай заявката</h4>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <table class="table table-hover" style="margin: 0px; padding: 0px;">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <i class="fa fa-clock-o"></i> Дата на приемане</td>
+                                                                                <td th:text="${request.getSendOn()}"></td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <i class="far fa-user"></i> Изпратил</td>
+                                                                                <td th:text="${request.getUser().getName()} + ' ' + ${request.getUser().getLastName()}">
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td>
+                                                                                    <i class="fa fa-info"></i> Допълнителна информация</td>
+                                                                                <td th:text="${request.getInformation()}"></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                    <!---->
+                                                                </div>
+                                                                <div th:id="${request.getId()}" class="modal-footer">
+                                                                    <button type="button" data-dismiss="modal" class="btn btn-danger btn-reject">
+                                                                        <i class="far fa-times-circle"></i> Откажи Заявката
+                                                                    </button>
+                                                                    <button type="button" data-dismiss="modal" class="btn btn-success btn-accept">
+                                                                        <i class="fa fa-check"></i> Приеми заявката
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="mt-actions" th:if="${noneToAccept}">
                                                     <div class="text-center">
                                                         <h3>
                                                             <i class="fa fa-list-ol"></i>
@@ -561,13 +684,28 @@
                                                     <i class="icon-bar-chart font-dark hide"></i>
                                                     <span class="caption-subject font-dark bold uppercase">Следващи клиенти</span>
                                                     <span class="caption-helper">
-                                                        <span class="label label-success">0</span>
+                                                        <span class="label label-success" th:text="${numberOfRequests}"></span>
                                                     </span>
                                                 </div>
                                             </div>
                                             <div class="portlet-body">
                                                 <div class="general-item-list">
-                                                    <h3 class="text-center">
+                                                    <div th:each="request: ${requestsForTheDay}" class="item">
+                                                        <div class="item-head">
+                                                            <div class="item-details">
+                                                                <img src="/static/img/avatars/avatar.png" class="item-pic rounded" style="height: 45px;">
+                                                                <a href="" class="item-name primary-link" th:text="${request.getUser().getName()}"></a>
+                                                                <span class="item-label" th:text="${request.getDaytime()}"></span>
+                                                            </div>
+                                                            <span class="item-status" style="color: black;">
+                                                                <span th:inline="text">
+                                                                    <i class="fas fa-male"></i> [[${request.getNumberOfParticipants()}]]</span>
+                                                                <br>
+                                                                <!---->
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <h3 class="text-center" th:if="${noNextRequests}">
                                                         Няма намерени</h3>
                                                 </div>
                                             </div>
@@ -582,9 +720,25 @@
                                             </div>
                                             <div class="portlet-body">
                                                 <div class="mt-comments">
-                                                    <div class="text-center">
-                                                        <h3>
-                                                            <i class="fa fa-comments-o"></i> Нямате непрочетени съобщения.</h3>
+                                                    <div class="mt-comment">
+                                                        <div class="mt-comment-img">
+                                                            <img src="/static/img/avatars/avatar.png" style="width: 50px;">
+                                                        </div>
+                                                        <div class="mt-comment-body">
+                                                            <div class="mt-comment-info">
+                                                                <span class="mt-comment-author" th:text="${messageAuthor}">
+                                                                    Hristian Iliev
+                                                                </span>
+                                                            </div>
+                                                            <div class="mt-comment-details">
+                                                                <ul class="mt-comment-actions">
+                                                                    <li>
+                                                                        <a href="/messages" style="color: rgb(106, 161, 238);">
+                                                                            <i class="fa fa-eye"></i> Виж повече </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -600,7 +754,7 @@
     </div>
 
     <!-- Scripts -->
-    <script type="text/javascript" src="/static/js/libs/jquery-3.3.1.js"></script>
+
     <!-- CONTAINS JS THEME ASSETS -->
     <script src="/static/js/app-assets.js"></script>
     <!-- TOASTR-->

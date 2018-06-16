@@ -101,4 +101,18 @@ public class Request implements IModel {
   public void setSendOn(String sendOn) {
     this.sendOn = sendOn;
   }
+
+  @Override
+  public String toString() {
+    return "Request{" +
+            "id=" + id +
+            ", user=" + user +
+            ", owner=" + owner +
+            ", daytime='" + daytime + '\'' +
+            ", information='" + information + '\'' +
+            ", numberOfParticipants=" + numberOfParticipants +
+            ", status='" + status + '\'' +
+            ", sendOn='" + sendOn + '\'' +
+            '}';
+  }
 }

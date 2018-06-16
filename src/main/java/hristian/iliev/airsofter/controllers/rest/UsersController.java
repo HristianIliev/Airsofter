@@ -2,6 +2,8 @@ package hristian.iliev.airsofter.controllers.rest;
 
 import hristian.iliev.airsofter.contracts.IUsersService;
 import hristian.iliev.airsofter.models.User;
+import hristian.iliev.airsofter.models.request.Names;
+import hristian.iliev.airsofter.models.request.Passwords;
 import hristian.iliev.airsofter.models.response.Conversation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
@@ -36,5 +38,21 @@ public class UsersController {
     String userEmail = principal.getName();
     User current = this.usersService.getUserByEmail(userEmail);
     return new Conversation(current, this.usersService.getById(current.getLastConversationWith()));
+  }
+
+  @RequestMapping(value = "/changeNames", method = RequestMethod.POST)
+  @ResponseBody
+  public User changeNames(@RequestBody Names names, Principal principal){
+    String userEmail = principal.getName();
+    User current = this.usersService.getUserByEmail(userEmail);
+    return this.usersService.changeNames(current, names);
+  }
+
+  @RequestMapping(value = "/changePassword", method = RequestMethod.POST)
+  @ResponseBody
+  public User changePassword(@RequestBody Passwords passwords, Principal principal){
+    String userEmail = principal.getName();
+    User current = this.usersService.getUserByEmail(userEmail);
+    return this.usersService.changePasswords(current, passwords);
   }
 }

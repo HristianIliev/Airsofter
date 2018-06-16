@@ -4,14 +4,21 @@ import hristian.iliev.airsofter.contracts.IArenasService;
 import hristian.iliev.airsofter.contracts.IRepository;
 import hristian.iliev.airsofter.models.Arena;
 import hristian.iliev.airsofter.models.ArenaCategory;
+import hristian.iliev.airsofter.models.Request;
 import hristian.iliev.airsofter.models.Timetable;
 import hristian.iliev.airsofter.models.User;
 import hristian.iliev.airsofter.models.request.ArenaMainSettings;
 import hristian.iliev.airsofter.models.request.LatLng;
+import hristian.iliev.airsofter.models.response.ChartData;
+import hristian.iliev.airsofter.models.response.ChartEntry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -112,5 +119,59 @@ public class ArenasService implements IArenasService {
     owner.setArena(toChange);
 
     return this.usersRepository.update(owner).getArena();
+  }
+
+  @Override
+  public ChartData getChartData(User owner) throws ParseException {
+    Calendar now = Calendar.getInstance();
+    now.setTime(new Date());
+    now.add(Calendar.DAY_OF_YEAR, 1);
+    List<ChartEntry> result = new ArrayList<>();
+    List<Request> allRequests = owner.getRequestsForTheArena();
+
+    for (int i = 0; i < 7; i++) {
+      now.add(Calendar.DAY_OF_YEAR, -1);
+      ChartEntry chartEntry = this.getChartEntry(now, allRequests);
+
+      result.add(chartEntry);
+    }
+
+    return new ChartData(result);
+  }
+
+  private ChartEntry getChartEntry(Calendar dateToGet, List<Request> allRequest) throws ParseException {
+    int numberOfRequestsForTheDate = 0;
+
+    for (int i = 0; i < allRequest.size(); i++) {
+      Calendar calendar = Calendar.getInstance();
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+      Date requestDate = sdf.parse(allRequest.get(i).getDaytime());
+      calendar.setTime(requestDate);
+      if (dateToGet.get(Calendar.YEAR) == calendar.get(Calendar.YEAR) &&
+              dateToGet.get(Calendar.DAY_OF_YEAR) == calendar.get(Calendar.DAY_OF_YEAR)) {
+        numberOfRequestsForTheDate++;
+      }
+
+    }
+
+    int dayOfMonth = dateToGet.get(Calendar.DAY_OF_MONTH);
+    int month = dateToGet.get(Calendar.MONTH) + 1;
+
+    String day = "";
+    String monthStr = "";
+
+    if (dayOfMonth < 10) {
+      day = "0" + Integer.toString(dayOfMonth);
+    } else {
+      day = Integer.toString(dayOfMonth);
+    }
+
+    if (month < 10) {
+      monthStr = "0" + Integer.toString(month);
+    } else {
+      monthStr = Integer.toString(month);
+    }
+
+    return new ChartEntry(day + "." + monthStr + ".", numberOfRequestsForTheDate);
   }
 }

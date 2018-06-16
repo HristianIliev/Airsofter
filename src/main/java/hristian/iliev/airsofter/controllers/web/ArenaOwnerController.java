@@ -3,7 +3,9 @@ package hristian.iliev.airsofter.controllers.web;
 import hristian.iliev.airsofter.contracts.IArenaCategoriesService;
 import hristian.iliev.airsofter.contracts.IUsersService;
 import hristian.iliev.airsofter.models.ArenaCategory;
+import hristian.iliev.airsofter.models.Request;
 import hristian.iliev.airsofter.models.User;
+import hristian.iliev.airsofter.models.helper.RequestsInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.List;
+import java.util.Objects;
 
 @Controller
 public class ArenaOwnerController {
@@ -25,7 +29,7 @@ public class ArenaOwnerController {
   }
 
   @GetMapping("/dashboard")
-  public String dashboard(Model model, Principal principal) {
+  public String dashboard(Model model, Principal principal) throws ParseException {
     User user = this.usersService.getUserByEmail(principal.getName());
     if (user.isNeedsInstallation()) {
       if (user.isArenaOwner()) {
@@ -37,7 +41,40 @@ public class ArenaOwnerController {
       return "redirect:/app";
     }
 
+    RequestsInformation requestsInformation = this.usersService.getRequestsInformation(user);
+
+    System.out.println(requestsInformation);
+
     model.addAttribute("arenaName", user.getArena().getName());
+    model.addAttribute("clientsForToday", requestsInformation.getClientsForToday());
+    model.addAttribute("timeUntilNextClient", requestsInformation.getTimeUntilNextClient());
+    if (requestsInformation.getNextRequest() != null) {
+      model.addAttribute("timeNextClient", requestsInformation.getNextRequest().getDaytime().substring(11, 16));
+    } else {
+      model.addAttribute("timeNextClient", "--:--");
+    }
+
+    model.addAttribute("pendingRequests", requestsInformation.getPendingRequests());
+    model.addAttribute("doneClients", requestsInformation.getDoneClients());
+    model.addAttribute("requestsForTheDay", requestsInformation.getRequestsForTheDay());
+    model.addAttribute("numberOfRequests", requestsInformation.getRequestsForTheDay().size());
+    boolean noNextRequests = false;
+    if (requestsInformation.getRequestsForTheDay().size() == 0) {
+      noNextRequests = true;
+    }
+
+    model.addAttribute("noNextRequests", noNextRequests);
+    model.addAttribute("requests", requestsInformation.getRequestsToAccept());
+
+    boolean noneToAccept = false;
+    if (requestsInformation.getRequestsToAccept().size() == 0) {
+      noneToAccept = true;
+    }
+
+    model.addAttribute("noneToAccept", noneToAccept);
+
+    model.addAttribute("messageAuthor", this.usersService.getById(user.getLastConversationWith()).getName() + " " +
+            this.usersService.getById(user.getLastConversationWith()).getLastName());
 
     return "dashboard";
   }
@@ -90,7 +127,19 @@ public class ArenaOwnerController {
   }
 
   @GetMapping("/profile")
-  public String profile() {
+  public String profile(Model model, Principal principal) {
+    User user = this.usersService.getUserByEmail(principal.getName());
+
+    int doneRequests = 0;
+    for (int i = 0; i < user.getRequestsForTheArena().size(); i++) {
+      if (Objects.equals(user.getRequestsForTheArena().get(i).getStatus(), "DONE")) {
+        doneRequests++;
+      }
+    }
+
+    model.addAttribute("user", user);
+    model.addAttribute("doneRequests", doneRequests);
+
     return "profile";
   }
 

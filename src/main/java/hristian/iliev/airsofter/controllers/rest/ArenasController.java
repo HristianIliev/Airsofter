@@ -7,6 +7,7 @@ import hristian.iliev.airsofter.models.Timetable;
 import hristian.iliev.airsofter.models.User;
 import hristian.iliev.airsofter.models.request.ArenaMainSettings;
 import hristian.iliev.airsofter.models.request.LatLng;
+import hristian.iliev.airsofter.models.response.ChartData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
+import java.text.ParseException;
 import java.util.List;
 
 @RestController
@@ -92,5 +94,15 @@ public class ArenasController {
     User user = this.usersService.getUserByEmail(userEmail);
 
     return this.arenasService.changeTimetable(user, timetable);
+  }
+
+  @RequestMapping(value = "/getChartData", method = RequestMethod.GET)
+  @ResponseBody
+  public ChartData getChartData(Principal principal) throws ParseException {
+    String userEmail = principal.getName();
+    User user = this.usersService.getUserByEmail(userEmail);
+
+    System.out.println(this.arenasService.getChartData(user));
+    return this.arenasService.getChartData(user);
   }
 }

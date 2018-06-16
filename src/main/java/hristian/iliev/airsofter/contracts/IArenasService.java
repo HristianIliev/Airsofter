@@ -6,7 +6,9 @@ import hristian.iliev.airsofter.models.Timetable;
 import hristian.iliev.airsofter.models.User;
 import hristian.iliev.airsofter.models.request.ArenaMainSettings;
 import hristian.iliev.airsofter.models.request.LatLng;
+import hristian.iliev.airsofter.models.response.ChartData;
 
+import java.text.ParseException;
 import java.util.List;
 
 public interface IArenasService {
@@ -23,4 +25,6 @@ public interface IArenasService {
   Arena changeLatLng(User owner, LatLng latLng);
 
   Arena changeTimetable(User owner, Timetable timetable);
+
+  ChartData getChartData(User owner) throws ParseException;
 }
