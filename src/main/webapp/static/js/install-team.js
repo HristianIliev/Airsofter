@@ -89,7 +89,7 @@ $("#generate-forms").click(function() {
                           $("<input/>")
                             .attr("type", "radio")
                             .attr("id", "radio_" + i)
-                            .attr("name", "radio_" + i)
+                            .attr("name", "radio" + i)
                             .addClass("md-radiobtn")
                         )
                         .append(
@@ -108,7 +108,7 @@ $("#generate-forms").click(function() {
                           $("<input/>")
                             .attr("type", "radio")
                             .attr("id", "radio-2_" + i)
-                            .attr("name", "radio-2_" + i)
+                            .attr("name", "radio" + i)
                             .addClass("md-radiobtn")
                         )
                         .append(
@@ -127,7 +127,7 @@ $("#generate-forms").click(function() {
                           $("<input/>")
                             .attr("type", "radio")
                             .attr("id", "radio-3_" + i)
-                            .attr("name", "radio-3_" + i)
+                            .attr("name", "radio" + i)
                             .addClass("md-radiobtn")
                         )
                         .append(
