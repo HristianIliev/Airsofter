@@ -45,6 +45,12 @@ public class ArenaOwnerController {
 
     this.usersService.markRequestsThatAreProbablyDone(user);
 
+    this.setUpDashboard(model, user);
+
+    return "dashboard";
+  }
+
+  private void setUpDashboard(Model model, User user) throws ParseException {
     RequestsInformation requestsInformation = this.usersService.getRequestsInformation(user);
 
     model.addAttribute("arenaName", user.getArena().getName());
@@ -81,8 +87,6 @@ public class ArenaOwnerController {
     boolean thereAreProbDoneRequests = this.usersService.checkIfThereAreProbDoneRequests(user);
 
     model.addAttribute("thereAreProbDoneRequests", thereAreProbDoneRequests);
-
-    return "dashboard";
   }
 
   @GetMapping("/preview")

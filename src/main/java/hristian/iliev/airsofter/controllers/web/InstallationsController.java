@@ -30,4 +30,12 @@ public class InstallationsController {
   public String install() {
     return "install";
   }
+
+  @GetMapping("/install-team")
+  public String installTeam(Model model) {
+    List<ArenaCategory> arenaCategories = this.arenaCategoriesService.getAll();
+    model.addAttribute("arenaCategories1", arenaCategories.subList(0, 9));
+    model.addAttribute("arenaCategories2", arenaCategories.subList(9, 18));
+    return "install-team";
+  }
 }

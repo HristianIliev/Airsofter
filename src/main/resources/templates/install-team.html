@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Регистрация на отбор - Airsofter</title>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css"
+    />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+        crossorigin="anonymous">
+    <link href="/static/css/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap-3.3.7.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/about.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/contact.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/pricing.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/billing.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/MDTP.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/inbox.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/error.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN APP GLOBAL ASSETS-->
+    <link href="/static/css/components-md.min.css" rel="stylesheet" id="style_components" type="text/css" />
+    <link href="/static/css/plugins-md.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/layout-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/default-theme.min.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="/static/css/toastr.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/static/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/static/css/iziToast.min.css">
+    <style>
+        input[type="checkbox"].ios8-switch {
+            display: none;
+        }
+
+        input[type="checkbox"].ios8-switch+label {
+            position: relative;
+            padding: 5px 0 0 50px;
+            font-weight: bold;
+            color: #555;
+            line-height: 2.0em;
+        }
+
+        input[type="checkbox"].ios8-switch+label:before {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0;
+            top: 2px;
+            width: 40px;
+            /* x*5 */
+            height: 24px;
+            /* x*3 */
+            border-radius: 16px;
+            /* x*2 */
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        input[type="checkbox"].ios8-switch+label:after {
+            content: "";
+            position: absolute;
+            display: block;
+            left: 0px;
+            top: 2px;
+            width: 24px;
+            /* x*3 */
+            height: 24px;
+            /* x*3 */
+            border-radius: 16px;
+            /* x*2 */
+            background: #fff;
+            border: 1px solid #d9d9d9;
+            -webkit-transition: all 0.3s;
+            transition: all 0.3s;
+        }
+
+        input[type="checkbox"].ios8-switch+label:hover:after {
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"].ios8-switch:checked+label:after {
+            margin-left: 16px;
+        }
+
+        input[type="checkbox"].ios8-switch:checked+label:before {
+            background: #55D069;
+        }
+
+        /* SMALL */
+
+        input[type="checkbox"].ios8-switch-sm {
+            margin: 5px 0 0 10px;
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label {
+            position: relative;
+            padding: 0 0 0 32px;
+            line-height: 1.3em;
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label:before {
+            width: 25px;
+            /* x*5 */
+            height: 15px;
+            /* x*3 */
+            border-radius: 10px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label:after {
+            width: 15px;
+            /* x*3 */
+            height: 15px;
+            /* x*3 */
+            border-radius: 10px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-sm+label:hover:after {
+            box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"].ios8-switch-sm:checked+label:after {
+            margin-left: 10px;
+            /* x*2 */
+        }
+
+        /* LARGE */
+
+        input[type="checkbox"].ios8-switch-lg {
+            margin: 10px 0 0 20px;
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label {
+            position: relative;
+            padding: 7px 0 0 60px;
+            line-height: 2.3em;
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label:before {
+            width: 50px;
+            /* x*5 */
+            height: 30px;
+            /* x*3 */
+            border-radius: 20px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label:after {
+            width: 30px;
+            /* x*3 */
+            height: 30px;
+            /* x*3 */
+            border-radius: 20px;
+            /* x*2 */
+        }
+
+        input[type="checkbox"].ios8-switch-lg+label:hover:after {
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+
+        input[type="checkbox"].ios8-switch-lg:checked+label:after {
+            margin-left: 20px;
+            /* x*2 */
+        }
+    </style>
+    <style>
+        .sidebar-hidden {
+            visibility: hidden !important;
+        }
+
+        .full-width-page-content {
+            margin-left: 0px !important;
+        }
+
+        .page-sidebar .page-sidebar-menu a {
+            font-size: 15px !important;
+        }
+
+        .page-content {
+            background-color: #f2f3f8;
+        }
+
+        .removeTopPadding {
+            padding-top: 0px !important;
+        }
+
+        .diff_time {
+            font-size: 10px;
+        }
+
+        .serviceGallery img {
+            max-width: 100%;
+        }
+
+        .dropdown-menu-list a:hover {
+            text-decoration: none;
+        }
+
+        .calender-div {
+            background-color: white;
+        }
+
+        .alreadyRequested:hover {
+            background-color: white !important;
+            cursor: default;
+        }
+
+        .findServiceButton {
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+
+        .map {
+            height: 500px;
+            margin-top: 20px;
+            border-radius: 4px;
+            box-shadow: 0 7px 15px rgba(0, 9, 128, 0.05), 0 12px 28px rgba(0, 9, 128, 0.075);
+        }
+    </style>
+</head>
+
+<body class="page-container-bg-solid page-md">
+    <div class="page-wrapper">
+        <div class="page-wrapper-row">
+            <div class="page-wrapper-top">
+                <div class="page-header" style="height: 75px;">
+                    <div class="page-header-top">
+                        <div class="container">
+                            <div class="page-logo">
+                                <a href="#">
+                                    <img src="/static/img/sample-logo-app.png" alt="Airsofter" class="logo-default" style="max-width: 200px; margin-top: 17px !important;">
+                                </a>
+                            </div>
+                            <div class="top-menu">
+                                <ul class="nav navbar-nav pull-right">
+                                    <li class="dropdown dropdown-user dropdown-dark">
+                                        <a href="javascript:;" data-toggle="dropdown" data-hover="dropdown" data-close-others="true" class="dropdown-toggle">
+                                            <img src="/static/img/avatars/avatar.png" alt="Airsofter" class="img-circle">
+                                            <span class="username username-hide-mobile"></span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-default">
+                                            <li>
+                                                <a href="/logout">
+                                                    <i class="icon-key"></i>
+                                                    " Изход "
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix">
+        </div>
+        <div class="page-wrapper-row full-height">
+            <div class="page-wrapper-middle">
+                <div class="page-container">
+                    <div class="page-content-wrapper">
+                        <div class="page-content" style="min-height: 960px">
+                            <div class="container">
+                                <div class="container" style="pading-left: 30px;">
+                                    <div class="mt-element-step">
+                                        <!-- STEPS -->
+                                        <div class="row step-line">
+                                            <div class="mt-step-desc" style="text-align: center;">
+                                                <div class="font-dark bold uppercase" style="font-size: 20px;">
+                                                    Регистрация на Airsoft отбор
+                                                </div>
+                                                <div class="caption-desc font-grey-cascade" style="font-size: 15px;">
+                                                    За да регистрираш отбор в Airsofter просто следвай стъпките
+                                                </div>
+                                                <br>
+                                            </div>
+                                            <!-- STEP 1 -->
+                                            <div id="step-1" class="col-md-4 mt-step-col first active">
+                                                <div class="mt-step-number bg-white">
+                                                    <i class="icon-pencil"></i>
+                                                </div>
+                                                <div class="mt-step-title uppercase font-grey-cascade">
+                                                    Основна
+                                                </div>
+                                                <div class="mt-step-content font-grey-cascade">
+                                                    основната информация за вашият отбор
+                                                </div>
+                                            </div>
+                                            <!-- END STEP 1 -->
+                                            <!-- STEP 2 -->
+                                            <div id="step-2" class="col-md-4 mt-step-col">
+                                                <div class="mt-step-number bg-white">
+                                                    <i class="icon-compass"></i>
+                                                </div>
+                                                <div class="mt-step-title uppercase font-grey-cascade">
+                                                    Участници
+                                                </div>
+                                                <div class="mt-step-content font-grey-cascade">
+                                                    въведи други потребители в патформата, които са в твоя отбор
+                                                </div>
+                                            </div>
+                                            <!-- END STEP 2 -->
+                                            <!-- STEP 3 -->
+                                            <div id="step-3" class="col-md-4 mt-step-col last">
+                                                <div class="mt-step-number bg-white">
+                                                    <i class="icon-settings"></i>
+                                                </div>
+                                                <div class="mt-step-title uppercase font-grey-cascade">
+                                                    Телефон
+                                                </div>
+                                                <div class="mt-step-content font-grey-cascade">
+                                                    допълнителни настройки
+                                                </div>
+                                            </div>
+                                            <!-- END STEP 3 -->
+                                        </div>
+                                        <!-- END STEPS -->
+                                        <!-- STEP 1 FORM -->
+                                        <div id="first-form" class="row">
+                                            <div class="col-sm-12 col-md-8 col-md-offset-2" style="margin-top: 40px">
+                                                <div class="portlet light bordered">
+                                                    <div class="portlet-title">
+                                                        <div class="caption font-green">
+                                                            <i class="icon-pin font-green">
+                                                            </i>
+                                                            <span class="caption-subject bold uppercase">
+                                                                Информация за вашият отбор
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body form">
+                                                        <form role="form">
+                                                            <div class="form-body">
+                                                                <div class="form-group form-md-line-input form-md-floating-label">
+                                                                    <div class="input-icon">
+                                                                        <input id="teamName" name="name" type="text" class="form-control">
+                                                                        <label for="name">Име на отбора</label>
+                                                                        <span class="help-block">Кратко и ясно име на Airsoft отборът ви</span>
+                                                                        <i class="icon-grid"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group form-md-line-input form-md-floating-label">
+                                                                    <textarea id="teamDescription" name="description" class="form-control autosizeme" rows="6"></textarea>
+                                                                    <span class="help-block">Описание на отборът ти. С какво се занимавате, хобита,
+                                                                        работа.. Минимум 150 символа</span>
+                                                                </div>
+                                                                <div class="form-group form-md-checkboxes">
+                                                                    <div class="caption font-green" style="text-align: center; margin-bottom: 20px;">
+                                                                        <i class="icon-clock font-green"></i>
+                                                                        <span class="caption-subject bold uppercase">
+                                                                            Избери предпочитанията на отбора ти. (Какво искаш да има в една Airsoft арена)
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="row md-checkbox-list">
+                                                                        <div class="col-md-6">
+                                                                            <div th:each="arenaCategory: ${arenaCategories1}" class="md-checkbox">
+                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategoryStat.index}" class="md-check">
+                                                                                <label th:id="'label' + ${arenaCategoryStat.index}" th:inline="text" th:for="'checkbox' + ${arenaCategoryStat.index}">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> [[${arenaCategory.getName()}]]
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div th:each="arenaCategory: ${arenaCategories2}" class="md-checkbox">
+                                                                                <input type="checkbox" th:id="'checkbox' + ${arenaCategoryStat.index} + '_1'" class="md-check">
+                                                                                <label th:id="'label' + ${arenaCategoryStat.index} + '_1'" th:inline="text" th:for="'checkbox' + ${arenaCategoryStat.index} + '_1'">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span> [[${arenaCategory.getName()}]]
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-actions ">
+                                                                <button id="submit-1" type="button" class="btn green-sharp" style="float: right">
+                                                                    <i class="far fa-check-circle"></i> Продължи</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- END STEP 1 FORM -->
+                                        <!-- STEP 2 FORM -->
+                                        <div id="second-form" class="row" style="display: none;">
+                                            <div class="col-sm-12 col-md-12" style="margin-top: 40px;">
+                                                <div class="portlet light bordered">
+                                                    <div class="portlet-title">
+                                                        <div class="caption font-green">
+                                                            <i class="icon-pin font-green">
+                                                            </i>
+                                                            <span class="caption-subject bold uppercase">
+                                                                Въведи участниците
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="portlet-body form">
+                                                        <form role="form" class="searchService">
+                                                            <div class="form-body addTo">
+                                                                <!-- <div class="input-icon">
+                                                                        <input type="number" class="form-control">
+                                                                        <label for="form_control_1">Брой участници</label>
+                                                                        <span class="help-block">Броят на участниците в отборът ти</span>
+                                                                        <i class="fa fa-bell-o"></i>
+                                                                    </div> -->
+                                                                <div class="form-group form-md-line-input form-md-floating-label" style="padding-right: 25px; padding-left: 25px;">
+                                                                    <div class="input-group">
+                                                                        <div class="input-group-control">
+                                                                            <input id="members" type="number" class="form-control" min="2" max="20" value="2">
+                                                                            <label for="form_control_1">Брой участници</label>
+                                                                        </div>
+                                                                        <span class="input-group-btn btn-left">
+                                                                            <button id="generate-forms" class="btn blue-madison" type="button">Ok!</button>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                                <!-- <div class="row">
+                                                                    <div class="col-md-5">
+                                                                        <div class="form-group form-md-line-input form-md-floating-label">
+                                                                            <div class="input-icon">
+                                                                                <input type="text" class="form-control">
+                                                                                <label for="form_control_1">Емайл на участника</label>
+                                                                                <span class="help-block">Въведи емайл на участника в тази платформа</span>
+                                                                                <i class="fas fa-at"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-7">
+                                                                        <div class="form-group form-md-radios ">
+                                                                            <label>Ниво на умения</label>
+                                                                            <div class="md-radio-inline">
+                                                                                <div class="md-radio">
+                                                                                    <input type="radio" id="radio14" name="radio2" class="md-radiobtn">
+                                                                                    <label for="radio14">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span> Опитен </label>
+                                                                                </div>
+                                                                                <div class="md-radio has-error">
+                                                                                    <input type="radio" id="radio15" name="radio2" class="md-radiobtn" checked="">
+                                                                                    <label for="radio15">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span> Среден </label>
+                                                                                </div>
+                                                                                <div class="md-radio has-warning">
+                                                                                    <input type="radio" id="radio16" name="radio2" class="md-radiobtn">
+                                                                                    <label for="radio16">
+                                                                                        <span class="inc"></span>
+                                                                                        <span class="check"></span>
+                                                                                        <span class="box"></span> Нов </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div> -->
+                                                            </div>
+                                                    </div>
+                                                    <div class="form-actions ">
+                                                        <button id="back-1" type="button" class="btn grey-cascade" style="float: left; margin-bottom: 10px;">
+                                                            <i class="fas fa-undo"></i> Назад</button>
+                                                        <button id="submit-2" type="button" class="btn green-sharp" style="float: right; margin-bottom: 10px;">
+                                                            <i class="far fa-check-circle"></i> Продължи</button>
+                                                    </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END STEP 2 FORM -->
+                                    <!-- STEP 3 FORM -->
+                                    <div id="third-form" class="row" style="display: none;">
+                                        <div class="col-sm-12 col-md-8 col-md-offset-2" style="margin-top: 40px">
+                                            <div class="portlet light bordered">
+                                                <div class="portlet-title">
+                                                    <div class="caption font-green">
+                                                        <i class="icon-pin font-green">
+                                                        </i>
+                                                        <span class="caption-subject bold uppercase">
+                                                            Последни настройки
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="portlet-body form">
+                                                    <form role="form">
+                                                        <div class="form-body">
+                                                            <div class="form-group form-md-line-input form-md-floating-label">
+                                                                <div class="input-icon">
+                                                                    <input id="telephone" name="telephone" type="text" class="form-control">
+                                                                    <label for="telephone">Моля въведете телефонен номер във формат: 359XXXXXXXXX</label>
+                                                                    <i class="fas fa-phone"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="caption font-green" style="text-align: center; margin-bottom: 10px;">
+                                                                <i class="icon-clock font-green"></i>
+                                                                <span class="caption-subject bold uppercase">
+                                                                    Въведи работното време на арената
+                                                                </span>
+                                                            </div>
+                                                            <table class="table table-hover">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th scope="col"></th>
+                                                                        <th scope="col">Отваря</th>
+                                                                        <th scope="col">Затваря</th>
+                                                                        <th scope="col">Почивен ден</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th style="vertical-align: middle;" scope="row">Понеделник</th>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-0" type="text" class="form-control" value="09:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-1" type="text" class="form-control" value="17:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input type="checkbox" id="checkbox-0" class="md-check">
+                                                                                <label for="checkbox-0">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="vertical-align: middle;" scope="row">Вторник</th>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-2" type="text" class="form-control" value="09:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-3" type="text" class="form-control" value="17:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input type="checkbox" id="checkbox-1" class="md-check">
+                                                                                <label for="checkbox-1">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="vertical-align: middle;" scope="row">Сряда</th>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-4" type="text" class="form-control" value="09:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-5" type="text" class="form-control" value="17:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input type="checkbox" id="checkbox-2" class="md-check">
+                                                                                <label for="checkbox-2">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="vertical-align: middle;" scope="row">Четвъртък</th>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-6" type="text" class="form-control" value="09:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-7" type="text" class="form-control" value="17:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input type="checkbox" id="checkbox-3" class="md-check">
+                                                                                <label for="checkbox-3">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="vertical-align: middle;" scope="row">Петък</th>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-8" type="text" class="form-control" value="09:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-9" type="text" class="form-control" value="17:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input type="checkbox" id="checkbox-4" class="md-check">
+                                                                                <label for="checkbox-4">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="vertical-align: middle;" scope="row">Събота</th>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-10" type="text" class="form-control" value="09:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-11" type="text" class="form-control" value="17:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input type="checkbox" id="checkbox-5" class="md-check">
+                                                                                <label for="checkbox-5">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th style="vertical-align: middle;" scope="row">Неделя</th>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-12" type="text" class="form-control" value="09:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="input-icon">
+                                                                                <i class="far fa-clock"></i>
+                                                                                <input id="trigger-time-13" type="text" class="form-control" value="17:00">
+                                                                            </div>
+                                                                        </td>
+                                                                        <td style="vertical-align: middle;">
+                                                                            <div class="md-checkbox">
+                                                                                <input type="checkbox" id="checkbox-6" class="md-check">
+                                                                                <label for="checkbox-6">
+                                                                                    <span class="inc"></span>
+                                                                                    <span class="check"></span>
+                                                                                    <span class="box"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <div class="form-actions">
+                                                            <button id="back-2" type="button" class="btn grey-cascade" style="float: left;">
+                                                                <i class="fas fa-undo"></i> Назад</button>
+                                                            <button id="submit-3" type="button" class="btn green-sharp" style="float: right">
+                                                                <i class="far fa-check-circle"></i> Приключване</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- END STEP 3 FORM -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-footer">
+            <div class="container">
+                <div class="page-footer-inner">
+                    2018 © Airsofter
+                </div>
+                <div class="scroll-to-top" style="display: block;">
+                    <i class="icon-arrow-up">
+                    </i>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="text/javascript" src="/static/js/libs/jquery-3.3.1.js"></script>
+    <!-- CONTAINS JS THEME ASSETS -->
+    <script src="/static/js/app-assets.js"></script>
+    <!-- TOASTR-->
+    <script src="/static/js/toastr.js"></script>
+    <!-- WYSIWYG -->
+    <script src="/static/js/wysihtml5-0.3.0.js"></script>
+    <script src="/static/js/bootstrap-wysihtml5.js"></script>
+    <script type="text/javascript" src="/static/js/libs/iziToast.min.js"></script>
+
+    <script src="/static/js/install-team.js"></script>
+</body>
+
+</html>
