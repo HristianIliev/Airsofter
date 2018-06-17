@@ -6,4 +6,6 @@ public interface IRequestsService {
   Bool rejectRequest(int id);
 
   Bool acceptRequest(int id);
+
+  Bool markAsDone(int id);
 }

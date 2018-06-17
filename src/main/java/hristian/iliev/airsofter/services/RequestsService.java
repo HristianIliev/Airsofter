@@ -33,4 +33,13 @@ public class RequestsService implements IRequestsService {
 
     return new Bool(true);
   }
+
+  @Override
+  public Bool markAsDone(int id) {
+    Request request = this.requestsRepository.getById(id);
+    request.setStatus("DONE");
+    this.requestsRepository.update(request);
+
+    return new Bool(true);
+  }
 }

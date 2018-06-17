@@ -429,6 +429,17 @@
                                     </div>
                                 </div>
                                 <div class="row">
+                                    <div class="col-md-12" th:if="${thereAreProbDoneRequests}">
+                                        <div class="alert alert-block alert-success fade in">
+                                            <h4 class="alert-heading">Вероятно завършени заявки не са маркирани като приключени!</h4>
+                                            <p> Съществуват отворени заявки, които най-вероятно са завършени. Моля, ако те наистина
+                                                са приключени, да ги маркирате като такива. </p>
+                                            <p>
+                                                <a href="/requests" class="btn green" style="margin-top: 10px;">
+                                                    Управление на заявките </a>
+                                            </p>
+                                        </div>
+                                    </div>
                                     <!-- NUMBER OF CLIENTS FOR TODAY -->
                                     <div class="col-md-3">
                                         <div id="client-waiting-today" class="widget-thumb widget-bg-color-white text-uppercase margin-bottom-20">

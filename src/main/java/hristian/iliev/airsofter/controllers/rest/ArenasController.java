@@ -102,7 +102,6 @@ public class ArenasController {
     String userEmail = principal.getName();
     User user = this.usersService.getUserByEmail(userEmail);
 
-    System.out.println(this.arenasService.getChartData(user));
     return this.arenasService.getChartData(user);
   }
 }

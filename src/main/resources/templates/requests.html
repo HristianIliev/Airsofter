@@ -409,6 +409,9 @@
                                                                                 <span th:text="${request.getUser().getName()} + ' ' + ${request.getUser().getLastName()}"></span>
                                                                                 <br>
                                                                                 <strong>Статус:</strong>
+                                                                                <span th:if="${request.getStatus() == 'PROB_DONE'}">
+                                                                                    Вероятно приключена
+                                                                                </span>
                                                                                 <span th:if="${request.getStatus() == 'DONE'}">
                                                                                     Извършена
                                                                                 </span>
@@ -451,6 +454,11 @@
                                                             <a th:href="'#approveModal' + ${request.getId()}" data-toggle="modal" class="btn btn-circle btn-outline green btn-sm">
                                                                 Прегледай заявката
                                                             </a>
+                                                        </div>
+                                                        <div class="mt-action-buttons " style="width: 200px;" th:if="${request.getStatus() == 'PROB_DONE'}">
+                                                            <button th:id="'markAsDone_' + ${request.getId()}" type="button" class="btn btn-circle btn-outline green btn-sm markAsDone">
+                                                                Маркирай като приключена
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>

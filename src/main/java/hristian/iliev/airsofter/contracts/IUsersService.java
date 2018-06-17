@@ -1,6 +1,5 @@
 package hristian.iliev.airsofter.contracts;
 
-import hristian.iliev.airsofter.models.Request;
 import hristian.iliev.airsofter.models.User;
 import hristian.iliev.airsofter.models.helper.RequestsInformation;
 import hristian.iliev.airsofter.models.request.Names;
@@ -23,4 +22,8 @@ public interface IUsersService extends UserDetailsService {
   User changePasswords(User current, Passwords passwords);
 
   RequestsInformation getRequestsInformation(User owner) throws ParseException;
+
+  boolean checkIfThereAreProbDoneRequests(User owner);
+
+  void markRequestsThatAreProbablyDone(User owner) throws ParseException;
 }

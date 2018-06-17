@@ -35,3 +35,26 @@ $(".btn-accept").click(function() {
     }
   });
 });
+
+$(".markAsDone").click(function() {
+  var indexOfUndescore = $(this)
+    .attr("id")
+    .indexOf("_");
+  var requestIdToSend = $(this)
+    .attr("id")
+    .substring(indexOfUndescore + 1);
+
+  $.ajax({
+    url: "/api/markAsDone/" + requestIdToSend,
+    method: "GET",
+    success: function(result) {
+      if (result.ok) {
+        iziToast.success({
+          title: "OK",
+          message: "Заявката беше успешно маркирана като завършена!",
+          position: "topRight"
+        });
+      }
+    }
+  });
+});

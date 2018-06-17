@@ -1,6 +1,5 @@
 package hristian.iliev.airsofter.services;
 
-import com.sun.org.apache.regexp.internal.RE;
 import hristian.iliev.airsofter.contracts.IRepository;
 import hristian.iliev.airsofter.contracts.IUsersService;
 import hristian.iliev.airsofter.models.Request;
@@ -26,10 +25,13 @@ import java.util.Locale;
 public class UsersService implements IUsersService {
   private final IRepository<User> usersRepository;
   private final PasswordEncoder passwordEncoder;
+  private final IRepository<Request> requestsRepository;
 
   public UsersService(IRepository<User> usersRepository,
+                      IRepository<Request> requestsRepository,
                       PasswordEncoder passwordEncoder) {
     this.usersRepository = usersRepository;
+    this.requestsRepository = requestsRepository;
     this.passwordEncoder = passwordEncoder;
   }
 
@@ -107,6 +109,46 @@ public class UsersService implements IUsersService {
             doneClients,
             requestsForTheDay,
             requestsToAccept);
+  }
+
+  @Override
+  public boolean checkIfThereAreProbDoneRequests(User owner) {
+    for (int i = 0; i < owner.getRequestsForTheArena().size(); i++) {
+      if (owner.getRequestsForTheArena().get(i).getStatus().equals("PROB_DONE")) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  @Override
+  public void markRequestsThatAreProbablyDone(User owner) throws ParseException {
+    List<Request> toUpdate = new ArrayList<>();
+    for (int i = 0; i < owner.getRequestsForTheArena().size(); i++) {
+      Calendar now = Calendar.getInstance();
+      Calendar requestTime = Calendar.getInstance();
+      now.setTime(new Date());
+
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+      Date requestDate = sdf.parse(owner.getRequestsForTheArena().get(i).getDaytime());
+      requestTime.setTime(requestDate);
+
+      Date nowDate = now.getTime();
+      Date requestDateToCompare = requestTime.getTime();
+
+      boolean isBeforeCurrentTime = requestDateToCompare.before(nowDate);
+
+      if (isBeforeCurrentTime && owner.getRequestsForTheArena().get(i).getStatus().equals("ACCEPTED")) {
+        owner.getRequestsForTheArena().get(i).setStatus("PROB_DONE");
+        toUpdate.add(owner.getRequestsForTheArena().get(i));
+      }
+    }
+
+    for (Request request :
+            toUpdate) {
+      this.requestsRepository.update(request);
+    }
   }
 
   private List<Request> getRequestsToAccept(User owner) {

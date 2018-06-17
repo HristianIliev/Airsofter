@@ -17,6 +17,8 @@ import java.text.ParseException;
 import java.util.List;
 import java.util.Objects;
 
+import static com.auth0.jwt.internal.org.bouncycastle.asn1.x500.style.RFC4519Style.owner;
+
 @Controller
 public class ArenaOwnerController {
   private final IUsersService usersService;
@@ -41,9 +43,9 @@ public class ArenaOwnerController {
       return "redirect:/app";
     }
 
-    RequestsInformation requestsInformation = this.usersService.getRequestsInformation(user);
+    this.usersService.markRequestsThatAreProbablyDone(user);
 
-    System.out.println(requestsInformation);
+    RequestsInformation requestsInformation = this.usersService.getRequestsInformation(user);
 
     model.addAttribute("arenaName", user.getArena().getName());
     model.addAttribute("clientsForToday", requestsInformation.getClientsForToday());
@@ -75,6 +77,10 @@ public class ArenaOwnerController {
 
     model.addAttribute("messageAuthor", this.usersService.getById(user.getLastConversationWith()).getName() + " " +
             this.usersService.getById(user.getLastConversationWith()).getLastName());
+
+    boolean thereAreProbDoneRequests = this.usersService.checkIfThereAreProbDoneRequests(user);
+
+    model.addAttribute("thereAreProbDoneRequests", thereAreProbDoneRequests);
 
     return "dashboard";
   }

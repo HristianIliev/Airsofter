@@ -27,4 +27,9 @@ public class RequestsController {
   public Bool acceptRequest(@PathVariable String id){
     return this.requestsService.acceptRequest(Integer.parseInt(id));
   }
+
+  @RequestMapping(value = "/markAsDone/{id}", method = RequestMethod.GET)
+  public Bool markAsDone(@PathVariable String id){
+    return this.requestsService.markAsDone(Integer.parseInt(id));
+  }
 }
