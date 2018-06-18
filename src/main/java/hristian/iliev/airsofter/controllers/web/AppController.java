@@ -14,7 +14,12 @@ public class AppController {
   }
 
   @GetMapping("/team/{id}")
-  public String teamPage(@PathVariable String id){
+  public String teamPage(@PathVariable String id) {
     return "team-page";
+  }
+
+  @GetMapping("/arena/{id}")
+  public String arena(@PathVariable String id) {
+    return "arena-page";
   }
 }
