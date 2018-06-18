@@ -1,5 +1,6 @@
 var map;
 var lastMarker = null;
+var allMarkers = [];
 
 function initMap() {
   $.ajax({
@@ -49,7 +50,8 @@ function initMap() {
         let arenaMarker = new google.maps.Marker({
           position: arenaLocation,
           map: map,
-          animation: google.maps.Animation.DROP
+          animation: google.maps.Animation.DROP,
+          arenaCategories: result[i].arenaCategories
         });
 
         let content =
@@ -78,7 +80,11 @@ function initMap() {
         arenaMarker.addListener("click", function() {
           infowindow.open(map, arenaMarker);
         });
+
+        allMarkers.push(arenaMarker);
       }
+
+      console.log(allMarkers);
 
       $(".searchService").on("submit", function() {
         var geocoder = new google.maps.Geocoder();
@@ -103,4 +109,53 @@ function initMap() {
       });
     }
   });
+}
+
+$("#form_control_1").on("change", function(event) {
+  if (this.value === "Всички категории") {
+    showAllMarkers();
+  }
+
+  for (var i = 0; i < allMarkers.length; i += 1) {
+    let hasBeenSeen = false;
+    for (var j = 0; j < allMarkers[i].arenaCategories.length; j += 1) {
+      if (allMarkers[i].arenaCategories[j].name === this.value) {
+        hasBeenSeen = true;
+      }
+    }
+
+    if (!hasBeenSeen) {
+      clearMarker(allMarkers[i]);
+    } else if (hasBeenSeen) {
+      showMarker(allMarkers[i]);
+    }
+  }
+});
+
+// Sets the map on all markers in the array.
+function setMapOnMarker(marker, map) {
+  marker.setMap(map);
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarker(marker) {
+  setMapOnMarker(marker, null);
+}
+
+// Shows a marker on the map
+function showMarker(marker) {
+  setMapOnMarker(marker, map);
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+  for (var i = 0; i < allMarkers.length; i += 1) {
+    alert();
+    setMapOnMarker(allMarkers[i], map);
+  }
+}
+
+// Shows all markers on the map
+function showAllMarkers() {
+  setMapOnAll(map);
 }
