@@ -242,7 +242,7 @@ $("#submit-3").click(function() {
     });
   }
 
-  // sendVerificationSMS(telephone);
+  sendVerificationSMS(telephone);
 
   showCodeVerificationModal(dataJSON);
 });
@@ -256,50 +256,50 @@ function sendVerificationSMS(telephone) {
 }
 
 function showCodeVerificationModal(dataJSON) {
-  // vex.dialog.open({
-  //   message:
-  //     "За да завършите успешно регистрацията на отбор трябва първо да потвърдите телефонния си номер. Ние ви изпратихме SMS, въведете кода за достъп:",
-  //   input: [
-  //     '<div class="input-group"><span class="input-group-addon"><input type="text" name="code" class="form-control" placeholder="Код"></span"</div>'
-  //   ].join(""),
-  //   callback: function(data) {
-  //     if (!data) {
-  //       return console.log("Cancelled");
-  //     }
-  //     console.log(data.code);
-
-  //     $.ajax({
-  //       url: "/api/checkVerificationCode?code=" + data.code,
-  //       method: "GET",
-  //       success: function(result) {
-  //         if (result) {
-  startLoading();
-
-  $.ajax({
-    url: "/api/createTeam",
-    method: "POST",
-    data: JSON.stringify(dataJSON),
-    contentType: "application/json",
-    success: function(result) {
-      stopLoading();
-      if (result.id !== 0 && result !== "null" && result !== null) {
-        window.location.href = "/team/" + result.id;
-      } else {
-        iziToast.error({
-          title: "Error",
-          message: "Някой от емайлите не е валиден",
-          positon: "topRight"
-        });
+  vex.dialog.open({
+    message:
+      "За да завършите успешно регистрацията на отбор трябва първо да потвърдите телефонния си номер. Ние ви изпратихме SMS, въведете кода за достъп:",
+    input: [
+      '<div class="input-group"><span class="input-group-addon"><input type="text" name="code" class="form-control" placeholder="Код"></span"</div>'
+    ].join(""),
+    callback: function(data) {
+      if (!data) {
+        return console.log("Cancelled");
       }
+      console.log(data.code);
+
+      $.ajax({
+        url: "/api/checkVerificationCode?code=" + data.code,
+        method: "GET",
+        success: function(result) {
+          if (result) {
+            startLoading();
+
+            $.ajax({
+              url: "/api/createTeam",
+              method: "POST",
+              data: JSON.stringify(dataJSON),
+              contentType: "application/json",
+              success: function(result) {
+                stopLoading();
+                if (result.id !== 0 && result !== "null" && result !== null) {
+                  window.location.href = "/team/" + result.id;
+                } else {
+                  iziToast.error({
+                    title: "Error",
+                    message: "Някой от емайлите не е валиден",
+                    positon: "topRight"
+                  });
+                }
+              }
+            });
+          } else {
+            alert("Вашият код беше грешен :(");
+          }
+        }
+      });
     }
   });
-  //         } else {
-  //           alert("Вашият код беше грешен :(");
-  //         }
-  //       }
-  //     });
-  //   }
-  // });
 }
 
 function startLoading() {

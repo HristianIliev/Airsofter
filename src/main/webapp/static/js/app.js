@@ -112,8 +112,11 @@ function initMap() {
 }
 
 $("#form_control_1").on("change", function(event) {
+  showSuccessfulFiltering();
+
   if (this.value === "Всички категории") {
     showAllMarkers();
+    return false;
   }
 
   for (var i = 0; i < allMarkers.length; i += 1) {
@@ -150,7 +153,6 @@ function showMarker(marker) {
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
   for (var i = 0; i < allMarkers.length; i += 1) {
-    alert();
     setMapOnMarker(allMarkers[i], map);
   }
 }
@@ -158,4 +160,12 @@ function setMapOnAll(map) {
 // Shows all markers on the map
 function showAllMarkers() {
   setMapOnAll(map);
+}
+
+function showSuccessfulFiltering() {
+  iziToast.success({
+    title: "OK!",
+    message: "Успешно филтрирахте Airsoft арените",
+    position: "topRight"
+  });
 }
