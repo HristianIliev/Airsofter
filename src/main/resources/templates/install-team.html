@@ -31,6 +31,8 @@
     <link href="/static/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/static/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/static/css/iziToast.min.css">
+    <link href="/static/css/vex.css" rel="stylesheet">
+    <link href="/static/css/vex-theme-os.css" rel="stylesheet">
     <style>
         input[type="checkbox"].ios8-switch {
             display: none;
@@ -415,12 +417,6 @@
                                                     <div class="portlet-body form">
                                                         <form role="form" class="searchService">
                                                             <div class="form-body addTo">
-                                                                <!-- <div class="input-icon">
-                                                                        <input type="number" class="form-control">
-                                                                        <label for="form_control_1">Брой участници</label>
-                                                                        <span class="help-block">Броят на участниците в отборът ти</span>
-                                                                        <i class="fa fa-bell-o"></i>
-                                                                    </div> -->
                                                                 <div class="form-group form-md-line-input form-md-floating-label" style="padding-right: 25px; padding-left: 25px;">
                                                                     <div class="input-group">
                                                                         <div class="input-group-control">
@@ -432,46 +428,6 @@
                                                                         </span>
                                                                     </div>
                                                                 </div>
-                                                                <!-- <div class="row">
-                                                                    <div class="col-md-5">
-                                                                        <div class="form-group form-md-line-input form-md-floating-label">
-                                                                            <div class="input-icon">
-                                                                                <input type="text" class="form-control">
-                                                                                <label for="form_control_1">Емайл на участника</label>
-                                                                                <span class="help-block">Въведи емайл на участника в тази платформа</span>
-                                                                                <i class="fas fa-at"></i>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-md-7">
-                                                                        <div class="form-group form-md-radios ">
-                                                                            <label>Ниво на умения</label>
-                                                                            <div class="md-radio-inline">
-                                                                                <div class="md-radio">
-                                                                                    <input type="radio" id="radio14" name="radio2" class="md-radiobtn">
-                                                                                    <label for="radio14">
-                                                                                        <span class="inc"></span>
-                                                                                        <span class="check"></span>
-                                                                                        <span class="box"></span> Опитен </label>
-                                                                                </div>
-                                                                                <div class="md-radio has-error">
-                                                                                    <input type="radio" id="radio15" name="radio2" class="md-radiobtn" checked="">
-                                                                                    <label for="radio15">
-                                                                                        <span class="inc"></span>
-                                                                                        <span class="check"></span>
-                                                                                        <span class="box"></span> Среден </label>
-                                                                                </div>
-                                                                                <div class="md-radio has-warning">
-                                                                                    <input type="radio" id="radio16" name="radio2" class="md-radiobtn">
-                                                                                    <label for="radio16">
-                                                                                        <span class="inc"></span>
-                                                                                        <span class="check"></span>
-                                                                                        <span class="box"></span> Нов </label>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div> -->
                                                             </div>
                                                     </div>
                                                     <div class="form-actions ">
@@ -495,7 +451,7 @@
                                                         <i class="icon-pin font-green">
                                                         </i>
                                                         <span class="caption-subject bold uppercase">
-                                                            Последни настройки
+                                                            Телефон за връзка
                                                         </span>
                                                     </div>
                                                 </div>
@@ -509,199 +465,6 @@
                                                                     <i class="fas fa-phone"></i>
                                                                 </div>
                                                             </div>
-                                                            <div class="caption font-green" style="text-align: center; margin-bottom: 10px;">
-                                                                <i class="icon-clock font-green"></i>
-                                                                <span class="caption-subject bold uppercase">
-                                                                    Въведи работното време на арената
-                                                                </span>
-                                                            </div>
-                                                            <table class="table table-hover">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th scope="col"></th>
-                                                                        <th scope="col">Отваря</th>
-                                                                        <th scope="col">Затваря</th>
-                                                                        <th scope="col">Почивен ден</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <th style="vertical-align: middle;" scope="row">Понеделник</th>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-0" type="text" class="form-control" value="09:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-1" type="text" class="form-control" value="17:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="vertical-align: middle;">
-                                                                            <div class="md-checkbox">
-                                                                                <input type="checkbox" id="checkbox-0" class="md-check">
-                                                                                <label for="checkbox-0">
-                                                                                    <span class="inc"></span>
-                                                                                    <span class="check"></span>
-                                                                                    <span class="box"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="vertical-align: middle;" scope="row">Вторник</th>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-2" type="text" class="form-control" value="09:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-3" type="text" class="form-control" value="17:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="vertical-align: middle;">
-                                                                            <div class="md-checkbox">
-                                                                                <input type="checkbox" id="checkbox-1" class="md-check">
-                                                                                <label for="checkbox-1">
-                                                                                    <span class="inc"></span>
-                                                                                    <span class="check"></span>
-                                                                                    <span class="box"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="vertical-align: middle;" scope="row">Сряда</th>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-4" type="text" class="form-control" value="09:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-5" type="text" class="form-control" value="17:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="vertical-align: middle;">
-                                                                            <div class="md-checkbox">
-                                                                                <input type="checkbox" id="checkbox-2" class="md-check">
-                                                                                <label for="checkbox-2">
-                                                                                    <span class="inc"></span>
-                                                                                    <span class="check"></span>
-                                                                                    <span class="box"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="vertical-align: middle;" scope="row">Четвъртък</th>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-6" type="text" class="form-control" value="09:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-7" type="text" class="form-control" value="17:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="vertical-align: middle;">
-                                                                            <div class="md-checkbox">
-                                                                                <input type="checkbox" id="checkbox-3" class="md-check">
-                                                                                <label for="checkbox-3">
-                                                                                    <span class="inc"></span>
-                                                                                    <span class="check"></span>
-                                                                                    <span class="box"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="vertical-align: middle;" scope="row">Петък</th>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-8" type="text" class="form-control" value="09:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-9" type="text" class="form-control" value="17:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="vertical-align: middle;">
-                                                                            <div class="md-checkbox">
-                                                                                <input type="checkbox" id="checkbox-4" class="md-check">
-                                                                                <label for="checkbox-4">
-                                                                                    <span class="inc"></span>
-                                                                                    <span class="check"></span>
-                                                                                    <span class="box"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="vertical-align: middle;" scope="row">Събота</th>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-10" type="text" class="form-control" value="09:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-11" type="text" class="form-control" value="17:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="vertical-align: middle;">
-                                                                            <div class="md-checkbox">
-                                                                                <input type="checkbox" id="checkbox-5" class="md-check">
-                                                                                <label for="checkbox-5">
-                                                                                    <span class="inc"></span>
-                                                                                    <span class="check"></span>
-                                                                                    <span class="box"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <th style="vertical-align: middle;" scope="row">Неделя</th>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-12" type="text" class="form-control" value="09:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="input-icon">
-                                                                                <i class="far fa-clock"></i>
-                                                                                <input id="trigger-time-13" type="text" class="form-control" value="17:00">
-                                                                            </div>
-                                                                        </td>
-                                                                        <td style="vertical-align: middle;">
-                                                                            <div class="md-checkbox">
-                                                                                <input type="checkbox" id="checkbox-6" class="md-check">
-                                                                                <label for="checkbox-6">
-                                                                                    <span class="inc"></span>
-                                                                                    <span class="check"></span>
-                                                                                    <span class="box"></span>
-                                                                                </label>
-                                                                            </div>
-                                                                        </td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
                                                         </div>
                                                         <div class="form-actions">
                                                             <button id="back-2" type="button" class="btn grey-cascade" style="float: left;">
@@ -746,6 +509,9 @@
     <script src="/static/js/wysihtml5-0.3.0.js"></script>
     <script src="/static/js/bootstrap-wysihtml5.js"></script>
     <script type="text/javascript" src="/static/js/libs/iziToast.min.js"></script>
+    <!-- VEX Dialog -->
+    <script src="/static/js/libs/vex.combined.min.js"></script>
+    <script>vex.defaultOptions.className = 'vex-theme-os'</script>
 
     <script src="/static/js/install-team.js"></script>
 </body>

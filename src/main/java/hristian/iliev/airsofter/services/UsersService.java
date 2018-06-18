@@ -36,10 +36,10 @@ public class UsersService implements IUsersService {
   }
 
   @Override
-  public User getUserByEmail(String username) {
+  public User getUserByEmail(String email) {
     return usersRepository.getAll()
             .stream()
-            .filter(u -> u.getEmail().equals(username))
+            .filter(u -> u.getEmail().equals(email))
             .findFirst()
             .orElse(null);
   }
