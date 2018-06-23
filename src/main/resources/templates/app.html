@@ -31,6 +31,8 @@
     <link href="/static/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link href="/static/css/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="/static/css/iziToast.min.css">
+    <link rel="stylesheet" href="/static/css/jquery-confirm.min.css">
+    <link rel="stylesheet" href="/static/css/star-rating.min.css">
     <style>
         input[type="checkbox"].ios8-switch {
             display: none;
@@ -544,397 +546,181 @@
                                                 <div class="portlet-title">
                                                     <div class="caption">
                                                         <i class="icon-bubble font-dark hide"></i>
-                                                        <span class="caption-subject font-hide bold uppercase">Вашите активни заявки към сервизи</span>
+                                                        <span class="caption-subject font-hide bold uppercase">Вашите активни заявки към арени</span>
                                                     </div>
                                                 </div>
                                                 <div class="portlet-body">
-                                                    <!---->
-                                                    <div class="mt-actions">
-                                                        <div class="mt-action pending_req">
+                                                    <div th:each="request: ${requests}" class="mt-actions">
+                                                        <div class="mt-action">
                                                             <div class="mt-action-body">
                                                                 <div class="mt-action-row">
-                                                                    <div class="mt-action-info">
-                                                                        <div class="mt-action-icon ">
-                                                                            <i class="fa fa-car"></i>
+                                                                    <div class="mt-action-info ">
+                                                                        <div class="mt-action-icon" style="padding-bottom: 15px;">
+                                                                            <i class="fas fa-bullseye"></i>
                                                                         </div>
-                                                                        <div class="mt-action-details ">
-                                                                            <span class="mt-action-author">test</span>
-                                                                            <p class="mt-action-desc">
-                                                                                <a href="#/service/detail?id=278" style="color: rgb(166, 168, 168);">fdsfsdfsd</a>
-                                                                            </p>
+                                                                        <div class="mt-action-details" style="vertical-align: middle;">
+                                                                            <a th:href="'#requestModal' + ${request.getId()}" data-toggle="modal" class="mt-action-author" th:text="${request.getOwner().getArena().getName()} + ' - ' + ${request.getNumberOfParticipants()} + ' човека'"></a>
+                                                                            <div th:id="'requestModal' + ${request.getId()}" class="modal fade">
+                                                                                <div class="modal-dialog">
+                                                                                    <div class="modal-content">
+                                                                                        <div class="modal-header">
+                                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close">×
+                                                                                            </button>
+                                                                                            <h4 class="modal-title" th:inline="text">
+                                                                                                <i class="fas fa-bullseye"></i>
+                                                                                                [[${request.getOwner().getArena().getName()}]] - [[${request.getNumberOfParticipants()}]] човека
+                                                                                            </h4>
+                                                                                        </div>
+                                                                                        <div class="modal-body">
+                                                                                            <strong>Допълнителна информация:</strong>
+                                                                                            <span th:text="${request.getInformation()}"></span>
+                                                                                            <br>
+                                                                                            <strong>Дата на изпълнение:</strong>
+                                                                                            <span th:text="${request.getDaytime()}"></span>
+                                                                                            <br>
+                                                                                            <strong>Брой участници:</strong>
+                                                                                            <span th:text="${request.getNumberOfParticipants()}"></span>
+                                                                                            <br>
+                                                                                            <strong>Направена от:</strong>
+                                                                                            <span th:text="${request.getUser().getName()} + ' ' + ${request.getUser().getLastName()}"></span>
+                                                                                            <br>
+                                                                                            <strong>Статус:</strong>
+                                                                                            <span th:if="${request.getStatus() == 'PROB_DONE'}">
+                                                                                                Вероятно приключена
+                                                                                            </span>
+                                                                                            <span th:if="${request.getStatus() == 'DONE'}">
+                                                                                                Извършена
+                                                                                            </span>
+                                                                                            <span th:if="${request.getStatus() == 'ACCEPTED'}">
+                                                                                                Очаква се изпълнение
+                                                                                            </span>
+                                                                                            <span th:if="${request.getStatus() == 'PENDING'}">
+                                                                                                Очаква се одобрение
+                                                                                            </span>
+                                                                                        </div>
+                                                                                        <div class="modal-footer">
+                                                                                            <button type="button" data-dismiss="modal" class="btn btn-default">Затвори
+                                                                                            </button>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="mt-action-datetime">
-                                                                        <span class="mt-action-date" style="padding-right: 20px;">
-                                                                            <i class="fa fa-clock-o"></i> 17.06.2018 09:00
+                                                                        <span class="mt-action-date" style="padding-right: 20px;" th:inline="text">
+                                                                            <i class="fa fa-clock-o"></i> [[${request.getDaytime()}]]</span>
+                                                                        <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'DONE'}">
+                                                                            <i class="far fa-thumbs-up"></i> Извършена
                                                                         </span>
-                                                                        <span class="mt-action-date" style="margin-right: 30px;">
-                                                                            <i class="fa fa-play-circle"></i> Очаква потвърждение от сервиз
+                                                                        <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'ACCEPTED'}">
+                                                                            <i class="fa fa-play-circle"></i> Очаква се изпълнение
                                                                         </span>
-                                                                        <!---->
-                                                                        <!---->
-                                                                        <!---->
-                                                                        <!---->
-                                                                        <!---->
+                                                                        <span class="mt-action-date" style="margin-right: 30px;" th:if="${request.getStatus() == 'PENDING'}">
+                                                                            <i class="fas fa-question"></i> Очаква се одобрение
+                                                                        </span>
                                                                     </div>
-                                                                    <!---->
-                                                                    <!---->
                                                                     <div class="mt-action-buttons " style="width: 200px;">
-                                                                        <a data-toggle="modal" href="#" type="button" class="btn btn-circle btn-outline red-mint btn-sm">
+                                                                        <button th:id="${request.getId()}" type="button" class="btn btn-circle btn-outline red-mint btn-sm withdrawRequest">
                                                                             Оттегли заявката
-                                                                        </a>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!---->
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-12 col-xs-12 col-sm-12 suggested_services" style="display: none;">
+                                        <div class="col-lg-12 col-xs-12 col-sm-12 suggested_services">
                                             <div class="portlet light bordered">
                                                 <div class="portlet-title">
                                                     <div class="caption">
                                                         <i class="icon-bubble font-dark hide"></i>
-                                                        <span class="caption-subject font-hide bold uppercase">Най-добрите сервизи около теб</span>
+                                                        <span class="caption-subject font-hide bold uppercase">Най-добрите арени около теб</span>
                                                     </div>
                                                 </div>
                                                 <div class="portlet-body">
-                                                    <div class="row"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="addRating" tabindex="-1" aria-hidden="true" class="modal fade">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"></button>
-                                                        <h4 class="modal-title">Добави мнение за сервиз</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <table>
-                                                            <tr style="border-bottom: 1px solid rgb(239, 239, 239);">
-                                                                <td style="padding-top: 15px; padding-bottom: 15px;">service_time</td>
-                                                                < td width="1%">
-                                                                    <div data-v-34cbeed1="" class="vue-star-rating">
-                                                                        <div data-v-34cbeed1="" class="vue-star-rating">
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="479uc" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#479uc)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#479uc)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="mtid8lp" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#mtid8lp)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#mtid8lp)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="ed95fd" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#ed95fd)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#ed95fd)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="wp7v3" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#wp7v3)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#wp7v3)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="403oe" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#403oe)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#403oe)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-rating-text">
-                                                                                0</span>
+                                                    <div class="row">
+                                                        <div th:each="arena: ${arenas}" class="col-md-4" style="margin-bottom: 20px;">
+                                                            <div class="mt-widget-1">
+                                                                <div>
+                                                                    <img src="https://mechanic.bg/images/services/1528998381.jpg" class="img-responsive">
+                                                                </div>
+                                                                <div class="mt-body" style="padding-top: 12px;">
+                                                                    <a th:href="@{'/arena/' + ${arena.getId()}}">
+                                                                        <h3 class="mt-username" th:text="${arena.getName()}"></h3>
+                                                                    </a>
+                                                                    <p class="mt-user-title" th:text="${arena.getCity()}"></p>
+                                                                    <!---->
+                                                                    <div th:if="${arena.getRating() == 0.0}">Няма мнения за сервиза.</div>
+                                                                    <div th:if="${arena.getRating() != 0.0}">
+                                                                        <input class="initRating" data-min="0" data-max="5" data-step="0.1" th:value="${arena.getRating()}">
+                                                                    </div>
+                                                                    <br>
+                                                                    <a th:href="@{'/arena/' + ${arena.getId()}}">
+                                                                        Виж повече
+                                                                    </a>
+                                                                    <div class="mt-stats">
+                                                                        <div class="btn-group btn-group btn-group-justified">
+                                                                            <a data-toggle="modal" th:href="'#sendRequest' + ${arena.getId()}" class="btn font-red">
+                                                                                <i class="fa fa-paper-plane"></i>
+                                                                                Изпрати заявка
+                                                                            </a>
                                                                         </div>
                                                                     </div>
-                                                                    </td>
-                                                            </tr>
-                                                            <tr style="border-bottom: 1px solid rgb(239, 239, 239);">
-                                                                <td style="padding-top: 15px; padding-bottom: 15px;">quality</td>
-                                                                <td width="1%">
-                                                                    <div data-v-34cbeed1="" class="vue-star-rating">
-                                                                        <div data-v-34cbeed1="" class="vue-star-rating">
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="ge68p" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#ge68p)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#ge68p)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="6krdk" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#6krdk)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#6krdk)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="qn6kno" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#qn6kno)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#qn6kno)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="nrpngc" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#nrpngc)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#nrpngc)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="vknwmd" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#vknwmd)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#vknwmd)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-rating-text">
-                                                                                0</span>
+                                                                </div>
+                                                            </div>
+                                                            <div th:id="'sendRequest' + ${arena.getId()}" tabindex="-1" aria-hidden="true" class="modal fade">
+                                                                <div class="modal-dialog">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <button type="button" data-dismiss="modal" aria-hidden="true" class="close"></button>
+                                                                            <h4 class="modal-title" th:inline="text">Изпрати заявка до арена - [[${arena.getName()}]]</h4>
                                                                         </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr style="border-bottom: 1px solid rgb(239, 239, 239);">
-                                                                <td style="padding-top: 15px; padding-bottom: 15px;">correctness</td>
-                                                                <td width="1%">
-                                                                    <div data-v-34cbeed1="" class="vue-star-rating">
-                                                                        <div data-v-34cbeed1="" class="vue-star-rating">
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="ouzapx" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#ouzapx)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#ouzapx)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="kscyzn" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#kscyzn)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#kscyzn)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="vypxzb" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#vypxzb)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#vypxzb)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="kuw5v4" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#kuw5v4)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#kuw5v4)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-pointer vue-star-rating-star">
-                                                                                <svg data-v-34cbeed1="" height="30" width="30" step="100" style="overflow: visible;">
-                                                                                    <linearGradient id="klswht" x1="0" x2="100%" y1="0" y2="0">
-                                                                                        <stop offset="0%" stop-color="#ffd055"></stop>
-                                                                                        <stop offset="0%" stop-color="#d8d8d8"></stop>
-                                                                                    </linearGradient>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#klswht)" stroke="#999" stroke-width="0"></polygon>
-                                                                                    <polygon points="13.813953488372094,1.5348837209302326,4.604651162790698,30.390697674418607,27.62790697674419,11.972093023255814,0,11.972093023255814,23.02325581395349,30.390697674418607"
-                                                                                        fill="url(#klswht)"></polygon>
-                                                                                </svg>
-                                                                            </span>
-                                                                            <span data-v-34cbeed1="" class="vue-star-rating-rating-text">
-                                                                                0</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                        <div class="form-group form-md-line-input" style="width: 100%;">
-                                                            <label>Съобщение</label>
-                                                            <textarea rows="3" class="form-control"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" data-dismiss="modal" class="btn dark btn-outline">
-                                                            Затвори
-                                                        </button>
-                                                        <button type="button" class="btn green">Изпрати</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="sendRequest" tabindex="-1" aria-hidden="true" class="modal fade">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <button type="button" data-dismiss="modal" aria-hidden="true" class="close"></button>
-                                                        <h4 class="modal-title">Изпрати заявка до сервиз</h4>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <!---->
-                                                        <div>
-                                                            <div class="form-group">
-                                                                <label>Избери автомобил</label>
-                                                                <select class="form-control" style="width: 100%;">
-                                                                    <option value="41">
-                                                                        test
-                                                                    </option>
-                                                                </select>
-                                                                <span class="help-block">Изберете автомобил, нямащ активна заявка към сервиза.</span>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Вид на ремонта: </label>
-                                                                <select class="form-control">
-                                                                    <option value="1">Основни Ремонти
-                                                                    </option>
-                                                                    <option value="2">Гуми
-                                                                    </option>
-                                                                    <option value="3">Електрически Ремонти
-                                                                    </option>
-                                                                    <option value="4">Заваряване
-                                                                    </option>
-                                                                    <option value="5">Застраховки
-                                                                    </option>
-                                                                    <option value="6">Боядисване
-                                                                    </option>
-                                                                    <option value="7">Годишен технически преглед
-                                                                    </option>
-                                                                    <option value="8">Хидравлични ремонти
-                                                                    </option>
-                                                                    <option value="9">Ремонти на горивна помпа и инжектор
-                                                                    </option>
-                                                                    <option value="10">Ремонти на трансмисия
-                                                                    </option>
-                                                                    <option value="11">Реставрация
-                                                                    </option>
-                                                                    <option value="12">Тунинг
-                                                                    </option>
-                                                                    <option value="13">Автостъкла - ремонт и подмяна
-                                                                    </option>
-                                                                    <option value="14">Ремонт на двигатели
-                                                                    </option>
-                                                                    <option value="15">Диагностика
-                                                                    </option>
-                                                                    <option value="16">Ремонт на климатици
-                                                                    </option>
-                                                                    <option value="17">Друго
-                                                                    </option>
-                                                                </select>
-                                                                <span class="help-block">Изберете вид на ремонта. Ако не сте сигурни, изберете Друго.</span>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Допълнителна информация</label>
-                                                                <textarea rows="3" class="form-control"></textarea>
-                                                            </div>
-                                                            <label>Изберете дата и час: </label>
-                                                            <div class="MDateTimePicker">
-                                                                <div class="DTPControls">
-                                                                    <div class="row">
-                                                                        <div class="col-md-4 text-left">
+                                                                        <div class="modal-body">
                                                                             <!---->
+                                                                            <div>
+                                                                                <div class="form-group" th:if="${hasTeams}">
+                                                                                    <label>Избери отбор</label>
+                                                                                    <select class="form-control" style="width: 100%;">
+                                                                                        <option th:each="team: ${user.getCreatedTeams()}" value="41">
+                                                                                            <span th:text="${team.getName()}"></span>
+                                                                                        </option>
+                                                                                    </select>
+                                                                                    <span class="help-block">Изберете отбор, нямащ активна заявка
+                                                                                        към арена.</span>
+                                                                                </div>
+                                                                                <div class="form-group">
+                                                                                    <label>Допълнителна информация</label>
+                                                                                    <textarea rows="3" class="form-control"></textarea>
+                                                                                </div>
+                                                                                <label>Изберете дата и час: </label>
+                                                                                <div class="MDateTimePicker">
+                                                                                    <input id="datetimepicker" type="text">
+                                                                                    <div class="legend">
+                                                                                        <span class="legend_box"></span> За този час вече има други
+                                                                                        заявки. Има вероятност заявката Ви
+                                                                                        да бъде отказана.
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-md-4"></div>
-                                                                        <div class="col-md-4 text-right">
-                                                                            <i class="fa fa-arrow-circle-right"></i>
+                                                                        <!---->
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" data-dismiss="modal" class="btn dark btn-outline">Затвори
+                                                                            </button>
+                                                                            <button type="button" class="btn green">
+                                                                                <!---->
+                                                                                <div>
+                                                                                    Изпрати
+                                                                                </div>
+                                                                            </button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="legend">
-                                                                    <span class="legend_box"></span> За този час вече има други заявки. Има вероятност
-                                                                    заявката Ви да бъде отказана.
-                                                                </div>
                                                             </div>
                                                         </div>
-                                                    </div>
-                                                    <!---->
-                                                    <div class="modal-footer">
-                                                        <button type="button" data-dismiss="modal" class="btn dark btn-outline">Затвори
-                                                        </button>
-                                                        <button type="button" class="btn green">
-                                                            <!---->
-                                                            <div>
-                                                                Изпрати
-                                                            </div>
-                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -969,11 +755,19 @@
     <script src="/static/js/wysihtml5-0.3.0.js"></script>
     <script src="/static/js/bootstrap-wysihtml5.js"></script>
     <script src="/static/js/libs/moment-with-locales.js"></script>
-
+    <!-- Confirm -->
+    <script type="text/javascript" src="/static/js/libs/jquery-confirm.min.js"></script>
+    <!-- POPUPS -->
     <script type="text/javascript" src="/static/js/libs/iziToast.min.js"></script>
+    <!-- STAR RATING -->
+    <script type="text/javascript" src="/static/js/libs/star-rating.min.js"></script>
+    <!-- datetimepicker -->
+    <link rel="stylesheet" type="text/css" href="/static/css/jquery.datetimepicker.min.css" />
+    <script src="/static/js/libs/jquery.datetimepicker.full.min.js"></script>
 
     <script src="/static/js/app.js"></script>
 
+    <!-- GOOGLE MAPS -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDjJimoTORP3LAM9lx8aasMG5_1dlNgrGI&libraries=places&callback=initMap"
         async defer></script>
 </body>

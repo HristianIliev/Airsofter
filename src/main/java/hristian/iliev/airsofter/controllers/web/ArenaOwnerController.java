@@ -81,8 +81,15 @@ public class ArenaOwnerController {
 
     model.addAttribute("noneToAccept", noneToAccept);
 
-    model.addAttribute("messageAuthor", this.usersService.getById(user.getLastConversationWith()).getName() + " " +
-            this.usersService.getById(user.getLastConversationWith()).getLastName());
+    if (user.getLastConversationWith() != null) {
+
+      User lastConversationWith = this.usersService.getById(user.getLastConversationWith());
+      model.addAttribute("hasMessage", true);
+      model.addAttribute("messageAuthor", lastConversationWith.getName() + " " +
+              lastConversationWith.getLastName());
+    } else {
+      model.addAttribute("hasMessage", false);
+    }
 
     boolean thereAreProbDoneRequests = this.usersService.checkIfThereAreProbDoneRequests(user);
 

@@ -27,4 +27,6 @@ public interface IArenasService {
   Arena changeTimetable(User owner, Timetable timetable);
 
   ChartData getChartData(User owner) throws ParseException;
+
+  List<Arena> list();
 }

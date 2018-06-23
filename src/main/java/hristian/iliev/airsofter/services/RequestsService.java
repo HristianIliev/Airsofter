@@ -42,4 +42,11 @@ public class RequestsService implements IRequestsService {
 
     return new Bool(true);
   }
+
+  @Override
+  public Bool withdrawRequest(int id) {
+    this.requestsRepository.delete(this.requestsRepository.getById(id));
+
+    return new Bool(true);
+  }
 }

@@ -36,7 +36,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
 //    Spring Security
     compile("org.springframework.boot:spring-boot-starter-security")
-//    SMS Verification
+//    SMS Verification and Calling
     compile 'com.nexmo:client:3.5.0'
 //    Relative Time Between Dates
     compile 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'

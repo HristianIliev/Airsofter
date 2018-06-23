@@ -18,6 +18,7 @@ $(".login-form-inputs").submit(function(event) {
   if (password !== repassword) {
     displayError();
     event.preventDefault();
+    return false;
   }
 
   initiateLoading();

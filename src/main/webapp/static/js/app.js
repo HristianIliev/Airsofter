@@ -169,3 +169,59 @@ function showSuccessfulFiltering() {
     position: "topRight"
   });
 }
+
+$(".withdrawRequest").click(function(event) {
+  var id = $(this).attr("id");
+  var instance = $(this);
+
+  $.confirm({
+    title: "Потвърдете оттеглянето",
+    content: "Сигурни ли сте, че искате да оттеглите тази заявка",
+    theme: "supervan",
+    buttons: {
+      Да: {
+        btnClass: "btn-blue",
+        action: function() {
+          $.ajax({
+            url: "/api/withdrawRequest?id=" + id,
+            method: "DELETE",
+            success: function(result) {
+              if (result.ok === "true" || result.ok === true) {
+                $(instance)
+                  .parent()
+                  .parent()
+                  .parent()
+                  .parent()
+                  .hide("slow");
+
+                iziToast.success({
+                  title: "OK!",
+                  message: "Заявката беше оттеглена успешно",
+                  position: "topRight"
+                });
+              }
+            }
+          });
+        }
+      },
+      Не: {
+        btnClass: "btn-blue",
+        action: function() {
+          iziToast.warning({
+            title: "Отказ",
+            message: "Заявката не беше оттеглена",
+            position: "topRight"
+          });
+        }
+      }
+    }
+  });
+});
+
+$(document).on("ready", function() {
+  $(".initRating").rating({
+    displayOnly: true
+  });
+
+  $("#datetimepicker").datetimepicker();
+});

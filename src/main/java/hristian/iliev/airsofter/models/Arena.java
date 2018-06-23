@@ -36,6 +36,8 @@ public class Arena implements IModel {
   private String telephone;
   private Timetable timetable;
   private User owner;
+  private Double rating;
+  private String city;
 
   @GenericGenerator(name = "generator_arena", strategy = "foreign",
           parameters = @Parameter(name = "property", value = "owner"))
@@ -126,5 +128,23 @@ public class Arena implements IModel {
 
   public void setOwner(User owner) {
     this.owner = owner;
+  }
+
+  @Column(name = "rating")
+  public Double getRating() {
+    return rating;
+  }
+
+  public void setRating(Double rating) {
+    this.rating = rating;
+  }
+
+  @Column(name = "city")
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    this.city = city;
   }
 }

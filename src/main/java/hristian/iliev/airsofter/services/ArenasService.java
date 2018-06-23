@@ -56,6 +56,12 @@ public class ArenasService implements IArenasService {
 
     arena.getTimetable().setArena(arena);
 
+    System.out.println(arena.getCity());
+
+    arena.setCity(arena.getCity().trim());
+
+    arena.setRating(0.0);
+
     user.setArena(arena);
     user.getArena().setOwner(user);
 
@@ -137,6 +143,11 @@ public class ArenasService implements IArenasService {
     }
 
     return new ChartData(result);
+  }
+
+  @Override
+  public List<Arena> list() {
+    return this.arenasRepository.getAll();
   }
 
   private ChartEntry getChartEntry(Calendar dateToGet, List<Request> allRequest) throws ParseException {
